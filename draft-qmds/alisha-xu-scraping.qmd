@@ -1,0 +1,13 @@
+---
+title: "Alisha Xu Scraping"
+format: html
+editor: visual
+---
+# Core Power 10Q Webscraping Script
+
+```{r}
+
+
+
+
+```
