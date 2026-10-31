@@ -19,6 +19,8 @@ options(scipen = 1, knitr.kable.NA = "")
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(rvest)
+library(robotstxt)
 ```
 
 # Getting started

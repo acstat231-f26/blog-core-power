@@ -6,8 +6,36 @@ editor: visual
 # Core Power 10Q Webscraping Script
 
 ```{r}
+#| label: packages
+# load packages
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+library(knitr)
+library(kableExtra)
+```
+
+```{r}
+#| label: importing-data
+# check if scraping is allowed
+paths_allowed("https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/amzn-20250930.htm")
+
+# Compiled dataset of all the 10Qs we will be using
+# COMP: Company Name
+# FILD-D: Filing Date
+# REP-D: Reporting For Date
+# HTML: HTML link
+ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
+```
+
+``` {r}
+#| label: r&d-expenses
 
 
+```
+
+```{r}
+#| label: stock-time-series
 
 
 ```
