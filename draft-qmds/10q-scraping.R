@@ -143,4 +143,8 @@ for (i in 1:4) {
 ten_Qs_RD <- ten_Qs |>
   select(!HTML)
 
+str(ten_Qs_RD)
+data.frame(ten_Qs_RD)
+ten_Qs_RD$RD <- as.numeric(as.character(ten_Qs_RD$RD))
+
 write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
