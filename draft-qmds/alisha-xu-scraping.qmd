@@ -29,10 +29,184 @@ ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
 ```
 
 ``` {r}
-#| label: r&d-expenses
+#| label: r&d-expenses-test
+# Amazon 10Qs do not list Research and Development
 
+nursery_rhymes20 <- tibble(title = toc_titles
+                         , url = hrefs
+                         # Create empty character vector the same 
+                         # length as our titles vector
+                         , text = vector(mode = "character"
+                                         , length = length(toc_titles))) |>
+  # Limit to only the rows we are trying to work with
+  slice(1:n_iter)
+
+# Iterate through links to grab nursery rhyme text 
+for (i in 1:n_iter) {
+  # Scrape nursery rhyme i's text and save it to row i of the `text` variable 
+  nursery_rhymes20$text[i] <- nursery_rhymes20$url[i] |> 
+    read_html() |>
+    html_element(".poem") |>
+    html_text()
+}
+
+library(httr)
+my_ua <- "AmherstCollege alxu27@amherst.edu"
+
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+check <- session_jump_to(sec_session, "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm") |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X1, X4)
+
+
+read_html(target_page)
+
+# ---------
+ ten_Qs$HTML[1] |> 
+    read_html()
+
+check <- session_jump_to(sec_session, "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm") |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(11) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X16)
 
 ```
+
+```{r}
+#| label: r&d-expenses-code
+
+# compartmentalize each variable
+# Microsoft
+microsoft <- ten_Qs |>
+  filter(COMP == "Microsoft")
+
+# Google
+google <- ten_Qs |>
+  filter(COMP == "Google")
+
+# Meta
+meta <- ten_Qs |>
+  filter(COMP == "Meta")
+
+# Apple
+apple <- ten_Qs |>
+  filter(COMP == "Apple")
+
+# Nvidia
+nvidia <- ten_Qs |>
+  filter(COMP == "Nvidia")
+
+# Tesla
+tesla <- ten_Qs |>
+  filter(COMP == "Tesla")
+
+# create sec session
+my_ua <- "AmherstCollege alxu27@amherst.edu"
+
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+ten_Qs <- ten_Qs |>
+  mutate(RD = NA)
+
+# Scraping
+# Microsoft
+for (i in 1:4) {
+  ten_Qs$RD[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# Google
+for (i in 1:2) {
+  ten_Qs$RD[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(14) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X10)
+}
+
+for (i in 1:2) {
+  ten_Qs$RD[i+6] <- session_jump_to(sec_session, google$HTML[i+2]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(15) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X10)
+}  
+
+# Meta
+for (i in 1:4) {
+  ten_Qs$RD[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# third one
+ten_Qs$RD[11] <- session_jump_to(sec_session, meta$HTML[3]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X16)
+
+# Apple
+for (i in 1:4) {
+  ten_Qs$RD[i+12] <- session_jump_to(sec_session, apple$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(13) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# Nvidia
+for (i in 1:4) {
+  ten_Qs$RD[i+16] <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(8) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# Tesla
+for (i in 1:4) {
+  ten_Qs$RD[i+20] <- session_jump_to(sec_session, tesla$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(11) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+ten_Qs_RD <- ten_Qs |>
+  select(!HTML)
+
+write.csv()
+
+```
+
 
 ```{r}
 #| label: stock-time-series
