@@ -1,0 +1,68 @@
+
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Improve digit display and NA display for kable tables
+options(scipen = 1, knitr.kable.NA = "")
+
+# Load necessary packages
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(quantmod)
+```
+
+# Getting started
+
+```{r}
+# Microsoft
+# 5 days before, closing price
+
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-28", to = "2026-04-02")
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-06-27", to = "2026-07-02")
+meta_stock <- getSymbols("META", src = "yahoo", from = "2025-09-27", to = "2026-10-02")
+apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-06-25", to = "2026-06-30")
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-07-24", to = "2026-07-30")
+tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-09-27", to = "2026-10-02")
+```
+
+```{r}
+#| label: tbl-layout
+#| tbl-cap: "Two tables side-by-side"
+#| tbl-subcap: 
+#|   - "First three rows of cars dataset"
+#|   - "First three rows of pressure dataset"
+#| layout-ncol: 2
+
+cars |> 
+  slice(1:3) |> 
+  kable()
+
+pressure |> 
+  slice(1:3) |> 
+  kable()
+```
+
+
+```{r}
+#| label: fig-layout
+#| fig-cap: "Three figures in a complex layout"
+#| fig-subcap: 
+#|   - "cars"
+#|   - "pressure"
+#|   - "mtcars"
+#| layout: [[4, -1, 4], [1]] 
+
+ggplot(cars, aes(speed, dist)) +
+  geom_point()
+
+ggplot(pressure, aes(temperature, pressure)) +
+  geom_point()
+
+ggplot(mtcars, aes(hp, mpg)) +
+  geom_point()
+```
+
