@@ -22,18 +22,28 @@ library(ggplot2)
 # Microsoft
 # 5 days before, closing price
 
-microsoft_stock <- getSymbols("MSFT", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-03-26", to = "2026-04-05") |>
-  select(MSFT.Close)
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-26", to = "2026-04-05") |>
+  data.frame(Date = index(MSFT), coredata(MSFT)) |>
+  select(Date, MSFT.Close)
 
-alphabet_stock <- getSymbols("GOOG", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-06-27", to = "2026-07-02") |>
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-06-27", to = "2026-07-02") |>
+  data.frame(Date = index(GOOG), coredata(GOOG)) |>
   select(GOOG.Close)
-meta_stock <- getSymbols("META", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-09-27", to = "2026-10-02") |>
+
+meta_stock <- getSymbols("META", src = "yahoo", from = "2025-09-27", to = "2026-10-02") |>
+  data.frame(Date = index(META), coredata(META)) |>
   select(META.Close)
-apple_stock <- getSymbols("AAPL", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-06-25", to = "2026-06-30") |>
+
+apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-06-25", to = "2026-06-30") |>
+  data.frame(Date = index(AAPL), coredata(AAPL)) |>
   select(AAPL.Close)
-nvidia_stock <- getSymbols("NVDA", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-07-24", to = "2026-07-30") |>
+
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-07-24", to = "2026-07-30") |>
+  data.frame(Date = index(NVDA), coredata(NVDA)) |>
   select(NVDA.Close)
-tesla_stock <- getSymbols("TSLA", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-09-27", to = "2026-10-02") |>
+
+tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-09-27", to = "2026-10-02") |>
+  data.frame(Date = index(TSLA), coredata(TSLA)) |>
   select(TSLA.Close)
 
 ten_qs <- read_csv("data/scraped-10qs.csv")
