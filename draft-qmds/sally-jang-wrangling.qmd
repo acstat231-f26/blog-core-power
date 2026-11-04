@@ -13,6 +13,7 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 library(quantmod)
+library(ggplot2)
 ```
 
 # Getting started
@@ -21,12 +22,35 @@ library(quantmod)
 # Microsoft
 # 5 days before, closing price
 
-microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-28", to = "2026-04-02")
-alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-06-27", to = "2026-07-02")
-meta_stock <- getSymbols("META", src = "yahoo", from = "2025-09-27", to = "2026-10-02")
-apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-06-25", to = "2026-06-30")
-nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-07-24", to = "2026-07-30")
-tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-09-27", to = "2026-10-02")
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-03-26", to = "2026-04-05") |>
+  select(MSFT.Close)
+
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-06-27", to = "2026-07-02") |>
+  select(GOOG.Close)
+meta_stock <- getSymbols("META", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-09-27", to = "2026-10-02") |>
+  select(META.Close)
+apple_stock <- getSymbols("AAPL", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-06-25", to = "2026-06-30") |>
+  select(AAPL.Close)
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-07-24", to = "2026-07-30") |>
+  select(NVDA.Close)
+tesla_stock <- getSymbols("TSLA", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-09-27", to = "2026-10-02") |>
+  select(TSLA.Close)
+
+ten_qs <- read_csv("data/scraped-10qs.csv")
+```
+
+```{r}
+#| label: time-series
+
+ggplot(data=microsoft_stock, aes(x = ))
+```
+
+```{r}
+#| label: dot-plot
+
+ggplot(data = ten_qs, aes(color = COMP, x = COMP, y = RD)) + 
+  geom_point(size = 3) + 
+  labs(color = "Company")
 ```
 
 ```{r}
