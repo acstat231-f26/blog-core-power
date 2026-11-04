@@ -369,3 +369,19 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 
 ```
+
+
+```{r}
+
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-03-26", to = "2026-04-05") |>
+  select(MSFT.Close)
+
+
+
+class(microsoft_stock)
+
+microsoft_stock <- microsoft_stock |>
+  mutate(date = row_number())
+
+write_csv(microsoft_stock, "data/microsoft_data.csv")
+```
