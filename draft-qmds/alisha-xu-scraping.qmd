@@ -372,19 +372,52 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 
 ```{r}
+#| label: stock-time-series
 
-microsoft_stock <- getSymbols("MSFT", src = "yahoo", auto.assign = FALSE, return.class = "data.frame", from = "2025-03-26", to = "2026-04-05") |>
-  select(MSFT.Close)
+# copied from Sally's code
+# grabbing closing price stock data for our companies from 3/1/25 to 11/1/26
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(MSFT), coredata(MSFT)) |>
+  select(Date, MSFT.Close) |>
+  rename(Close = MSFT.Close) |>
+  mutate(COMP = "MSFT")
 
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(GOOG), coredata(GOOG)) |>
+  select(Date, GOOG.Close) |>
+  rename(Close = GOOG.Close) |>
+  mutate(COMP = "GOOG")
 
+meta_stock <- getSymbols("META", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(META), coredata(META)) |>
+  select(Date, META.Close) |>
+  rename(Close = META.Close) |>
+  mutate(COMP = "META")
 
-class(microsoft_stock)
+apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(AAPL), coredata(AAPL)) |>
+  select(Date, AAPL.Close) |>
+  rename(Close = AAPL.Close) |>
+  mutate(COMP = "AAPL")
 
-microsoft_stock <- microsoft_stock |>
-  mutate(date = row_number())
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(NVDA), coredata(NVDA)) |>
+  select(Date, NVDA.Close) |>
+  rename(Close = NVDA.Close) |>
+  mutate(COMP = "NVDA")
 
-write_csv(microsoft_stock, "data/microsoft_data.csv")
+tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(TSLA), coredata(TSLA)) |>
+  select(Date, TSLA.Close) |>   
+  rename(Close = TSLA.Close) |>
+  mutate(COMP = "TSLA")
 
+stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, apple_stock, nvidia_stock, tesla_stock)
+
+```
+
+```{r}
+#| label: summary-statistics-table
 
 
 ```
