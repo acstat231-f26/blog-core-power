@@ -96,5 +96,12 @@
     "title": "Website title",
     "section": "A note",
     "text": "A note\nNotice that you can also modify the YAML headings at the top of each page as I did in the first subpage or completely delete them, as I did here."
+  },
+  {
+    "objectID": "draft-qmds/sally-jang-wrangling.html",
+    "href": "draft-qmds/sally-jang-wrangling.html",
+    "title": "Getting started",
+    "section": "",
+    "text": "Getting started\n\n\nRows: 24 Columns: 4\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (1): COMP\ndbl  (1): RD\ndttm (2): FIL-D, REP-D\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 1: Two tables side-by-side\n\n\n\n\n\n\n\n(a) First three rows of cars dataset\n\n\n\n\n\nspeed\ndist\n\n\n\n\n4\n2\n\n\n4\n10\n\n\n7\n4\n\n\n\n\n\n\n\n\n\n\n\n(b) First three rows of pressure dataset\n\n\n\n\n\ntemperature\npressure\n\n\n\n\n0\n0.0002\n\n\n20\n0.0012\n\n\n40\n0.0060\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n(a) cars\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n(b) pressure\n\n\n\n\n\n\n\n\n\n\n\n\n\n(c) mtcars\n\n\n\n\n\n\n\nFigure 1: Three figures in a complex layout"
   }
 ]

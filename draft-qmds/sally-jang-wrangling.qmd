@@ -19,32 +19,45 @@ library(ggplot2)
 # Getting started
 
 ```{r}
-# Microsoft
-# 5 days before, closing price
+#| label: stock-prices
 
-microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-26", to = "2026-04-05") |>
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
   data.frame(Date = index(MSFT), coredata(MSFT)) |>
-  select(Date, MSFT.Close)
+  select(Date, MSFT.Close) |>
+  rename(Close = MSFT.Close) |>
+  mutate(COMP = "MSFT")
 
-alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-06-27", to = "2026-07-02") |>
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
   data.frame(Date = index(GOOG), coredata(GOOG)) |>
-  select(GOOG.Close)
+  select(Date, GOOG.Close) |>
+  rename(Close = GOOG.Close) |>
+  mutate(COMP = "GOOG")
 
-meta_stock <- getSymbols("META", src = "yahoo", from = "2025-09-27", to = "2026-10-02") |>
+meta_stock <- getSymbols("META", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
   data.frame(Date = index(META), coredata(META)) |>
-  select(META.Close)
+  select(Date, META.Close) |>
+  rename(Close = META.Close) |>
+  mutate(COMP = "META")
 
-apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-06-25", to = "2026-06-30") |>
+apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
   data.frame(Date = index(AAPL), coredata(AAPL)) |>
-  select(AAPL.Close)
+  select(Date, AAPL.Close) |>
+  rename(Close = AAPL.Close) |>
+  mutate(COMP = "AAPL")
 
-nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-07-24", to = "2026-07-30") |>
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
   data.frame(Date = index(NVDA), coredata(NVDA)) |>
-  select(NVDA.Close)
+  select(Date, NVDA.Close) |>
+  rename(Close = NVDA.Close) |>
+  mutate(COMP = "NVDA")
 
-tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-09-27", to = "2026-10-02") |>
+tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
   data.frame(Date = index(TSLA), coredata(TSLA)) |>
-  select(TSLA.Close)
+  select(Date, TSLA.Close) |>   
+  rename(Close = TSLA.Close) |>
+  mutate(COMP = "TSLA")
+
+stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, apple_stock, nvidia_stock, tesla_stock)
 
 ten_qs <- read_csv("data/scraped-10qs.csv")
 ```
@@ -52,7 +65,13 @@ ten_qs <- read_csv("data/scraped-10qs.csv")
 ```{r}
 #| label: time-series
 
-ggplot(data=microsoft_stock, aes(x = ))
+# palletteer
+
+# stock time series
+ggplot(data=stock_price_joined, aes(x = Date, y = Close)) +
+  geom_line() +
+  facet_wrap(~COMP)
+
 ```
 
 ```{r}
