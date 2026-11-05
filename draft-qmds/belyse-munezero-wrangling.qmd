@@ -3,3 +3,116 @@ title: "belyse-munezero-wrangling"
 format: html
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+# Improve digit display and NA display for kable tables
+options(scipen = 1, knitr.kable.NA = "")
+
+# Load necessary packages
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(quantmod)
+library(ggplot2)
+```
+
+```{r}
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(MSFT), coredata(MSFT)) |>
+  select(Date, MSFT.Close) |>
+  rename(Close = MSFT.Close) |>
+  mutate(COMP = "MSFT")
+
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(GOOG), coredata(GOOG)) |>
+  select(Date, GOOG.Close) |>
+  rename(Close = GOOG.Close) |>
+  mutate(COMP = "GOOG")
+
+meta_stock <- getSymbols("META", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(META), coredata(META)) |>
+  select(Date, META.Close) |>
+  rename(Close = META.Close) |>
+  mutate(COMP = "META")
+
+apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(AAPL), coredata(AAPL)) |>
+  select(Date, AAPL.Close) |>
+  rename(Close = AAPL.Close) |>
+  mutate(COMP = "AAPL")
+
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(NVDA), coredata(NVDA)) |>
+  select(Date, NVDA.Close) |>
+  rename(Close = NVDA.Close) |>
+  mutate(COMP = "NVDA")
+
+tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(TSLA), coredata(TSLA)) |>
+  select(Date, TSLA.Close) |>   
+  rename(Close = TSLA.Close) |>
+  mutate(COMP = "TSLA")
+
+stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, apple_stock, nvidia_stock, tesla_stock)
+
+ten_qs <- read_csv("data/scraped-10qs.csv")
+```
+```{r}
+##microsoft
+
+# Convert dates to Date format
+tenq <- ten_qs |>
+  mutate(`FIL-D` = as.Date(`FIL-D`))|>
+  mutate(COMP = recode(COMP,
+    "Microsoft" = "MSFT",
+    "Google" = "GOOG",
+    "Meta" = "META",
+    "Apple" = "AAPL",
+    "Nvidia" = "NVDA",
+    "Tesla" = "TSLA"
+  ))
+
+
+
+class(tenq$`FIL-D`)
+class(stock_price_joined$Date)
+
+```
+
+
+```{r}
+
+stock_before <- stock_price_joined |>
+  rename(
+    stock_date_before = Date,
+    stock_price_before = Close
+  )
+
+before <- tenq |>
+  left_join(
+    stock_before,
+    by = join_by(
+      COMP,
+      closest(`FIL-D` > stock_date_before)
+    )
+  )
+
+
+stock_after <- stock_price_joined |>
+  rename(
+    stock_date_after = Date,
+    stock_price_after = Close
+  )
+
+final_data <- before |>
+  left_join(
+    stock_after,
+    by = join_by(
+      COMP,
+      closest(`FIL-D` < stock_date_after)
+    )
+  )
+```
+
