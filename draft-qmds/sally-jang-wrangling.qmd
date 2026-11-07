@@ -14,6 +14,9 @@ library(knitr)
 library(kableExtra)
 library(quantmod)
 library(ggplot2)
+library(lubridate)
+library(glue)
+library(ggrepel)
 ```
 
 # Getting started
@@ -60,6 +63,22 @@ tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-03-01", to = "2026
 stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, apple_stock, nvidia_stock, tesla_stock)
 
 ten_qs <- read_csv("data/scraped-10qs.csv")
+
+companies <- tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+                       name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
+
+ten_qs_updated <- ten_qs |> left_join(companies, by = c("COMP" = "name1"))
+
+vertical_lines <- ten_qs_updated |>
+  select(name2, "REP-D") |>
+  rename(COMP = "name2", reported_date = "REP-D")
+
+text_labels <- ten_qs_updated |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", reported_date = "REP-D") |>
+  mutate(x_position = reported_date - days(5), 
+         y_position = 1000,
+         text_values = glue("Quarterly R&D Expense: {ten_qs_updated$RD} million"))
 ```
 
 ```{r}
@@ -70,8 +89,12 @@ ten_qs <- read_csv("data/scraped-10qs.csv")
 # stock time series
 ggplot(data=stock_price_joined, aes(x = Date, y = Close)) +
   geom_line() +
-  facet_wrap(~COMP)
+  facet_wrap(~COMP) +
+  geom_vline(data=vertical_lines, aes(xintercept = reported_date)) +
+  geom_text_repel(data=text_labels, aes(x = x_position, y = y_position, label = text_values), 
+                  size = 3)
 
+#annotate, geom_text, labels
 ```
 
 ```{r}
@@ -80,23 +103,60 @@ ggplot(data=stock_price_joined, aes(x = Date, y = Close)) +
 ggplot(data = ten_qs, aes(color = COMP, x = COMP, y = RD)) + 
   geom_point(size = 3) + 
   labs(color = "Company")
+
+# is this more helpful if date is somehow included? another visualization?
 ```
 
 ```{r}
-#| label: tbl-layout
-#| tbl-cap: "Two tables side-by-side"
-#| tbl-subcap: 
-#|   - "First three rows of cars dataset"
-#|   - "First three rows of pressure dataset"
-#| layout-ncol: 2
+#| label: text-analysis-scraping
 
-cars |> 
-  slice(1:3) |> 
-  kable()
+ten_Qs_text <- readxl::read_xlsx("data/10q-links.xlsx")
 
-pressure |> 
-  slice(1:3) |> 
-  kable()
+# compartmentalize each variable
+# Microsoft
+microsoft <- ten_Qs_text |>
+  filter(COMP == "Microsoft")
+
+# Google
+google <- ten_Qs_text |>
+  filter(COMP == "Google")
+
+# Meta
+meta <- ten_Qs_text |>
+  filter(COMP == "Meta")
+
+# Apple
+apple <- ten_Qs_text |>
+  filter(COMP == "Apple")
+
+# Nvidia
+nvidia <- ten_Qs_text |>
+  filter(COMP == "Nvidia")
+
+# Tesla
+tesla <- ten_Qs_text |>
+  filter(COMP == "Tesla")
+
+# create sec session
+my_ua <- "AmherstCollege yjang27@amherst.edu"
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+
+# add empty column to store values
+ten_Qs_text_scraped <- ten_Qs_text |>
+  mutate(text = NA)
+
+# -------------------------------Scraping---------------------------------------
+# Microsoft
+for (i in 1:4) {
+  ten_Qs$text[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+    read_html() |>
+    #edit from here
+    html_elements("table") |>
+    purrr::pluck(7) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
 ```
 
 
