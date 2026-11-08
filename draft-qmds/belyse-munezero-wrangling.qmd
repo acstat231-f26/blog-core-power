@@ -84,13 +84,29 @@ class(stock_price_joined$Date)
 
 ```{r}
 
+stock_filing <- stock_price_joined |>
+  rename(
+    stock_date_filing = Date,
+    stock_price_filing = Close
+  )
+
+filing <- tenq |>
+  left_join(
+    stock_filing,
+    by = join_by(
+      COMP,
+      closest(`FIL-D` <= stock_date_filing)
+    )
+  )
+
+
 stock_before <- stock_price_joined |>
   rename(
     stock_date_before = Date,
     stock_price_before = Close
   )
 
-before <- tenq |>
+final_data <- filing |>
   left_join(
     stock_before,
     by = join_by(
@@ -98,21 +114,47 @@ before <- tenq |>
       closest(`FIL-D` > stock_date_before)
     )
   )
+```
 
+```{r}
+# Calculating change is stock price and change in RD
 
-stock_after <- stock_price_joined |>
-  rename(
-    stock_date_after = Date,
-    stock_price_after = Close
+#change in stock price
+
+final_data <- final_data |>
+  mutate(
+    stock_change = stock_price_filing - stock_price_before,
+    stock_change_pct = (
+      stock_change / stock_price_before
+    ) * 100
   )
 
-final_data <- before |>
-  left_join(
-    stock_after,
-    by = join_by(
-      COMP,
-      closest(`FIL-D` < stock_date_after)
-    )
-  )
+final_data_changes <- final_data |>
+  arrange(COMP, `REP-D`) |>
+  group_by(COMP) |>
+  mutate(
+    previous_RD = lag(RD),
+    change_RD = RD - previous_RD,
+    change_RD_pct = (change_RD / previous_RD) * 100
+  ) |>
+  ungroup()
+
+
+```
+
+```{r}
+ggplot(final_data_changes,
+       aes(x = change_RD, y = stock_change_pct, color = COMP)) +
+
+  geom_point(size = 3, alpha = 0.7) +
+
+  labs(
+    title = "Change in R&D Expenses vs. Stock Price Reaction",
+    x = "Change in R&D Expenses",
+    y = "Stock Price Change (%)",
+    color = "Company"
+  ) +
+
+  theme_minimal()
 ```
 
