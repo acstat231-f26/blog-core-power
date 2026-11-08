@@ -3,6 +3,7 @@ title: "Alisha Xu Scraping"
 format: html
 editor: visual
 ---
+
 # Core Power 10Q Webscraping Script
 
 ```{r}
@@ -28,7 +29,7 @@ paths_allowed("https://www.sec.gov/Archives/edgar/data/1018724/00010187242500012
 ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
 ```
 
-``` {r}
+```{r}
 #| label: r&d-expenses-test
 # Amazon 10Qs do not list Research and Development
 
@@ -209,7 +210,6 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 ```
 
-
 ```{r}
 # ------------------------------------------------------------------------------
 # This is the code for scraping 10Qs from HTM files from the SEC website
@@ -369,7 +369,6 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 
 ```
-
 
 ```{r}
 #| label: stock-time-series
