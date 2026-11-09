@@ -148,15 +148,62 @@ ten_Qs_text_scraped <- ten_Qs_text |>
 # -------------------------------Scraping---------------------------------------
 # Microsoft
 for (i in 1:4) {
-  ten_Qs$text[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+  all_text[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
     read_html() |>
-    #edit from here
-    html_elements("table") |>
-    purrr::pluck(7) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X4)
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i] <- all_text[detect_1:detect_2]
 }
+
+# Google
+for (i in 1:4) {
+  all_text[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
+    read_html() |>
+    html_elements("div") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text, "QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i] <- all_text[detect_1:detect_2]
+}
+
+# Meta
+for (i in 1:4) {
+  all_text[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
+    read_html() |>
+    html_elements("p") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i] <- all_text[detect_1:detect_2]
+}
+
+
+
+
+test2 <- session_jump_to(sec_session, google$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+print(test2)
+
+test2_detect <- which(str_detect(test2, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+test2_detect_2 <- which(str_detect(all_text, "ITEM 3."))
+
+test2[test2_detect:test2_detect_2]
+
+
+
 ```
 
 
