@@ -1,6 +1,6 @@
 ---
 title: "Alisha Xu Scraping"
-format: html
+format: pdf
 editor: visual
 ---
 
@@ -14,6 +14,7 @@ library(rvest)
 library(robotstxt)
 library(knitr)
 library(kableExtra)
+library(quantmod)
 ```
 
 ```{r}
@@ -31,7 +32,10 @@ ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
 
 ```{r}
 #| label: r&d-expenses-test
+#| eval: false
+
 # Amazon 10Qs do not list Research and Development
+
 
 ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
 
@@ -84,6 +88,7 @@ check <- session_jump_to(sec_session, "https://www.sec.gov/Archives/edgar/data/1
 
 ```{r}
 #| label: r&d-expenses-code
+#| eval: false
 
 # compartmentalize each variable
 # Microsoft
@@ -211,6 +216,7 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 ```
 
 ```{r}
+#| eval: false
 # ------------------------------------------------------------------------------
 # This is the code for scraping 10Qs from HTM files from the SEC website
 # for Microsoft, Google, Meta, Apple, Nvidia, and Tesla
@@ -418,5 +424,147 @@ stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, app
 ```{r}
 #| label: summary-statistics-table
 
+# stock price
+microsoft_summary <- microsoft_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)
+
+alphabet_summary <- alphabet_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)
+
+meta_summary <- meta_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)
+
+nvidia_summary <- nvidia_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)
+
+apple_summary <- apple_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)
+
+tesla_summary <- tesla_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)
+
+# join tables
+stock_summary <- microsoft_summary |>
+  full_join(alphabet_summary) |>
+  full_join(meta_summary) |>
+  full_join(nvidia_summary) |>
+  full_join(apple_summary) |>
+  full_join(tesla_summary)
+
+stock_summary |> kable(digits = 2
+                       , caption = "Company Stock Price Summary Statistics"
+                       , format.args = list(big.mark = ","))
+```
+
+```{r}
+# r&d expenses
+rd <- read.csv("data/scraped-10qs.csv")
+
+microsoft_rd <- rd |>
+  filter(COMP == "Microsoft") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)  
+
+alphabet_rd <- rd |>
+  filter(COMP == "Google") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)  
+
+meta_rd <- rd |>
+  filter(COMP == "Meta") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)  
+
+nvidia_rd <- rd |>
+  filter(COMP == "Nvidia") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)  
+
+apple_rd <- rd |>
+  filter(COMP == "Apple") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)  
+
+tesla_rd <- rd |>
+  filter(COMP == "Tesla") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)  
+
+rd_summary <- microsoft_rd |>
+  full_join(alphabet_rd) |>
+  full_join(meta_rd) |>
+  full_join(nvidia_rd) |>
+  full_join(apple_rd) |>
+  full_join(tesla_rd)
+
+rd_summary |> kable(digits = 2
+                    , caption = "Company R&D Expense Summary Statistics"
+                    , format.args = list(big.mark = ","))
 
 ```
