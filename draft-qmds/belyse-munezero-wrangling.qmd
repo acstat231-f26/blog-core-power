@@ -59,6 +59,7 @@ stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, app
 
 ten_qs <- read_csv("data/scraped-10qs.csv")
 ```
+
 ```{r}
 ##microsoft
 
