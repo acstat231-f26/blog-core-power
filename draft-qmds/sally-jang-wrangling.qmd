@@ -164,45 +164,75 @@ for (i in 1:4) {
 for (i in 1:4) {
   all_text[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
     read_html() |>
-    html_elements("div") |>
+    html_elements("span") |>
     html_text2()
   
   detect_1 <- which(str_detect(all_text, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
   
   detect_2 <- which(str_detect(all_text, "QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
   
-  ten_Qs_text_scraped$text[i] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i+4] <- all_text[detect_1:detect_2]
 }
 
 # Meta
 for (i in 1:4) {
   all_text[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
     read_html() |>
-    html_elements("p") |>
+    html_elements("span") |>
     html_text2()
   
   detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
   
   detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
   
-  ten_Qs_text_scraped$text[i] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i+8] <- all_text[detect_1:detect_2]
 }
 
-
-
-
-test2 <- session_jump_to(sec_session, google$HTML[i]) |>
+# Apple
+for (i in 1:4) {
+  all_text[i+12] <- session_jump_to(sec_session, apple$HTML[i]) |>
     read_html() |>
     html_elements("span") |>
     html_text2()
-print(test2)
+  
+  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i+12] <- all_text[detect_1:detect_2]
+}
 
-test2_detect <- which(str_detect(test2, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
-test2_detect_2 <- which(str_detect(all_text, "ITEM 3."))
+# Nvidia
+for (i in 1:4) {
+  all_text[i+16] <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i+16] <- all_text[detect_1:detect_2]
+}
 
-test2[test2_detect:test2_detect_2]
+# Tesla
+for (i in 1:4) {
+  all_text[i+20] <- session_jump_to(sec_session, tesla$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i+20] <- all_text[detect_1:detect_2]
+}
 
+print(ten_Qs_text_scraped$text)
 
+write_csv(ten_Qs_text_scraped, "data/scraped-text-10qs.csv")
 
 ```
 
