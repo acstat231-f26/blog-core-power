@@ -34,11 +34,13 @@ library(ggrepel)
 ```{r}
 #| label: scrape-R&D-expenses-from-SEC
 
+# Student that worked on this section: Alisha
+
 # check if scraping is allowed
 paths_allowed("https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/amzn-20250930.htm")
 
 # -----------------------------------------------------------------------------
-# This is the code for scraping 10Qs from HTM files from the SEC website
+# This is the code for scraping 10Qs from HTML files from the SEC website
 # for Microsoft, Google, Meta, Apple, Nvidia, and Tesla
 # -----------------------------------------------------------------------------
 
@@ -188,8 +190,11 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 ```{r}
 #| label: import-stock-prices
 
+# Student that worked on this section: Sally
+
 # -----------------------------------------------------------------------------
-# This is the code for importing and wrangling stock prices for all 6 companies # by using the quantmod package
+# This is the code for importing and wrangling stock prices for all 6 companies 
+# by using the quantmod package
 # Because the 10-Q reporting time frames are different for each company, we
 # used a standardized, informative time frame (2025-03-01 to 2026-11-01) that 
 # captured all 4 10-Qs for each company 
@@ -246,6 +251,8 @@ stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, app
 ```{r}
 #| label: further-time-series-wrangling
 
+# Student that worked on this section: Sally
+
 scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
 
 # Ensuring that company name formats conform between scraped 10-Qs and stock 
@@ -272,6 +279,8 @@ text_labels <- named_ten_Qs |>
 
 ```{r}
 #| label: scatterplot-wrangling
+
+# Student that worked on this section: Belyse
 
 # Convert dates to Date format
 dated_ten_Qs <- scraped_ten_Qs |>
@@ -319,6 +328,8 @@ final_data <- before |>
 ```{r}
 #| label: time-series
 
+# Student that worked on this section: Sally
+
 ggplot(
     data=stock_price_joined, 
     aes(x = Date, y = Close)) +
@@ -337,7 +348,9 @@ ggplot(
 ```
 
 ```{r}
-#| label: dot-plot
+#| label: dot-plot 
+
+# Student that worked on this section: Sally
 
 ggplot(data = scraped_ten_Qs, aes(color = COMP, x = COMP, y = RD)) + 
   geom_point(size = 3) + 
@@ -346,6 +359,165 @@ ggplot(data = scraped_ten_Qs, aes(color = COMP, x = COMP, y = RD)) +
 # Tables
 
 ```{r}
+#| label: summary-statistics-tables
+
+# Student that worked on this section: Alisha
+
+# ------------------------------------------------------------------------------
+# This code is for creating the summary statistics table for company stock
+# prices using the kableextra package
+# ------------------------------------------------------------------------------
+
+# first, summarize the stats for each company's stock price
+microsoft_summary <- microsoft_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)
+
+alphabet_summary <- alphabet_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)
+
+meta_summary <- meta_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)
+
+nvidia_summary <- nvidia_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)
+
+apple_summary <- apple_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)
+
+tesla_summary <- tesla_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)
+
+# join all stock price summary tables
+stock_summary <- microsoft_summary |>
+  full_join(alphabet_summary) |>
+  full_join(meta_summary) |>
+  full_join(nvidia_summary) |>
+  full_join(apple_summary) |>
+  full_join(tesla_summary)
+
+# create kable
+stock_summary |> kable(digits = 2
+                       , caption = "Company Stock Price Summary Statistics (in dollars)"
+                       , format.args = list(big.mark = ","))
+
+
+# ------------------------------------------------------------------------------
+# This code is for creating the summary statistics table for company r&d
+# expenses using the kableextra package
+# ------------------------------------------------------------------------------
+
+# import 10qs (I did this in a separate document, hence different var name)
+rd <- read.csv("data/scraped-10qs.csv")
+
+# summarize each company's r&d separately
+microsoft_rd <- rd |>
+  filter(COMP == "Microsoft") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)  
+
+alphabet_rd <- rd |>
+  filter(COMP == "Google") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)  
+
+meta_rd <- rd |>
+  filter(COMP == "Meta") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)  
+
+nvidia_rd <- rd |>
+  filter(COMP == "Nvidia") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)  
+
+apple_rd <- rd |>
+  filter(COMP == "Apple") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)  
+
+tesla_rd <- rd |>
+  filter(COMP == "Tesla") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)  
+
+# join each data frame back together
+rd_summary <- microsoft_rd |>
+  full_join(alphabet_rd) |>
+  full_join(meta_rd) |>
+  full_join(nvidia_rd) |>
+  full_join(apple_rd) |>
+  full_join(tesla_rd)
+
+# create and format table
+rd_summary |> kable(digits = 2
+                    , caption = "Company R&D Expense Summary Statistics (in millions)"
+                    , format.args = list(big.mark = ","))
 
 ```
 
