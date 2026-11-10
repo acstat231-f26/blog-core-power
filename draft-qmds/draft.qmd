@@ -5,7 +5,18 @@ author:
 - "Alisha Xu"
 - "Belyse Munezero"
 - "Sally Jang"
-abstract: "A brief abstract summarizing your project is required here. This abstract, along with the first image or figure in your blog, will be used as a preview to your blog on the course's landing page for all the blogs."
+abstract: "Our project focuses on analyzing the financial and textual disclosures of six major technology companies: Alphabet, Apple, Meta, Microsoft, Nvidia, and Tesla. We are examining their last four quarterly 10-Q filings to extract Research and Development (R&D) expenses and investigate how these expenses relate to changes in stock prices.
+
+Additionally, we plan to conduct text analysis of the Management Discussion and Analysis (MD&A) section of each filing.
+
+Team contributions and progress
+
+Over the past few days, we have been making progress on different parts of the project, with each team member assigned specific responsibilities.
+- Alisha worked on web scraping the companies' 10-Q filings to collect their R&D expenses. She also worked on creating the summary table.
+- Sally collected stock price data for each company covering the period from March 11, 2025, to November 1, 2026. She also handled data wrangling for the time-series and dot plot visualizations. 
+- Belyse worked on data wrangling for the scatterplot visualization, preparing the data needed to examine the relationship between R&D expenses and stock prices.
+
+During our meetings, we shared our progress, discussed challenges and concerns, and worked together to find solutions. We also used these discussions to clarify next steps, address any difficulties, and make sure everyone understood their upcoming tasks.
 ---
 
 ```{r}
@@ -293,30 +304,61 @@ dated_ten_Qs <- scraped_ten_Qs |>
     "Nvidia" = "NVDA",
     "Tesla" = "TSLA"))
 
+#Making a new dataset with stock price after the tenq filing data and the day of the filing
+
+stock_filing <- stock_price_joined |>
+  rename(
+    stock_date_filing = Date,
+    stock_price_filing = Close
+  )
+
+filing <- tenq |>
+  left_join(
+    stock_filing,
+    by = join_by(
+      COMP,
+      closest(`FIL-D` <= stock_date_filing)
+    )
+)
+
+
 stock_before <- stock_price_joined |>
   rename(
     stock_date_before = Date,
-    stock_price_before = Close)
+    stock_price_before = Close
+  )
 
-before <- dated_ten_Qs |>
+final_data <- filing |>
   left_join(
     stock_before,
     by = join_by(
       COMP,
-      closest(`FIL-D` > stock_date_before)))
+      closest(`FIL-D` > stock_date_before)
+    )
+  )
 
+# Calculating change is stock price and change in RD
 
-stock_after <- stock_price_joined |>
-  rename(
-    stock_date_after = Date,
-    stock_price_after = Close)
+#change in stock price
 
-final_data <- before |>
-  left_join(
-    stock_after,
-    by = join_by(
-      COMP,
-      closest(`FIL-D` < stock_date_after)))
+final_data <- final_data |>
+  mutate(
+    stock_change = stock_price_filing - stock_price_before,
+    stock_change_pct = (
+      stock_change / stock_price_before
+    ) * 100
+  )
+
+# change in RD
+final_data_changes <- final_data |>
+  arrange(COMP, `REP-D`) |>
+  group_by(COMP) |>
+  mutate(
+    previous_RD = lag(RD),
+    change_RD = RD - previous_RD,
+    ) |>
+  ungroup()
+
 ```
 
 ```{r}
@@ -344,6 +386,24 @@ ggplot(
 ```
 ```{r}
 #| label: scatterplot
+
+# Student who worked on this section: Belyse
+
+#Change in R&D Expenses vs. Stock Price Reaction scatter plot
+
+ggplot(final_data_changes,
+       aes(x = change_RD, y = stock_change_pct, color = COMP)) +
+
+  geom_point(size = 3, alpha = 0.7) +
+
+  labs(
+    title = "Change in R&D Expenses vs. Stock Price Reaction",
+    x = "Change in R&D Expenses",
+    y = "Stock Price Change (%)",
+    color = "Company"
+  ) +
+
+  theme_minimal()
 
 ```
 
