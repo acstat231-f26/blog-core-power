@@ -1,0 +1,570 @@
+---
+title: "Alisha Xu Scraping"
+format: pdf
+editor: visual
+---
+
+# Core Power 10Q Webscraping Script
+
+```{r}
+#| label: packages
+# load packages
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+library(knitr)
+library(kableExtra)
+library(quantmod)
+```
+
+```{r}
+#| label: importing-data
+# check if scraping is allowed
+paths_allowed("https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/amzn-20250930.htm")
+
+# Compiled dataset of all the 10Qs we will be using
+# COMP: Company Name
+# FILD-D: Filing Date
+# REP-D: Reporting For Date
+# HTML: HTML link
+ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
+```
+
+```{r}
+#| label: r&d-expenses-test
+#| eval: false
+
+# Amazon 10Qs do not list Research and Development
+
+
+ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
+
+nursery_rhymes20 <- tibble(title = toc_titles
+                         , url = hrefs
+                         # Create empty character vector the same 
+                         # length as our titles vector
+                         , text = vector(mode = "character"
+                                         , length = length(toc_titles))) |>
+  # Limit to only the rows we are trying to work with
+  slice(1:n_iter)
+
+# Iterate through links to grab nursery rhyme text 
+for (i in 1:n_iter) {
+  # Scrape nursery rhyme i's text and save it to row i of the `text` variable 
+  nursery_rhymes20$text[i] <- nursery_rhymes20$url[i] |> 
+    read_html() |>
+    html_element(".poem") |>
+    html_text()
+}
+
+library(httr)
+my_ua <- "AmherstCollege alxu27@amherst.edu"
+
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+check <- session_jump_to(sec_session, "https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/msft-20260331.htm") |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X1, X4)
+
+
+read_html(target_page)
+
+# ---------
+ ten_Qs$HTML[1] |> 
+    read_html()
+
+check <- session_jump_to(sec_session, "https://www.sec.gov/Archives/edgar/data/1318605/000162828025045968/tsla-20250930.htm") |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(11) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X16)
+
+```
+
+```{r}
+#| label: r&d-expenses-code
+#| eval: false
+
+# compartmentalize each variable
+# Microsoft
+microsoft <- ten_Qs |>
+  filter(COMP == "Microsoft")
+
+# Google
+google <- ten_Qs |>
+  filter(COMP == "Google")
+
+# Meta
+meta <- ten_Qs |>
+  filter(COMP == "Meta")
+
+# Apple
+apple <- ten_Qs |>
+  filter(COMP == "Apple")
+
+# Nvidia
+nvidia <- ten_Qs |>
+  filter(COMP == "Nvidia")
+
+# Tesla
+tesla <- ten_Qs |>
+  filter(COMP == "Tesla")
+
+# create sec session
+my_ua <- "AmherstCollege alxu27@amherst.edu"
+
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+ten_Qs <- ten_Qs |>
+  mutate(RD = NA)
+
+# Scraping
+# Microsoft
+for (i in 1:4) {
+  ten_Qs$RD[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# Google
+for (i in 1:2) {
+  ten_Qs$RD[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(14) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X10)
+}
+
+for (i in 1:2) {
+  ten_Qs$RD[i+6] <- session_jump_to(sec_session, google$HTML[i+2]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(15) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X10)
+}  
+
+# Meta
+for (i in 1:4) {
+  ten_Qs$RD[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# third one
+ten_Qs$RD[11] <- session_jump_to(sec_session, meta$HTML[3]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X16)
+
+# Apple
+for (i in 1:4) {
+  ten_Qs$RD[i+12] <- session_jump_to(sec_session, apple$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(13) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# Nvidia
+for (i in 1:4) {
+  ten_Qs$RD[i+16] <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(8) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+# Tesla
+for (i in 1:4) {
+  ten_Qs$RD[i+20] <- session_jump_to(sec_session, tesla$HTML[i]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(11) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X4)
+}
+
+ten_Qs_RD <- ten_Qs |>
+  select(!HTML)
+
+write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
+
+```
+
+```{r}
+#| eval: false
+# ------------------------------------------------------------------------------
+# This is the code for scraping 10Qs from HTM files from the SEC website
+# for Microsoft, Google, Meta, Apple, Nvidia, and Tesla
+# ------------------------------------------------------------------------------
+
+# packages
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+library(knitr)
+library(kableExtra)
+library(httr)
+
+
+# import dataset 
+# variable Explanations:
+# COMP: Company Name
+# FILD-D: Filing Date
+# REP-D: Reporting For Date
+# HTML: HTML link
+
+ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
+
+# compartmentalize each variable
+# Microsoft
+microsoft <- ten_Qs |>
+  filter(COMP == "Microsoft")
+
+# Google
+google <- ten_Qs |>
+  filter(COMP == "Google")
+
+# Meta
+meta <- ten_Qs |>
+  filter(COMP == "Meta")
+
+# Apple
+apple <- ten_Qs |>
+  filter(COMP == "Apple")
+
+# Nvidia
+nvidia <- ten_Qs |>
+  filter(COMP == "Nvidia")
+
+# Tesla
+tesla <- ten_Qs |>
+  filter(COMP == "Tesla")
+
+# create sec session
+my_ua <- "AmherstCollege alxu27@amherst.edu"
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+
+# add empty column to store values
+ten_Qs <- ten_Qs |>
+  mutate(RD = NA)
+
+# -------------------------------Scraping---------------------------------------
+# Microsoft
+for (i in 1:4) {
+  ten_Qs$RD[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(7) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# Google
+for (i in 1:2) {
+  ten_Qs$RD[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(14) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X10)
+}
+
+for (i in 1:2) {
+  ten_Qs$RD[i+6] <- session_jump_to(sec_session, google$HTML[i+2]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(15) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X10)
+}  
+
+# Meta
+for (i in 1:4) {
+  ten_Qs$RD[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(7) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# third one
+ten_Qs$RD[11] <- session_jump_to(sec_session, meta$HTML[3]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X16)
+
+# Apple
+for (i in 1:4) {
+  ten_Qs$RD[i+12] <- session_jump_to(sec_session, apple$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(13) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# Nvidia
+for (i in 1:4) {
+  ten_Qs$RD[i+16] <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(8) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# Tesla
+for (i in 1:4) {
+  ten_Qs$RD[i+20] <- session_jump_to(sec_session, tesla$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(11) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+ten_Qs_RD <- ten_Qs |>
+  select(!HTML)
+
+# convert RD column into numeric type column
+ten_Qs_RD <- ten_Qs_RD |>
+mutate(
+  RD_clean = str_remove_all(RD, "[$, ]"), 
+  RD = as.numeric(RD_clean)
+) |>
+  select(!RD_clean)
+
+# export
+write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
+
+
+```
+
+```{r}
+#| label: stock-time-series
+
+# copied from Sally's code
+# grabbing closing price stock data for our companies from 3/1/25 to 11/1/26
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(MSFT), coredata(MSFT)) |>
+  select(Date, MSFT.Close) |>
+  rename(Close = MSFT.Close) |>
+  mutate(COMP = "MSFT")
+
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(GOOG), coredata(GOOG)) |>
+  select(Date, GOOG.Close) |>
+  rename(Close = GOOG.Close) |>
+  mutate(COMP = "GOOG")
+
+meta_stock <- getSymbols("META", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(META), coredata(META)) |>
+  select(Date, META.Close) |>
+  rename(Close = META.Close) |>
+  mutate(COMP = "META")
+
+apple_stock <- getSymbols("AAPL", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(AAPL), coredata(AAPL)) |>
+  select(Date, AAPL.Close) |>
+  rename(Close = AAPL.Close) |>
+  mutate(COMP = "AAPL")
+
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(NVDA), coredata(NVDA)) |>
+  select(Date, NVDA.Close) |>
+  rename(Close = NVDA.Close) |>
+  mutate(COMP = "NVDA")
+
+tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(TSLA), coredata(TSLA)) |>
+  select(Date, TSLA.Close) |>   
+  rename(Close = TSLA.Close) |>
+  mutate(COMP = "TSLA")
+
+stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, apple_stock, nvidia_stock, tesla_stock)
+
+```
+
+```{r}
+#| label: summary-statistics-table
+
+# stock price
+microsoft_summary <- microsoft_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)
+
+alphabet_summary <- alphabet_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)
+
+meta_summary <- meta_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)
+
+nvidia_summary <- nvidia_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)
+
+apple_summary <- apple_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)
+
+tesla_summary <- tesla_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)
+
+# join tables
+stock_summary <- microsoft_summary |>
+  full_join(alphabet_summary) |>
+  full_join(meta_summary) |>
+  full_join(nvidia_summary) |>
+  full_join(apple_summary) |>
+  full_join(tesla_summary)
+
+stock_summary |> kable(digits = 2
+                       , caption = "Company Stock Price Summary Statistics"
+                       , format.args = list(big.mark = ","))
+```
+
+```{r}
+# r&d expenses
+rd <- read.csv("data/scraped-10qs.csv")
+
+microsoft_rd <- rd |>
+  filter(COMP == "Microsoft") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)  
+
+alphabet_rd <- rd |>
+  filter(COMP == "Google") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)  
+
+meta_rd <- rd |>
+  filter(COMP == "Meta") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)  
+
+nvidia_rd <- rd |>
+  filter(COMP == "Nvidia") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)  
+
+apple_rd <- rd |>
+  filter(COMP == "Apple") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)  
+
+tesla_rd <- rd |>
+  filter(COMP == "Tesla") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)  
+
+rd_summary <- microsoft_rd |>
+  full_join(alphabet_rd) |>
+  full_join(meta_rd) |>
+  full_join(nvidia_rd) |>
+  full_join(apple_rd) |>
+  full_join(tesla_rd)
+
+rd_summary |> kable(digits = 2
+                    , caption = "Company R&D Expense Summary Statistics"
+                    , format.args = list(big.mark = ","))
+
+```
