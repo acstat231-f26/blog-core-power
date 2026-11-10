@@ -1,0 +1,951 @@
+---
+title: "Big Tech R&D Expenses vs. Changes in Stock Price"
+subtitle: "2026"
+author: 
+- "Alisha Xu"
+- "Belyse Munezero"
+- "Sally Jang"
+abstract: "Our project focuses on analyzing the financial and textual disclosures of six major technology companies: Alphabet, Apple, Meta, Microsoft, Nvidia, and Tesla. We are examining their last four quarterly 10-Q filings to extract Research and Development (R&D) expenses and investigate how these expenses relate to changes in stock price. Additionally, we plan to conduct text analysis of the Management Discussion and Analysis (MD&A) section of each filing."
+---
+# Team contributions and progress
+
+Over the past few days, we have been making progress on different parts of the project, with each team member assigned specific responsibilities. Alisha worked on web scraping the companies' 10-Q filings to collect their R&D expenses. She also worked on creating the summary statistics table. Sally collected stock price data for each company covering the period from March 11, 2025, to November 1, 2026 with the quantmod package. She also handled data wrangling for the time series and dot plot visualizations. Belyse worked on data wrangling for the scatterplot visualization, preparing the data needed to examine the relationship between R&D expenses and stock prices.Alisha and Sally worked together to web scrape the text of each company's 10-Q's MD&A. During our meetings, we shared our progress, discussed challenges and concerns, and worked together to find solutions. We also used these discussions to clarify next steps, address any difficulties, and make sure everyone understood their upcoming tasks.
+
+```{r}
+#| label: setup
+#| include: false
+
+# Improve digit display and NA display for kable tables
+options(scipen = 1, knitr.kable.NA = "")
+
+# Load necessary packages
+library(tidyverse)
+library(rvest)
+library(robotstxt)
+library(knitr)
+library(kableExtra)
+library(httr)
+library(quantmod)
+library(ggplot2)
+library(lubridate)
+library(glue)
+library(ggrepel)
+```
+
+# Wrangled data
+
+```{r}
+#| label: scrape-R&D-expenses-from-SEC
+#| include: false
+
+# Student that worked on this section: Alisha
+
+# Check if scraping is allowed
+paths_allowed("https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/amzn-20250930.htm")
+
+# -----------------------------------------------------------------------------
+# This is the code for scraping 10Qs' R&D expenses from HTML files from the 
+# SEC website for Microsoft, Google, Meta, Apple, Nvidia, and Tesla
+# -----------------------------------------------------------------------------
+
+
+# Import dataset 
+# Variable Explanations:
+# COMP: Company Name
+# FILD-D: Filing Date
+# REP-D: Reporting For Date
+# HTML: HTML link
+
+ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
+
+# Compartmentalize each variable
+# Microsoft
+microsoft <- ten_Qs |>
+  filter(COMP == "Microsoft")
+
+# Google
+google <- ten_Qs |>
+  filter(COMP == "Google")
+
+# Meta
+meta <- ten_Qs |>
+  filter(COMP == "Meta")
+
+# Apple
+apple <- ten_Qs |>
+  filter(COMP == "Apple")
+
+# Nvidia
+nvidia <- ten_Qs |>
+  filter(COMP == "Nvidia")
+
+# Tesla
+tesla <- ten_Qs |>
+  filter(COMP == "Tesla")
+
+# Create sec session
+my_ua <- "AmherstCollege alxu27@amherst.edu"
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+
+# Add empty column to store values
+ten_Qs <- ten_Qs |>
+  mutate(RD = NA)
+
+# -------------------------------Scraping---------------------------------------
+# Microsoft
+for (i in 1:4) {
+  ten_Qs$RD[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(7) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# Google
+for (i in 1:2) {
+  ten_Qs$RD[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(14) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X10)
+}
+
+for (i in 1:2) {
+  ten_Qs$RD[i+6] <- session_jump_to(sec_session, google$HTML[i+2]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(15) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X10)
+}  
+
+# Meta
+for (i in 1:4) {
+  ten_Qs$RD[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(7) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# Meta third 10-Q
+ten_Qs$RD[11] <- session_jump_to(sec_session, meta$HTML[3]) |>
+  read_html() |>
+  html_elements("table") |>
+  purrr::pluck(7) |>
+  html_table() |>
+  filter(X1 == "Research and development") |>
+  select(X16)
+
+# Apple
+for (i in 1:4) {
+  ten_Qs$RD[i+12] <- session_jump_to(sec_session, apple$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(13) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# Nvidia
+for (i in 1:4) {
+  ten_Qs$RD[i+16] <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(8) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+# Tesla
+for (i in 1:4) {
+  ten_Qs$RD[i+20] <- session_jump_to(sec_session, tesla$HTML[i]) |>
+    read_html() |>
+    html_elements("table") |>
+    purrr::pluck(11) |>
+    html_table() |>
+    filter(X1 == "Research and development") |>
+    select(X4)
+}
+
+ten_Qs_RD <- ten_Qs |>
+  select(!HTML)
+
+# convert RD column into numeric type column
+ten_Qs_RD <- ten_Qs_RD |>
+mutate(
+  RD_clean = str_remove_all(RD, "[$, ]"), 
+  RD = as.numeric(RD_clean)) |>
+  select(!RD_clean)
+
+# export
+write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
+```
+
+```{r}
+#| label: import-stock-prices
+#| include: false
+
+# Student that worked on this section: Sally
+
+# -----------------------------------------------------------------------------
+# This is the code for importing and wrangling stock prices for all 6 companies 
+# by using the quantmod package
+# Because the 10-Q reporting time frames are different for each company, we
+# used a standardized, informative time frame (2025-03-01 to 2026-11-01) that 
+# captured all 4 10-Qs for each company 
+# -----------------------------------------------------------------------------
+
+# Microsoft
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", 
+                              from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(MSFT), coredata(MSFT)) |>
+  select(Date, MSFT.Close) |>
+  rename(Close = MSFT.Close) |>
+  mutate(COMP = "MSFT")
+
+# Alphabet
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", 
+                             from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(GOOG), coredata(GOOG)) |>
+  select(Date, GOOG.Close) |>
+  rename(Close = GOOG.Close) |>
+  mutate(COMP = "GOOG")
+
+# Meta
+meta_stock <- getSymbols("META", src = "yahoo", 
+                         from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(META), coredata(META)) |>
+  select(Date, META.Close) |>
+  rename(Close = META.Close) |>
+  mutate(COMP = "META")
+
+# Apple
+apple_stock <- getSymbols("AAPL", src = "yahoo", 
+                          from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(AAPL), coredata(AAPL)) |>
+  select(Date, AAPL.Close) |>
+  rename(Close = AAPL.Close) |>
+  mutate(COMP = "AAPL")
+
+# Nvidia
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", 
+                           from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(NVDA), coredata(NVDA)) |>
+  select(Date, NVDA.Close) |>
+  rename(Close = NVDA.Close) |>
+  mutate(COMP = "NVDA")
+
+# Tesla
+tesla_stock <- getSymbols("TSLA", src = "yahoo", 
+                          from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(TSLA), coredata(TSLA)) |>
+  select(Date, TSLA.Close) |>   
+  rename(Close = TSLA.Close) |>
+  mutate(COMP = "TSLA")
+
+# Binding rows to consolidate all stock price points into one data set in 
+# preparation for faceted time series visualization
+stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, 
+                                apple_stock, nvidia_stock, tesla_stock)
+
+```
+
+```{r}
+#| label: further-time-series-wrangling
+#| include: false
+
+# Student that worked on this section: Sally
+
+scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
+
+# Ensuring that company name formats conform between scraped 10-Qs and stock 
+# price data set
+companies <- 
+  tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+         name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
+named_ten_Qs <- scraped_ten_Qs |> left_join(companies, by = c("COMP" = "name1"))
+
+# To create accurate time series visualization elements (vertical lines for 
+# 10-Q report dates and labels for corresponding quarterly R&D expenses)
+vertical_lines <- named_ten_Qs |>
+  select(name2, "REP-D") |>
+  rename(COMP = "name2", reported_date = "REP-D")
+
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", reported_date = "REP-D") |>
+  mutate(x_position = reported_date - days(5), 
+         y_position = 1000,
+         text_values = glue("Quarterly R&D Expense: {named_ten_Qs$RD}   
+                            million"))
+```
+
+```{r}
+#| label: scatterplot-wrangling
+#| include: false
+
+# Student that worked on this section: Belyse
+
+# Convert dates to Date format
+dated_ten_Qs <- scraped_ten_Qs |>
+  mutate(`FIL-D` = as.Date(`FIL-D`))|>
+  mutate(COMP = recode(COMP,
+    "Microsoft" = "MSFT",
+    "Google" = "GOOG",
+    "Meta" = "META",
+    "Apple" = "AAPL",
+    "Nvidia" = "NVDA",
+    "Tesla" = "TSLA"))
+
+# Making a new dataset with stock price after the 10-Q filing data and the 
+# day of the filing
+
+stock_filing <- stock_price_joined |>
+  rename(
+    stock_date_filing = Date,
+    stock_price_filing = Close
+  )
+
+filing <- dated_ten_Qs |>
+  left_join(
+    stock_filing,
+    by = join_by(
+      COMP,
+      closest(`FIL-D` <= stock_date_filing)
+    )
+)
+
+
+stock_before <- stock_price_joined |>
+  rename(
+    stock_date_before = Date,
+    stock_price_before = Close
+  )
+
+final_data <- filing |>
+  left_join(
+    stock_before,
+    by = join_by(
+      COMP,
+      closest(`FIL-D` > stock_date_before)
+    )
+  )
+
+# Calculating change in stock price and change in RD
+
+# Change in stock price
+
+final_data <- final_data |>
+  mutate(
+    stock_change = stock_price_filing - stock_price_before,
+    stock_change_pct = (
+      stock_change / stock_price_before
+    ) * 100
+  )
+
+# Change in RD
+final_data_changes <- final_data |>
+  arrange(COMP, `REP-D`) |>
+  group_by(COMP) |>
+  mutate(
+    previous_RD = lag(RD),
+    change_RD = RD - previous_RD,
+    ) |>
+  ungroup()
+
+```
+
+```{r}
+#| label: text-analysis-scraping
+#| include: false
+
+# Student that worked on this section: Sally and Alisha
+
+# -----------------------------------------------------------------------------
+# This is the code for scraping 10Qs' MD&A text from HTML files from the 
+# SEC website for Microsoft, Google, Meta, Apple, Nvidia, and Tesla
+# -----------------------------------------------------------------------------
+
+ten_Qs_text <- readxl::read_xlsx("data/10q-links.xlsx")
+
+# Compartmentalize each variable
+# Microsoft
+microsoft <- ten_Qs_text |>
+  filter(COMP == "Microsoft")
+
+# Google
+google <- ten_Qs_text |>
+  filter(COMP == "Google")
+
+# Meta
+meta <- ten_Qs_text |>
+  filter(COMP == "Meta")
+
+# Apple
+apple <- ten_Qs_text |>
+  filter(COMP == "Apple")
+
+# Nvidia
+nvidia <- ten_Qs_text |>
+  filter(COMP == "Nvidia")
+
+# Tesla
+tesla <- ten_Qs_text |>
+  filter(COMP == "Tesla")
+
+# Create sec session
+my_ua <- "AmherstCollege yjang27@amherst.edu"
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+
+# Add empty column to store values
+ten_Qs_text_scraped <- ten_Qs_text |>
+  mutate(text = NA)
+
+# -------------------------------Scraping---------------------------------------
+# Microsoft
+for (i in 1:4) {
+  all_text_microsoft <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_microsoft, "ITEM 2. MANAGEMENT’S"))
+  
+  detect_2 <- which(str_detect(all_text_microsoft, "ITEM 3. QUANTITATIVE"))
+  
+  ten_Qs_text_scraped$text[i] <- all_text_microsoft[detect_1:detect_2]
+}
+
+# Google
+for (i in 1:4) {
+  all_text_google <- session_jump_to(sec_session, google$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_google, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text_google, "QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i+4] <- all_text_google[detect_1:detect_2]
+}
+
+# Meta
+for (i in 1:4) {
+  all_text_meta <- session_jump_to(sec_session, meta$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_meta, "Management's Discussion and Analysis of Financial Condition and Results of Operations"))
+  
+  detect_2 <- which(str_detect(all_text_meta, "Quantitative and Qualitative Disclosures About Market Risk"))
+  
+  ten_Qs_text_scraped$text[i+8] <- all_text_meta[detect_1:detect_2]
+}
+
+# Apple
+for (i in 1:4) {
+  all_text_apple <- session_jump_to(sec_session, apple$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_apple, "Management’s Discussion and Analysis of Financial Condition and Results of Operations"))[2]
+  
+  detect_2 <- which(str_detect(all_text_apple, "Quantitative and Qualitative Disclosures About Market Risk"))[2]
+  
+  ten_Qs_text_scraped$text[i+12] <- all_text_apple[detect_1:detect_2]
+}
+
+# Nvidia
+for (i in 1:4) {
+  all_text_nvidia <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_nvidia, "Item 2."))[3]
+  
+  detect_2 <- which(str_detect(all_text_nvidia, "Item 3\\."))[2]
+  
+  ten_Qs_text_scraped$text[i+16] <- all_text_nvidia[detect_1:detect_2]
+}
+
+# Tesla
+for (i in 1:4) {
+  all_text_tesla <- session_jump_to(sec_session, tesla$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_tesla, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text_tesla, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  ten_Qs_text_scraped$text[i+20] <- all_text_tesla[detect_1:detect_2]
+}
+```
+
+# Visualizations
+
+```{r}
+#| label: time-series
+
+# Student that worked on this section: Sally
+
+ggplot(
+    data=stock_price_joined, 
+    aes(x = Date, y = Close)) +
+  geom_line() +
+  facet_wrap(~COMP) +
+  geom_vline(data=vertical_lines, aes(xintercept = reported_date)) +
+  geom_text_repel(
+    data=text_labels, 
+    aes(x = x_position, y = y_position, label = text_values), 
+    size = 3)
+
+```
+
+```{r}
+#| label: scatterplot
+
+# Student who worked on this section: Belyse
+
+# Change in R&D Expenses vs. Stock Price Reaction scatter plot
+
+ggplot(final_data_changes,
+       aes(x = change_RD, y = stock_change_pct, color = COMP)) +
+
+  geom_point(size = 3, alpha = 0.7) +
+
+  labs(
+    title = "Change in R&D Expenses vs. Stock Price Reaction",
+    x = "Change in R&D Expenses",
+    y = "Stock Price Change (%)",
+    color = "Company"
+  ) +
+  theme_minimal()
+
+```
+
+```{r}
+#| label: dot-plot 
+
+# Student that worked on this section: Sally
+
+ggplot(data = scraped_ten_Qs, aes(color = COMP, x = COMP, y = RD)) + 
+  geom_point(size = 3) + 
+  labs(color = "Company")
+```
+
+# Tables
+
+```{r}
+#| label: summary-statistics-table-wrangling
+#| include: false
+
+# Student that worked on this section: Alisha
+
+# ------------------------------------------------------------------------------
+# This code is for creating the summary statistics table for company stock
+# prices using the kableextra package
+# ------------------------------------------------------------------------------
+
+# First, summarize the stats for each company's stock price
+microsoft_summary <- microsoft_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)
+
+alphabet_summary <- alphabet_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)
+
+meta_summary <- meta_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)
+
+nvidia_summary <- nvidia_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)
+
+apple_summary <- apple_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)
+
+tesla_summary <- tesla_stock |>
+  summarise(
+    "Mean" = mean(Close, na.rm = TRUE)
+    , "Median"= median(Close, na.rm = TRUE)
+    , "St. Dev." = sd(Close, na.rm = TRUE)
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)
+
+# Join all stock price summary tables
+stock_summary <- microsoft_summary |>
+  full_join(alphabet_summary) |>
+  full_join(meta_summary) |>
+  full_join(nvidia_summary) |>
+  full_join(apple_summary) |>
+  full_join(tesla_summary)
+
+# Create kable
+stock_summary |> kable(digits = 2
+                       , caption = "Company Stock Price Summary Statistics (in dollars)"
+                       , format.args = list(big.mark = ","))
+
+
+# ------------------------------------------------------------------------------
+# This code is for creating the summary statistics table for company r&d
+# expenses using the kableextra package
+# ------------------------------------------------------------------------------
+
+# Import 10-Qs (I did this in a separate document, hence different var name)
+rd <- read.csv("data/scraped-10qs.csv")
+
+# Summarize each company's R&D separately
+microsoft_rd <- rd |>
+  filter(COMP == "Microsoft") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Microsoft") |>
+  relocate(Company)  
+
+alphabet_rd <- rd |>
+  filter(COMP == "Google") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Alphabet (Google)") |>
+  relocate(Company)  
+
+meta_rd <- rd |>
+  filter(COMP == "Meta") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Meta") |>
+  relocate(Company)  
+
+nvidia_rd <- rd |>
+  filter(COMP == "Nvidia") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Nvidia") |>
+  relocate(Company)  
+
+apple_rd <- rd |>
+  filter(COMP == "Apple") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Apple") |>
+  relocate(Company)  
+
+tesla_rd <- rd |>
+  filter(COMP == "Tesla") |>
+  summarise(
+    "Mean" = mean(RD, na.rm = TRUE)
+    , "Median"= median(RD, na.rm = TRUE)
+    , "St. Dev." = sd(RD, na.rm = TRUE)    
+  ) |>
+  mutate(Company = "Tesla") |>
+  relocate(Company)  
+
+# Join each data frame back together
+rd_summary <- microsoft_rd |>
+  full_join(alphabet_rd) |>
+  full_join(meta_rd) |>
+  full_join(nvidia_rd) |>
+  full_join(apple_rd) |>
+  full_join(tesla_rd)
+```
+
+```{r}
+#| label: summary-statistics-table
+
+# Create and format table
+rd_summary |> kable(digits = 2
+                    , caption = "Company R&D Expense Summary Statistics (in millions)"
+                    , format.args = list(big.mark = ","))
+
+```
+
+# Text Analysis
+
+```{r}
+
+```
+
+# Getting started
+
+This is an example of a Quarto website. All the [Quarto markdown features](https://quarto.org/docs/authoring/markdown-basics.html) we learned for formatting text, adding headings and subheadings, adding code and output, adding labels and captions and whatnot work as usual. 
+
+
+## Website project structure
+
+
+The website project folder/repo will contain the following files, at a minimum:
+
+* `_quarto.yml`: A configuration file that controls the YAML content, similar to what we typically see at the top of our qmd files. 
+
+  Use this file to add or remove additional subpages, change the overall website title, customize the [navigation bar contents and layout](https://quarto.org/docs/websites/website-navigation.html), change the [website theme](https://quarto.org/docs/output-formats/html-themes.html), and set any other default formatting options such as code chunk options.
+
+* `index.qmd`: This is the landing page of your website. This file must be called *index.qmd* and must be located in the root directory of the project.
+
+  Use this page, at a minimum, to introduce your project. From there you can either fully include the contents of the project or use additional qmd files to create subpages of your website (perhaps explaining the structure of the website to the user on this landing page).
+
+* `bib` folder: Contains the bibliography file, which you should edit to include your resources, and a *.csl* file that tells Quarto how to format in-text citations and the bibliography list according to the American Statistical Association citation style. 
+
+* `docs` folder: The rendered content of the website will be located here.
+
+* `styles.css`: This file is currently empty, but if you want to modify or replace the default theme, do so here using CSS. Students in the past have used custom color palettes or custom fonts, for example.
+
+* Additional qmd files: If you want to add subpages with their own content, create new qmd files in your root directory to do so, being sure to include them in the list of contents in your `_quarto.yml` file. 
+
+### Other recommended content:
+
+Similar to the Shiny project, you will need to organize your wrangling scripts and data. You may also have other images or figures saved for displaying in your blog that will also need to be organized. Here are recommendations for organization.
+
+* `scripts`: Store wrangling scripts in their own folder
+
+* `data`: Store datasets in their own folder, being sure to separate raw data from clean/processed data. You can do this in one of two ways: two separate data folders in the root directory (e.g., `raw-data` and `data`) or two subfolders of a single `data` folder (subfolders called, for example, `raw`, `processed`).
+
+* `images`: Organize saved images or figures together in their own folder. Make sure you keep track of the source of the images or figures and credit the sources in some way in your page (include source in caption and/or link image to source)
+
+## Workflow
+
+1. Edit contents of any files. Each new qmd file is a self-contained environment, so you will need to load any necessary packages and datasets for rendering that particular file at the top of that file.
+
+2. After updating a qmd file, **Render** the qmd file. Note that the rendered files (.html etc) are in the `docs` folder. Keep them there!
+
+3. Commit changes to website and PUSH to publish those changes. 
+
+
+# Citations, cross-referencing, and linking between pages
+
+## Cross-referencing
+
+You should use code chunk labels and in-text [cross-references for figures and tables](https://quarto.org/docs/authoring/cross-references.html#computations) (see the *Knitr* examples at the link). 
+
+Quarto additionally provides similar syntax for [creating labels for and cross-referencing equations](https://quarto.org/docs/authoring/cross-references.html#equations), [creating labels for and cross-referencing sections](https://quarto.org/docs/authoring/cross-references.html#sections), and using code chunk options of the form `lst-label: lst-your-listing-label` and `lst-cap: Code chunk caption` to be able to cross-reference displayed code chunks (or "listings") using the syntax `@lst-your-listing-label` within the text. 
+
+These are not required for this project but are good practice.
+
+
+## Creating and linking to subpages
+
+You can create subpages by simply creating new qmd files. Any subpage you want to include on the website should be added to the website navigation list in the `_quarto.yml` file. 
+
+You can [link to another page on the website](another-page.qmd) by using just the filepath to the corresponding qmd file. You can also [link directly to a section of a subpage](yet-another-page.qmd#sec-note). 
+
+
+## Creating the bibliography
+
+One of the new challenges of Quarto, relative to a Word or Google doc, is learning how to build a bibliography and use the specified citation keys to write in-text citations.
+
+All items you plan to cite should be added to the `library.bib` bibliography file, which *you can open from within RStudio and edit just like any other text file*. You should use standard bibtex syntax for each entry, following the examples provided. If the resource you are using doesn't already provide a way to generate a bibtex entry, I recommend using [zoterobib](https://zbib.org) to generate the appropriate syntax (must change the Bibliography style to "BibTeX generic citation style"). The entries currently in `library.bib` are intended to provide syntax examples that capture the range of entries you are most likely to use. **You will need to delete and replace the contents of `library.bib` with your own citation entries.**
+
+::: {.callout-note}
+The examples in `library.bib` are nicely formatted so you can read and follow the patterns, but formatting and order of the `library.bib` file doesn't actually matter and will not be assessed. Just be sure the citations are as complete as possible (authors, titles, dates, urls, dois, etc.).
+:::
+
+```markdown
+@book{hadley2016,
+  author = {Hadley, Wickham}, 
+  title = {ggplot2: Elegant Graphics for Data Analysis}, 
+  url  = {https://ggplot2-book.org},
+  publisher = {Springer},
+  address = {New York, NY},
+  type = {Online book},
+  year = {2016},
+  edition = {3}
+}
+```
+
+
+## Creating in-text citations
+
+Items you cite in the text will be automatically added to a list of References at the bottom of the corresponding page. To cite a reference in the text, use the corresponding *citation key* (the first item in each bibtex entry---it shouldn't have any spaces or special characters) and format the citation using the appropriate [quarto format for in-text citations](https://quarto.org/docs/authoring/citations.html#sec-citations). This is similar to how we cross-reference tables and figures from code chunk labels. For example, the syntax 
+
+```
+@hadley2016 provides excellent examples of customizing our visualizations using **ggplot2**.
+``` 
+
+produces the following text:
+
+> @hadley2016 provides excellent examples of customizing our visualizations using **ggplot2**.
+
+And the corresponding reference is listed in full at the bottom of this page. 
+
+
+# Quarto website features
+
+
+Below I demonstrate examples for customizing aspects of your webpage. In the `_quarto.yml` file you'll see additional links and information about customizing the website further. 
+
+::: {.callout-warning}
+Focus on completing the blog content first! You can play with features and customization *after* you're happy with the contents of the blog.
+:::
+
+
+## Including images or gifs
+
+I would strongly recommend  using **knitr**'s `include_graphics()` functions within code chunks to include images or gifs within your blog. This makes it easier to modify figures, add captions and links, and visually find the code for figures quickly if you need to modify something about the output. There is also [markdown syntax to display or embed images](https://quarto.org/docs/authoring/figures.html), but I would typically not recommend it.
+
+```{r}
+#| fig-cap: "Image courtesy of giphy.com"
+#| fig-align: center
+#| out-width: 100%
+#| fig-link: "https://giphy.com/gifs/insecurehbo-3og0IT6sIWd1eh7bJm"
+
+include_graphics("https://i.giphy.com/3og0IT6sIWd1eh7bJm.webp")
+```
+
+Either approach will take either a filepath to a stored file or a URL to an image or gif. Width can be specified as a percentage of the width of the page (0% to 100%; my preferred approach) or as a fixed number of units (e.g. 400px, 3in, 10cm). 
+
+I can't imagine a scenario where students should or would include videos within their blog, but Quarto provides [guidance on embedding videos](https://quarto.org/docs/authoring/videos.html), as well.
+
+::: {.callout-note}
+The first figure of your blog will be used as the display image on our course's landing page!
+:::
+
+
+
+## Panel tabsets
+
+Use the following format to add information or tables or visualizations in [tabset panels](https://quarto.org/docs/interactive/layout.html#tabset-panel).
+
+::: {.panel-tabset}
+
+### Tab 1
+
+Some information in one tab 
+
+
+### Tab 2
+
+Some information in a different tab
+
+:::
+
+## Panel layouts for content
+
+Use the following format to have more control over the [panel layout](https://quarto.org/docs/authoring/figures.html#complex-layouts) of various components. 
+
+The syntax "[ [1], [1,1] ]" indicates that we have three pieces of content that we want to spread across two rows. The first piece of content will be in its own row, and then the next two components will be split across two columns of equal width in a second row. 
+
+
+::: {layout="[ [1], [1,1] ]"}
+
+### Row 1 with only one output
+
+Some content
+
+
+### First column of row 2
+
+Some other content
+
+### Second column of row 2
+
+Some additional content.
+
+:::
+
+The values provided within each row specify the relative widths of the content within that row. For example "[1,2,1]" would create a row with 3 columns where the first and third columns are the same width and the middle column is twice as wide.
+
+
+## Layouts for tables and visualizations produced by code chunks
+
+For details on how to layout subfigures from multiple graphs produced by the same code chunk, see the examples in the **Knitr** tabs of the sections on [figure layouts, subcaptions, and custom layouts](https://quarto.org/docs/authoring/figures.html#layout).
+
+The same syntax shown across the linked examples can be used to create subtables by replacing `fig-cap` and `fig-subcap` with `tbl-cap` and `tbl-subcap`. 
+
+Two examples in @tbl-layout and @fig-layout below are borrowed and slightly modified from the linked sections. 
+
+```{r}
+#| label: tbl-layout
+#| tbl-cap: "Two tables side-by-side"
+#| tbl-subcap: 
+#|   - "First three rows of cars dataset"
+#|   - "First three rows of pressure dataset"
+#| layout-ncol: 2
+
+cars |> 
+  slice(1:3) |> 
+  kable()
+
+pressure |> 
+  slice(1:3) |> 
+  kable()
+```
+
+
+```{r}
+#| label: fig-layout
+#| fig-cap: "Three figures in a complex layout"
+#| fig-subcap: 
+#|   - "cars"
+#|   - "pressure"
+#|   - "mtcars"
+#| layout: [[4, -1, 4], [1]] 
+
+ggplot(cars, aes(speed, dist)) +
+  geom_point()
+
+ggplot(pressure, aes(temperature, pressure)) +
+  geom_point()
+
+ggplot(mtcars, aes(hp, mpg)) +
+  geom_point()
+```
+
