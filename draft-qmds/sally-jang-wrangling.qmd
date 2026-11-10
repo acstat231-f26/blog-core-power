@@ -148,91 +148,87 @@ ten_Qs_text_scraped <- ten_Qs_text |>
 # -------------------------------Scraping---------------------------------------
 # Microsoft
 for (i in 1:4) {
-  all_text[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+  all_text_microsoft <- session_jump_to(sec_session, microsoft$HTML[i]) |>
     read_html() |>
     html_elements("span") |>
     html_text2()
   
-  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  detect_1 <- which(str_detect(all_text_microsoft, "ITEM 2. MANAGEMENT’S"))
   
-  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  detect_2 <- which(str_detect(all_text_microsoft, "ITEM 3. QUANTITATIVE"))
   
-  ten_Qs_text_scraped$text[i] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i] <- all_text_microsoft[detect_1:detect_2]
 }
 
 # Google
 for (i in 1:4) {
-  all_text[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
+  all_text_google <- session_jump_to(sec_session, google$HTML[i]) |>
     read_html() |>
     html_elements("span") |>
     html_text2()
   
-  detect_1 <- which(str_detect(all_text, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  detect_1 <- which(str_detect(all_text_google, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
   
-  detect_2 <- which(str_detect(all_text, "QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  detect_2 <- which(str_detect(all_text_google, "QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
   
-  ten_Qs_text_scraped$text[i+4] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i+4] <- all_text_google[detect_1:detect_2]
 }
 
 # Meta
 for (i in 1:4) {
-  all_text[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
+  all_text_meta <- session_jump_to(sec_session, meta$HTML[i]) |>
     read_html() |>
     html_elements("span") |>
     html_text2()
   
-  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  detect_1 <- which(str_detect(all_text_meta, "Management's Discussion and Analysis of Financial Condition and Results of Operations"))
   
-  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  detect_2 <- which(str_detect(all_text_meta, "Quantitative and Qualitative Disclosures About Market Risk"))
   
-  ten_Qs_text_scraped$text[i+8] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i+8] <- all_text_meta[detect_1:detect_2]
 }
 
 # Apple
 for (i in 1:4) {
-  all_text[i+12] <- session_jump_to(sec_session, apple$HTML[i]) |>
+  all_text_apple <- session_jump_to(sec_session, apple$HTML[i]) |>
     read_html() |>
     html_elements("span") |>
     html_text2()
   
-  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  detect_1 <- which(str_detect(all_text_apple, "Management’s Discussion and Analysis of Financial Condition and Results of Operations"))[2]
   
-  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  detect_2 <- which(str_detect(all_text_apple, "Quantitative and Qualitative Disclosures About Market Risk"))[2]
   
-  ten_Qs_text_scraped$text[i+12] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i+12] <- all_text_apple[detect_1:detect_2]
 }
 
 # Nvidia
 for (i in 1:4) {
-  all_text[i+16] <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+  all_text_nvidia <- session_jump_to(sec_session, nvidia$HTML[i]) |>
     read_html() |>
     html_elements("span") |>
     html_text2()
   
-  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  detect_1 <- which(str_detect(all_text_nvidia, "Item 2."))[3]
   
-  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  detect_2 <- which(str_detect(all_text_nvidia, "Item 3\\."))[2]
   
-  ten_Qs_text_scraped$text[i+16] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i+16] <- all_text_nvidia[detect_1:detect_2]
 }
 
 # Tesla
 for (i in 1:4) {
-  all_text[i+20] <- session_jump_to(sec_session, tesla$HTML[i]) |>
+  all_text_tesla <- session_jump_to(sec_session, tesla$HTML[i]) |>
     read_html() |>
     html_elements("span") |>
     html_text2()
   
-  detect_1 <- which(str_detect(all_text, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  detect_1 <- which(str_detect(all_text_tesla, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
   
-  detect_2 <- which(str_detect(all_text, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  detect_2 <- which(str_detect(all_text_tesla, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
   
-  ten_Qs_text_scraped$text[i+20] <- all_text[detect_1:detect_2]
+  ten_Qs_text_scraped$text[i+20] <- all_text_tesla[detect_1:detect_2]
 }
-
-print(ten_Qs_text_scraped$text)
-
-write_csv(ten_Qs_text_scraped, "data/scraped-text-10qs.csv")
 
 ```
 
