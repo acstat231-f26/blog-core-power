@@ -190,14 +190,21 @@ text_labels <- named_ten_Qs |>
   rename(COMP = "name2", REPD = "REP-D") |>
   left_join(stock_price_joined
              , join_by(COMP, REPD == Date)) |>
-  mutate(y_position = case_when(
-    COMP == "AAPL" ~ 600
-    , COMP == "GOOG" ~ 600
-    , COMP == "META" ~ 300
-    , COMP == "MSFT" ~ 670
-    , COMP == "NVDA" ~ 600
-    , COMP == "TSLA" ~670
-  ))
+  mutate(y_position = c(
+    # MSFT
+    700, 600, 700, 600,
+    # GOOG
+    700, 600, 700, 600, 
+    # META
+    300, 200, 300, 200,
+    # AAPL
+    700, 600, 700, 600,
+    # NVDA
+    700, 600, 700, 600,
+    # TSLA
+    700, 600, 700, 600
+  ), 
+  x_offset = 30)
 
 
 
@@ -217,21 +224,40 @@ ts_visual <- ggplot(data=stock_price_joined
              , aes(xintercept = reported_date)
              , linetype = 2
              , color = "#1e5977") +
-  geom_text(data=text_labels
+  geom_label(data=text_labels
             , aes(
               x = REPD
               , y = y_position
               , label = paste(REPD,
-                              "\n", RD)
+                              "\n$", RD)
+              , nudge_x = 15
             )
-            , size = 3
+            , size = 2
             , hjust = "left"
             ) +
   theme_classic() +
   theme(legend.position = "none")
 
+ts_visual
 ggplotly(ts_visual)
+         
 
+```
+```{r}
+#| label: dp-visual
+
+ten_qs <- read_csv("data/scraped-10qs.csv") |>
+  rename(Date = "REP-D"
+         , Company = "COMP")
+
+dp_visual <- ggplot(data = ten_qs, aes(color = Company, x = Company, y = RD, label = Date)) + 
+  geom_point(size = 3) + 
+  labs(color = "Company") +
+  scale_color_paletteer_d("MetBrewer::Archambault") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+ggplotly(dp_visual)
 ```
 
 # Getting started
