@@ -15,6 +15,7 @@ library(robotstxt)
 library(knitr)
 library(kableExtra)
 library(quantmod)
+library(dygraphs)
 ```
 
 ```{r}
@@ -214,7 +215,7 @@ ten_Qs_RD <- ten_Qs |>
 write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 ```
-
+## Scraping
 ```{r}
 #| eval: false
 # ------------------------------------------------------------------------------
@@ -420,7 +421,7 @@ tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-03-01", to = "2026
 stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, apple_stock, nvidia_stock, tesla_stock)
 
 ```
-
+## Tables
 ```{r}
 #| label: summary-statistics-table
 
@@ -568,6 +569,8 @@ rd_summary |> kable(digits = 2
                     , format.args = list(big.mark = ","))
 
 ```
+
+## Interactive Graphs
 
 ```{r}
 #| label: interactive-graphs
