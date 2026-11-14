@@ -568,3 +568,32 @@ rd_summary |> kable(digits = 2
                     , format.args = list(big.mark = ","))
 
 ```
+
+```{r}
+#| label: interactive-graphs
+
+# working on making visualizations interactive
+
+scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
+
+# Ensuring that company name formats conform between scraped 10-Qs and stock 
+# price data set
+companies <- 
+  tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+         name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
+named_ten_Qs <- scraped_ten_Qs |> left_join(companies, by = c("COMP" = "name1"))
+
+# To create accurate time series visualization elements (vertical lines for 
+# 10-Q report dates and labels for corresponding quarterly R&D expenses)
+vertical_lines <- named_ten_Qs |>
+  select(name2, "REP-D") |>
+  rename(COMP = "name2", reported_date = "REP-D")
+
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", reported_date = "REP-D") |>
+  mutate(x_position = reported_date - days(5), 
+         y_position = 1000,
+         text_values = glue("Quarterly R&D Expense: {named_ten_Qs$RD}   
+                            million"))
+```
