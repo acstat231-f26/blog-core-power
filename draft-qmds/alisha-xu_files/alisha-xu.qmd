@@ -17,10 +17,221 @@ options(scipen = 1, knitr.kable.NA = "")
 
 # Load necessary packages
 library(tidyverse)
-library(knitr)
-library(kableExtra)
 library(rvest)
 library(robotstxt)
+library(knitr)
+library(kableExtra)
+library(quantmod)
+library(dygraphs)
+library(glue)
+library(plotly)
+library(paletteer)
+library(ggrepel)
+```
+
+```{r}
+#| label: import-stock-prices
+#| include: false
+
+# Student that worked on this section: Sally
+
+# -----------------------------------------------------------------------------
+# This is the code for importing and wrangling stock prices for all 6 companies 
+# by using the quantmod package
+# Because the 10-Q reporting time frames are different for each company, we
+# used a standardized, informative time frame (2025-03-01 to 2026-11-01) that 
+# captured all 4 10-Qs for each company 
+# -----------------------------------------------------------------------------
+
+# Microsoft
+microsoft_stock <- getSymbols("MSFT", src = "yahoo", 
+                              from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(MSFT), coredata(MSFT)) |>
+  select(Date, MSFT.Close) |>
+  rename(Close = MSFT.Close) |>
+  mutate(COMP = "MSFT")
+
+# Alphabet
+alphabet_stock <- getSymbols("GOOG", src = "yahoo", 
+                             from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(GOOG), coredata(GOOG)) |>
+  select(Date, GOOG.Close) |>
+  rename(Close = GOOG.Close) |>
+  mutate(COMP = "GOOG")
+
+# Meta
+meta_stock <- getSymbols("META", src = "yahoo", 
+                         from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(META), coredata(META)) |>
+  select(Date, META.Close) |>
+  rename(Close = META.Close) |>
+  mutate(COMP = "META")
+
+# Apple
+apple_stock <- getSymbols("AAPL", src = "yahoo", 
+                          from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(AAPL), coredata(AAPL)) |>
+  select(Date, AAPL.Close) |>
+  rename(Close = AAPL.Close) |>
+  mutate(COMP = "AAPL")
+
+# Nvidia
+nvidia_stock <- getSymbols("NVDA", src = "yahoo", 
+                           from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(NVDA), coredata(NVDA)) |>
+  select(Date, NVDA.Close) |>
+  rename(Close = NVDA.Close) |>
+  mutate(COMP = "NVDA")
+
+# Tesla
+tesla_stock <- getSymbols("TSLA", src = "yahoo", 
+                          from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(TSLA), coredata(TSLA)) |>
+  select(Date, TSLA.Close) |>   
+  rename(Close = TSLA.Close) |>
+  mutate(COMP = "TSLA")
+
+# Binding rows to consolidate all stock price points into one data set in 
+# preparation for faceted time series visualization
+stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, 
+                                apple_stock, nvidia_stock, tesla_stock)
+
+```
+
+```{r}
+#| label: further-time-series-wrangling
+#| include: false
+
+# Student that worked on this section: Sally
+
+scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
+
+# Ensuring that company name formats conform between scraped 10-Qs and stock 
+# price data set
+companies <- 
+  tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+         name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
+named_ten_Qs <- scraped_ten_Qs |> left_join(companies, by = c("COMP" = "name1"))
+
+# To create accurate time series visualization elements (vertical lines for 
+# 10-Q report dates and labels for corresponding quarterly R&D expenses)
+vertical_lines <- named_ten_Qs |>
+  select(name2, "REP-D") |>
+  rename(COMP = "name2", reported_date = "REP-D")
+
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", reported_date = "REP-D") |>
+  mutate(x_position = reported_date - days(5), 
+         y_position = 1000,
+         text_values = glue("Quarterly R&D Expense: {named_ten_Qs$RD}   
+                            million"))
+```
+```{r}
+#| label: interactive-graphs
+
+# working on making visualizations interactive
+
+scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
+
+# Ensuring that company name formats conform between scraped 10-Qs and stock 
+# price data set
+companies <- 
+  tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+         name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
+named_ten_Qs <- scraped_ten_Qs |> left_join(companies, by = c("COMP" = "name1"))
+
+# To create accurate time series visualization elements (vertical lines for 
+# 10-Q report dates and labels for corresponding quarterly R&D expenses)
+vertical_lines <- named_ten_Qs |>
+  select(name2, "REP-D") |>
+  rename(COMP = "name2", reported_date = "REP-D")
+
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", reported_date = "REP-D") |>
+  mutate(x_position = reported_date - days(5), 
+         y_position = 1000,
+         text_values = glue("Quarterly R&D Expense: {named_ten_Qs$RD}   
+                            million"))
+
+# ggplot
+ggplot(data=stock_price_joined, aes(x = Date, y = Close)) +
+  geom_line() +
+  facet_wrap(~COMP) +
+  geom_vline(data=vertical_lines, aes(xintercept = reported_date))
+
+```
+
+```{r}
+# -----------------------------Alisha Xu Work-----------------------------------
+# AAPL and NVDA report on Saturdays, when there is no closing price, so we have to take the price for the previous day
+
+# from = "2025-03-01", to = "2026-11-01"
+all_days <- seq(start(AAPL), end(AAPL), by = "day") |>
+  as_tibble_col("Date")
+
+# using tidyverse fill() function to fill missing data for all companies
+companies <- c("microsoft", "alphabet", "meta", "apple", "nvidia", "tesla")
+for (i in companies) {
+  df <- get(paste0(i,"_stock")) |>
+  merge(all_days, by = "Date", all = TRUE) |>
+  # LOCF
+  fill(Close, COMP)
+  
+  assign(paste0(i, "_all_days"), df)
+}
+
+stock_price_joined <- bind_rows(microsoft_all_days, alphabet_all_days, meta_all_days, apple_all_days, nvidia_all_days, tesla_all_days)
+
+# editing this variable to include closing price
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", REPD = "REP-D") |>
+  left_join(stock_price_joined
+             , join_by(COMP, REPD == Date)) |>
+  mutate(y_position = case_when(
+    COMP == "AAPL" ~ 600
+    , COMP == "GOOG" ~ 600
+    , COMP == "META" ~ 300
+    , COMP == "MSFT" ~ 670
+    , COMP == "NVDA" ~ 600
+    , COMP == "TSLA" ~670
+  ))
+
+
+
+# ggplot
+ts_visual <- ggplot(data=stock_price_joined
+                    , aes(
+                      x = Date
+                      , y = Close
+                      , color = COMP)) +
+  geom_line() +
+  facet_wrap(~COMP) +
+  scale_color_paletteer_d("MetBrewer::Archambault") +
+  geom_point(data=text_labels
+             , aes(x = REPD
+                 , y = Close)) +  
+  geom_vline(data=vertical_lines
+             , aes(xintercept = reported_date)
+             , linetype = 2
+             , color = "#1e5977") +
+  geom_text(data=text_labels
+            , aes(
+              x = REPD
+              , y = y_position
+              , label = paste(REPD,
+                              "\n", RD)
+            )
+            , size = 3
+            , hjust = "left"
+            ) +
+  theme_classic() +
+  theme(legend.position = "none")
+
+ggplotly(ts_visual)
+
 ```
 
 # Getting started
@@ -144,6 +355,7 @@ I would strongly recommend  using **knitr**'s `include_graphics()` functions wit
 #| fig-align: center
 #| out-width: 100%
 #| fig-link: "https://giphy.com/gifs/insecurehbo-3og0IT6sIWd1eh7bJm"
+
 
 include_graphics("https://i.giphy.com/3og0IT6sIWd1eh7bJm.webp")
 ```
