@@ -1,0 +1,1501 @@
+tool_id,tool_name,category,company,launch_year,users_millions,pricing_model,open_source
+1,AI Tool 1,Coding AI,Google,2025,100,Freemium,Yes
+2,AI Tool 2,LLM,Amazon,2022,100,Free,No
+3,AI Tool 3,LLM,Amazon,2026,148,Freemium,No
+4,AI Tool 4,Chatbots,Meta,2024,139,Free,Yes
+5,AI Tool 5,Video Generation,Stability AI,2025,62,Freemium,No
+6,AI Tool 6,LLM,Meta,2026,111,Freemium,Yes
+7,AI Tool 7,Image Generation,Meta,2023,178,Paid,Yes
+8,AI Tool 8,Chatbots,HuggingFace,2022,182,Freemium,Yes
+9,AI Tool 9,Image Generation,Meta,2026,152,Freemium,Yes
+10,AI Tool 10,Image Generation,Anthropic,2023,162,Freemium,Yes
+11,AI Tool 11,Coding AI,Microsoft,2023,93,Paid,No
+12,AI Tool 12,Image Generation,Anthropic,2023,194,Paid,Yes
+13,AI Tool 13,Productivity AI,Anthropic,2022,191,Free,Yes
+14,AI Tool 14,LLM,Stability AI,2021,28,Free,No
+15,AI Tool 15,Productivity AI,HuggingFace,2026,156,Free,Yes
+16,AI Tool 16,Image Generation,Amazon,2020,68,Freemium,No
+17,AI Tool 17,Image Generation,Adobe,2022,31,Free,Yes
+18,AI Tool 18,AI Agents,Runway,2024,181,Free,No
+19,AI Tool 19,LLM,HuggingFace,2025,11,Freemium,Yes
+20,AI Tool 20,Coding AI,Adobe,2025,185,Paid,No
+21,AI Tool 21,Image Generation,Anthropic,2026,153,Freemium,No
+22,AI Tool 22,Image Generation,Amazon,2023,184,Paid,Yes
+23,AI Tool 23,Chatbots,Anthropic,2023,123,Paid,No
+24,AI Tool 24,Voice AI,Amazon,2023,187,Free,Yes
+25,AI Tool 25,Voice AI,Meta,2023,126,Free,Yes
+26,AI Tool 26,Coding AI,HuggingFace,2024,132,Paid,No
+27,AI Tool 27,Chatbots,Adobe,2023,157,Free,Yes
+28,AI Tool 28,Chatbots,Microsoft,2023,192,Freemium,No
+29,AI Tool 29,Image Generation,Anthropic,2021,61,Free,Yes
+30,AI Tool 30,LLM,HuggingFace,2025,161,Free,No
+31,AI Tool 31,LLM,Runway,2023,44,Freemium,No
+32,AI Tool 32,Video Generation,Stability AI,2023,1,Freemium,Yes
+33,AI Tool 33,AI Agents,Amazon,2025,199,Freemium,No
+34,AI Tool 34,Video Generation,OpenAI,2026,16,Free,No
+35,AI Tool 35,Voice AI,Meta,2026,51,Freemium,Yes
+36,AI Tool 36,LLM,Google,2026,28,Paid,No
+37,AI Tool 37,AI Agents,OpenAI,2023,155,Free,No
+38,AI Tool 38,Productivity AI,Stability AI,2026,19,Free,No
+39,AI Tool 39,AI Agents,Meta,2021,36,Freemium,No
+40,AI Tool 40,AI Agents,Google,2025,53,Paid,No
+41,AI Tool 41,Productivity AI,HuggingFace,2020,70,Free,Yes
+42,AI Tool 42,Chatbots,Stability AI,2025,137,Freemium,Yes
+43,AI Tool 43,Video Generation,Amazon,2020,121,Freemium,No
+44,AI Tool 44,Productivity AI,Meta,2021,65,Paid,No
+45,AI Tool 45,Chatbots,HuggingFace,2025,26,Free,No
+46,AI Tool 46,Productivity AI,Microsoft,2023,171,Freemium,No
+47,AI Tool 47,LLM,OpenAI,2025,59,Free,No
+48,AI Tool 48,Productivity AI,Runway,2023,120,Free,No
+49,AI Tool 49,Productivity AI,Anthropic,2022,87,Free,No
+50,AI Tool 50,Image Generation,Google,2023,128,Free,Yes
+51,AI Tool 51,LLM,Amazon,2026,192,Free,No
+52,AI Tool 52,Video Generation,Runway,2025,153,Freemium,No
+53,AI Tool 53,Video Generation,Anthropic,2024,138,Free,Yes
+54,AI Tool 54,Image Generation,Meta,2021,53,Free,No
+55,AI Tool 55,Productivity AI,Amazon,2023,19,Freemium,No
+56,AI Tool 56,Video Generation,Stability AI,2021,192,Free,No
+57,AI Tool 57,LLM,Amazon,2022,90,Paid,No
+58,AI Tool 58,Productivity AI,Amazon,2026,134,Freemium,Yes
+59,AI Tool 59,AI Agents,Amazon,2025,52,Free,Yes
+60,AI Tool 60,Productivity AI,Google,2023,136,Paid,Yes
+61,AI Tool 61,Video Generation,OpenAI,2020,32,Paid,Yes
+62,AI Tool 62,LLM,Anthropic,2023,127,Freemium,Yes
+63,AI Tool 63,Voice AI,Google,2021,17,Free,No
+64,AI Tool 64,LLM,Microsoft,2020,168,Free,No
+65,AI Tool 65,Voice AI,HuggingFace,2024,95,Free,Yes
+66,AI Tool 66,Image Generation,Runway,2026,120,Free,Yes
+67,AI Tool 67,AI Agents,Google,2021,40,Free,Yes
+68,AI Tool 68,Productivity AI,Meta,2025,100,Freemium,Yes
+69,AI Tool 69,LLM,OpenAI,2023,125,Paid,No
+70,AI Tool 70,Video Generation,OpenAI,2025,68,Paid,Yes
+71,AI Tool 71,Image Generation,Microsoft,2026,192,Paid,Yes
+72,AI Tool 72,Chatbots,Google,2020,88,Paid,Yes
+73,AI Tool 73,Chatbots,HuggingFace,2022,119,Freemium,Yes
+74,AI Tool 74,Chatbots,Stability AI,2026,19,Freemium,Yes
+75,AI Tool 75,Voice AI,Microsoft,2023,166,Freemium,Yes
+76,AI Tool 76,Image Generation,Stability AI,2020,127,Free,Yes
+77,AI Tool 77,AI Agents,HuggingFace,2022,196,Paid,Yes
+78,AI Tool 78,AI Agents,Anthropic,2026,80,Paid,Yes
+79,AI Tool 79,Voice AI,Anthropic,2022,199,Freemium,Yes
+80,AI Tool 80,Image Generation,Google,2026,102,Free,No
+81,AI Tool 81,Image Generation,Microsoft,2021,97,Free,No
+82,AI Tool 82,LLM,Google,2020,24,Free,Yes
+83,AI Tool 83,Productivity AI,OpenAI,2023,58,Paid,Yes
+84,AI Tool 84,Image Generation,Runway,2025,28,Free,No
+85,AI Tool 85,Coding AI,Amazon,2024,31,Paid,Yes
+86,AI Tool 86,Image Generation,Runway,2024,110,Paid,No
+87,AI Tool 87,Video Generation,Adobe,2025,134,Free,No
+88,AI Tool 88,Productivity AI,Runway,2026,6,Paid,No
+89,AI Tool 89,Coding AI,Google,2020,188,Free,Yes
+90,AI Tool 90,Image Generation,Meta,2025,61,Free,No
+91,AI Tool 91,Voice AI,OpenAI,2026,165,Free,Yes
+92,AI Tool 92,Image Generation,HuggingFace,2022,118,Paid,No
+93,AI Tool 93,AI Agents,Adobe,2026,56,Free,Yes
+94,AI Tool 94,LLM,Meta,2023,49,Freemium,No
+95,AI Tool 95,LLM,Meta,2023,31,Free,Yes
+96,AI Tool 96,LLM,Microsoft,2024,124,Paid,Yes
+97,AI Tool 97,Productivity AI,Amazon,2020,164,Free,No
+98,AI Tool 98,AI Agents,HuggingFace,2026,33,Freemium,No
+99,AI Tool 99,Chatbots,Stability AI,2026,161,Freemium,Yes
+100,AI Tool 100,Productivity AI,Amazon,2026,185,Free,Yes
+101,AI Tool 101,Video Generation,Stability AI,2020,73,Freemium,Yes
+102,AI Tool 102,AI Agents,OpenAI,2021,44,Freemium,No
+103,AI Tool 103,Chatbots,Anthropic,2021,39,Free,No
+104,AI Tool 104,Productivity AI,Anthropic,2020,186,Paid,Yes
+105,AI Tool 105,AI Agents,HuggingFace,2021,144,Freemium,Yes
+106,AI Tool 106,LLM,HuggingFace,2022,151,Freemium,No
+107,AI Tool 107,Image Generation,Stability AI,2020,90,Free,No
+108,AI Tool 108,Productivity AI,Adobe,2026,135,Free,No
+109,AI Tool 109,Image Generation,OpenAI,2020,29,Freemium,No
+110,AI Tool 110,Productivity AI,Anthropic,2021,36,Freemium,No
+111,AI Tool 111,Coding AI,Runway,2025,24,Freemium,No
+112,AI Tool 112,Image Generation,Google,2023,68,Freemium,Yes
+113,AI Tool 113,Coding AI,Microsoft,2020,32,Free,Yes
+114,AI Tool 114,Coding AI,Adobe,2020,153,Free,No
+115,AI Tool 115,Voice AI,OpenAI,2021,149,Freemium,No
+116,AI Tool 116,Voice AI,Runway,2023,47,Paid,No
+117,AI Tool 117,Voice AI,HuggingFace,2026,63,Freemium,No
+118,AI Tool 118,LLM,OpenAI,2024,109,Paid,Yes
+119,AI Tool 119,Voice AI,Google,2020,153,Free,No
+120,AI Tool 120,Voice AI,Runway,2025,66,Free,No
+121,AI Tool 121,Coding AI,Stability AI,2020,92,Freemium,No
+122,AI Tool 122,Voice AI,Anthropic,2020,98,Paid,No
+123,AI Tool 123,Coding AI,Meta,2026,89,Paid,Yes
+124,AI Tool 124,Productivity AI,Meta,2026,179,Paid,Yes
+125,AI Tool 125,Coding AI,Adobe,2022,136,Freemium,No
+126,AI Tool 126,Video Generation,Amazon,2021,129,Paid,No
+127,AI Tool 127,AI Agents,Meta,2021,128,Freemium,Yes
+128,AI Tool 128,Coding AI,Runway,2025,187,Freemium,No
+129,AI Tool 129,LLM,OpenAI,2020,77,Freemium,No
+130,AI Tool 130,AI Agents,OpenAI,2021,32,Freemium,Yes
+131,AI Tool 131,Voice AI,Adobe,2021,88,Free,No
+132,AI Tool 132,Productivity AI,Stability AI,2023,87,Free,Yes
+133,AI Tool 133,Video Generation,Microsoft,2022,45,Freemium,Yes
+134,AI Tool 134,Video Generation,Meta,2023,197,Free,Yes
+135,AI Tool 135,Image Generation,Microsoft,2022,1,Freemium,No
+136,AI Tool 136,AI Agents,Google,2024,12,Paid,No
+137,AI Tool 137,Image Generation,Google,2021,124,Free,No
+138,AI Tool 138,Chatbots,HuggingFace,2022,198,Freemium,Yes
+139,AI Tool 139,Chatbots,Amazon,2023,127,Paid,Yes
+140,AI Tool 140,Video Generation,Anthropic,2025,189,Free,No
+141,AI Tool 141,Voice AI,HuggingFace,2025,112,Paid,Yes
+142,AI Tool 142,Productivity AI,Anthropic,2023,165,Paid,No
+143,AI Tool 143,Chatbots,Adobe,2020,170,Paid,No
+144,AI Tool 144,Image Generation,Microsoft,2025,93,Freemium,Yes
+145,AI Tool 145,Coding AI,OpenAI,2026,129,Freemium,Yes
+146,AI Tool 146,Voice AI,Adobe,2021,156,Freemium,Yes
+147,AI Tool 147,LLM,Microsoft,2020,23,Free,No
+148,AI Tool 148,Voice AI,Stability AI,2022,198,Freemium,No
+149,AI Tool 149,Productivity AI,Amazon,2024,133,Paid,No
+150,AI Tool 150,Voice AI,HuggingFace,2026,177,Free,No
+151,AI Tool 151,Video Generation,Microsoft,2023,27,Free,No
+152,AI Tool 152,AI Agents,Google,2024,134,Freemium,Yes
+153,AI Tool 153,Coding AI,OpenAI,2020,88,Paid,No
+154,AI Tool 154,Chatbots,HuggingFace,2024,19,Freemium,No
+155,AI Tool 155,Image Generation,Microsoft,2026,174,Free,Yes
+156,AI Tool 156,Image Generation,Google,2021,108,Paid,No
+157,AI Tool 157,AI Agents,Stability AI,2020,54,Freemium,No
+158,AI Tool 158,Coding AI,Adobe,2024,16,Paid,Yes
+159,AI Tool 159,Image Generation,Google,2020,30,Paid,Yes
+160,AI Tool 160,Productivity AI,Adobe,2025,1,Paid,Yes
+161,AI Tool 161,AI Agents,HuggingFace,2020,170,Freemium,No
+162,AI Tool 162,Image Generation,Amazon,2026,166,Paid,No
+163,AI Tool 163,Coding AI,Adobe,2025,77,Free,Yes
+164,AI Tool 164,Coding AI,Amazon,2026,24,Paid,No
+165,AI Tool 165,LLM,OpenAI,2026,111,Freemium,Yes
+166,AI Tool 166,Coding AI,Stability AI,2026,31,Freemium,Yes
+167,AI Tool 167,Chatbots,Stability AI,2026,103,Free,Yes
+168,AI Tool 168,Video Generation,OpenAI,2022,160,Free,No
+169,AI Tool 169,AI Agents,Google,2022,169,Free,No
+170,AI Tool 170,Productivity AI,Microsoft,2025,73,Freemium,Yes
+171,AI Tool 171,Video Generation,Runway,2020,85,Free,No
+172,AI Tool 172,LLM,Stability AI,2023,135,Free,Yes
+173,AI Tool 173,Chatbots,Anthropic,2024,80,Paid,No
+174,AI Tool 174,Video Generation,HuggingFace,2025,189,Free,Yes
+175,AI Tool 175,Productivity AI,Adobe,2020,6,Freemium,Yes
+176,AI Tool 176,Coding AI,Stability AI,2024,191,Freemium,Yes
+177,AI Tool 177,Image Generation,Runway,2024,121,Paid,No
+178,AI Tool 178,AI Agents,Amazon,2026,200,Paid,No
+179,AI Tool 179,Image Generation,Microsoft,2025,101,Paid,No
+180,AI Tool 180,Coding AI,Amazon,2026,51,Paid,Yes
+181,AI Tool 181,AI Agents,Amazon,2022,114,Paid,Yes
+182,AI Tool 182,Video Generation,Runway,2025,38,Freemium,No
+183,AI Tool 183,Coding AI,HuggingFace,2023,167,Paid,Yes
+184,AI Tool 184,Coding AI,Runway,2025,46,Freemium,No
+185,AI Tool 185,LLM,HuggingFace,2022,114,Freemium,Yes
+186,AI Tool 186,Voice AI,HuggingFace,2025,16,Free,No
+187,AI Tool 187,Voice AI,Adobe,2025,85,Paid,No
+188,AI Tool 188,Chatbots,HuggingFace,2023,171,Freemium,No
+189,AI Tool 189,Voice AI,Adobe,2026,1,Free,Yes
+190,AI Tool 190,Image Generation,Microsoft,2021,105,Paid,Yes
+191,AI Tool 191,Coding AI,Amazon,2022,43,Paid,No
+192,AI Tool 192,Voice AI,Amazon,2024,43,Free,Yes
+193,AI Tool 193,Video Generation,OpenAI,2025,170,Paid,Yes
+194,AI Tool 194,Video Generation,Anthropic,2025,27,Paid,No
+195,AI Tool 195,Video Generation,Stability AI,2023,44,Freemium,No
+196,AI Tool 196,Image Generation,Google,2025,145,Paid,Yes
+197,AI Tool 197,Video Generation,Microsoft,2020,138,Free,Yes
+198,AI Tool 198,Coding AI,Stability AI,2020,24,Paid,Yes
+199,AI Tool 199,Productivity AI,HuggingFace,2025,16,Paid,No
+200,AI Tool 200,AI Agents,OpenAI,2022,118,Paid,No
+201,AI Tool 201,Chatbots,Anthropic,2026,160,Paid,Yes
+202,AI Tool 202,LLM,Amazon,2023,196,Free,No
+203,AI Tool 203,Image Generation,Meta,2026,67,Paid,No
+204,AI Tool 204,Video Generation,Anthropic,2022,157,Paid,No
+205,AI Tool 205,Image Generation,Adobe,2020,173,Freemium,No
+206,AI Tool 206,LLM,HuggingFace,2022,8,Free,No
+207,AI Tool 207,Chatbots,Anthropic,2026,99,Paid,No
+208,AI Tool 208,AI Agents,Runway,2020,104,Paid,No
+209,AI Tool 209,LLM,Google,2021,131,Freemium,No
+210,AI Tool 210,LLM,HuggingFace,2026,110,Freemium,No
+211,AI Tool 211,LLM,OpenAI,2020,3,Free,Yes
+212,AI Tool 212,Voice AI,Anthropic,2024,188,Free,No
+213,AI Tool 213,LLM,Google,2023,93,Paid,No
+214,AI Tool 214,AI Agents,HuggingFace,2020,77,Paid,No
+215,AI Tool 215,LLM,OpenAI,2024,178,Free,Yes
+216,AI Tool 216,AI Agents,Anthropic,2022,77,Freemium,Yes
+217,AI Tool 217,Video Generation,Stability AI,2021,77,Freemium,Yes
+218,AI Tool 218,Image Generation,Amazon,2026,24,Freemium,Yes
+219,AI Tool 219,LLM,Google,2023,164,Free,No
+220,AI Tool 220,Coding AI,Anthropic,2025,79,Freemium,No
+221,AI Tool 221,AI Agents,Meta,2020,135,Free,No
+222,AI Tool 222,Productivity AI,Adobe,2021,78,Free,Yes
+223,AI Tool 223,Video Generation,Anthropic,2023,100,Paid,Yes
+224,AI Tool 224,Chatbots,Meta,2026,6,Free,Yes
+225,AI Tool 225,LLM,HuggingFace,2025,1,Free,No
+226,AI Tool 226,AI Agents,HuggingFace,2023,28,Free,No
+227,AI Tool 227,Chatbots,Stability AI,2024,113,Paid,No
+228,AI Tool 228,Image Generation,Runway,2024,35,Freemium,Yes
+229,AI Tool 229,AI Agents,Anthropic,2024,111,Free,No
+230,AI Tool 230,Voice AI,Meta,2020,87,Paid,No
+231,AI Tool 231,Image Generation,Meta,2022,194,Free,No
+232,AI Tool 232,AI Agents,Amazon,2023,121,Freemium,Yes
+233,AI Tool 233,Video Generation,Stability AI,2022,171,Paid,Yes
+234,AI Tool 234,LLM,Stability AI,2022,119,Freemium,No
+235,AI Tool 235,Productivity AI,Anthropic,2024,81,Paid,Yes
+236,AI Tool 236,Chatbots,OpenAI,2024,183,Free,No
+237,AI Tool 237,Productivity AI,Amazon,2022,32,Free,Yes
+238,AI Tool 238,Image Generation,Stability AI,2020,19,Paid,Yes
+239,AI Tool 239,Image Generation,Runway,2024,83,Freemium,Yes
+240,AI Tool 240,Video Generation,Runway,2025,6,Paid,Yes
+241,AI Tool 241,Image Generation,Google,2022,104,Freemium,No
+242,AI Tool 242,LLM,OpenAI,2020,14,Free,Yes
+243,AI Tool 243,Image Generation,Microsoft,2023,187,Freemium,No
+244,AI Tool 244,Productivity AI,Amazon,2021,158,Free,No
+245,AI Tool 245,LLM,Microsoft,2024,111,Free,Yes
+246,AI Tool 246,Productivity AI,Anthropic,2025,29,Freemium,No
+247,AI Tool 247,Voice AI,Anthropic,2022,72,Freemium,No
+248,AI Tool 248,Video Generation,HuggingFace,2025,170,Free,Yes
+249,AI Tool 249,LLM,Meta,2026,39,Free,Yes
+250,AI Tool 250,Video Generation,Microsoft,2023,46,Free,Yes
+251,AI Tool 251,Chatbots,Microsoft,2022,86,Paid,No
+252,AI Tool 252,Chatbots,Amazon,2026,119,Freemium,No
+253,AI Tool 253,Coding AI,HuggingFace,2026,142,Free,No
+254,AI Tool 254,Productivity AI,Stability AI,2021,48,Free,No
+255,AI Tool 255,Productivity AI,HuggingFace,2020,171,Free,Yes
+256,AI Tool 256,Image Generation,Meta,2025,65,Paid,No
+257,AI Tool 257,Coding AI,Microsoft,2021,183,Free,Yes
+258,AI Tool 258,LLM,Runway,2023,94,Paid,No
+259,AI Tool 259,Productivity AI,Meta,2021,65,Freemium,No
+260,AI Tool 260,Image Generation,HuggingFace,2021,69,Freemium,Yes
+261,AI Tool 261,Chatbots,Meta,2024,167,Freemium,No
+262,AI Tool 262,Productivity AI,HuggingFace,2025,193,Free,No
+263,AI Tool 263,Image Generation,OpenAI,2026,183,Freemium,Yes
+264,AI Tool 264,Productivity AI,Adobe,2022,77,Free,No
+265,AI Tool 265,Video Generation,Microsoft,2021,145,Paid,Yes
+266,AI Tool 266,Productivity AI,Google,2020,178,Freemium,Yes
+267,AI Tool 267,Voice AI,Runway,2020,86,Free,Yes
+268,AI Tool 268,Productivity AI,Stability AI,2020,15,Freemium,No
+269,AI Tool 269,Video Generation,HuggingFace,2026,155,Paid,No
+270,AI Tool 270,Voice AI,Amazon,2025,190,Freemium,Yes
+271,AI Tool 271,Coding AI,Microsoft,2025,76,Freemium,No
+272,AI Tool 272,Video Generation,HuggingFace,2023,85,Paid,Yes
+273,AI Tool 273,AI Agents,Anthropic,2024,182,Free,Yes
+274,AI Tool 274,AI Agents,HuggingFace,2020,60,Freemium,No
+275,AI Tool 275,Image Generation,Stability AI,2020,62,Freemium,No
+276,AI Tool 276,Image Generation,Microsoft,2025,189,Freemium,Yes
+277,AI Tool 277,Video Generation,Runway,2020,41,Paid,No
+278,AI Tool 278,LLM,Amazon,2020,31,Free,Yes
+279,AI Tool 279,Chatbots,Google,2022,193,Paid,Yes
+280,AI Tool 280,Video Generation,Runway,2026,141,Freemium,Yes
+281,AI Tool 281,AI Agents,Google,2023,71,Paid,Yes
+282,AI Tool 282,AI Agents,Meta,2026,14,Free,No
+283,AI Tool 283,Video Generation,HuggingFace,2025,168,Freemium,No
+284,AI Tool 284,Productivity AI,Microsoft,2026,110,Free,Yes
+285,AI Tool 285,Image Generation,Runway,2026,82,Paid,Yes
+286,AI Tool 286,Voice AI,Amazon,2021,36,Paid,Yes
+287,AI Tool 287,Image Generation,Stability AI,2020,131,Freemium,No
+288,AI Tool 288,Voice AI,OpenAI,2024,188,Paid,No
+289,AI Tool 289,Voice AI,OpenAI,2022,47,Freemium,Yes
+290,AI Tool 290,Coding AI,OpenAI,2022,174,Paid,No
+291,AI Tool 291,Chatbots,Amazon,2022,52,Paid,Yes
+292,AI Tool 292,Chatbots,HuggingFace,2024,185,Freemium,No
+293,AI Tool 293,Productivity AI,Stability AI,2025,78,Freemium,Yes
+294,AI Tool 294,Voice AI,Anthropic,2022,16,Free,Yes
+295,AI Tool 295,Chatbots,Google,2025,106,Freemium,No
+296,AI Tool 296,Voice AI,OpenAI,2023,131,Free,No
+297,AI Tool 297,Coding AI,Meta,2023,14,Paid,Yes
+298,AI Tool 298,Video Generation,Adobe,2022,134,Freemium,No
+299,AI Tool 299,Coding AI,HuggingFace,2024,1,Paid,Yes
+300,AI Tool 300,Video Generation,Runway,2020,143,Freemium,Yes
+301,AI Tool 301,AI Agents,HuggingFace,2022,14,Paid,Yes
+302,AI Tool 302,Coding AI,Google,2022,144,Freemium,Yes
+303,AI Tool 303,Image Generation,Microsoft,2021,174,Free,No
+304,AI Tool 304,LLM,Anthropic,2021,110,Freemium,Yes
+305,AI Tool 305,LLM,Microsoft,2026,90,Free,No
+306,AI Tool 306,Chatbots,Anthropic,2026,25,Free,No
+307,AI Tool 307,Image Generation,Microsoft,2023,196,Free,No
+308,AI Tool 308,Coding AI,Anthropic,2025,200,Paid,No
+309,AI Tool 309,Chatbots,Adobe,2020,158,Free,No
+310,AI Tool 310,AI Agents,Microsoft,2026,151,Paid,Yes
+311,AI Tool 311,Chatbots,Microsoft,2023,86,Paid,No
+312,AI Tool 312,AI Agents,Anthropic,2024,85,Freemium,Yes
+313,AI Tool 313,Coding AI,Adobe,2026,128,Paid,No
+314,AI Tool 314,Productivity AI,Meta,2026,186,Paid,Yes
+315,AI Tool 315,Video Generation,Adobe,2023,62,Freemium,No
+316,AI Tool 316,LLM,Amazon,2021,69,Free,No
+317,AI Tool 317,Video Generation,Runway,2026,55,Free,Yes
+318,AI Tool 318,Coding AI,Runway,2026,69,Paid,No
+319,AI Tool 319,Productivity AI,Adobe,2022,85,Paid,Yes
+320,AI Tool 320,AI Agents,Anthropic,2024,106,Freemium,Yes
+321,AI Tool 321,Chatbots,Google,2021,182,Freemium,No
+322,AI Tool 322,LLM,Anthropic,2025,38,Freemium,No
+323,AI Tool 323,Productivity AI,Google,2024,143,Free,No
+324,AI Tool 324,Productivity AI,OpenAI,2025,196,Paid,No
+325,AI Tool 325,Productivity AI,Meta,2021,182,Paid,Yes
+326,AI Tool 326,Chatbots,Stability AI,2026,122,Paid,No
+327,AI Tool 327,Voice AI,Anthropic,2021,26,Paid,No
+328,AI Tool 328,Chatbots,Runway,2026,96,Freemium,No
+329,AI Tool 329,Coding AI,Adobe,2020,132,Freemium,Yes
+330,AI Tool 330,Coding AI,Runway,2022,82,Paid,No
+331,AI Tool 331,Image Generation,Runway,2020,20,Freemium,No
+332,AI Tool 332,Image Generation,Adobe,2020,52,Freemium,No
+333,AI Tool 333,Image Generation,Stability AI,2023,89,Free,Yes
+334,AI Tool 334,LLM,Microsoft,2022,143,Free,No
+335,AI Tool 335,LLM,Stability AI,2020,183,Freemium,Yes
+336,AI Tool 336,AI Agents,Amazon,2021,165,Free,No
+337,AI Tool 337,Coding AI,OpenAI,2024,59,Free,Yes
+338,AI Tool 338,Video Generation,Google,2021,36,Paid,No
+339,AI Tool 339,Voice AI,HuggingFace,2022,130,Free,No
+340,AI Tool 340,LLM,Amazon,2025,132,Free,No
+341,AI Tool 341,Video Generation,Stability AI,2025,126,Free,Yes
+342,AI Tool 342,Productivity AI,Amazon,2025,1,Free,Yes
+343,AI Tool 343,AI Agents,Stability AI,2023,11,Paid,Yes
+344,AI Tool 344,AI Agents,OpenAI,2026,104,Freemium,Yes
+345,AI Tool 345,Chatbots,Anthropic,2026,141,Free,No
+346,AI Tool 346,Productivity AI,Google,2022,89,Paid,No
+347,AI Tool 347,Chatbots,Microsoft,2023,57,Free,No
+348,AI Tool 348,Image Generation,Adobe,2020,172,Free,No
+349,AI Tool 349,Coding AI,Google,2026,51,Freemium,Yes
+350,AI Tool 350,Coding AI,HuggingFace,2024,120,Freemium,No
+351,AI Tool 351,Chatbots,Amazon,2022,64,Paid,No
+352,AI Tool 352,LLM,HuggingFace,2022,63,Free,No
+353,AI Tool 353,Image Generation,HuggingFace,2026,90,Free,Yes
+354,AI Tool 354,Voice AI,Stability AI,2022,82,Freemium,No
+355,AI Tool 355,Image Generation,OpenAI,2022,178,Freemium,No
+356,AI Tool 356,Video Generation,Meta,2022,26,Paid,Yes
+357,AI Tool 357,Video Generation,OpenAI,2020,14,Paid,No
+358,AI Tool 358,Chatbots,Runway,2022,37,Paid,No
+359,AI Tool 359,Productivity AI,Adobe,2023,171,Free,No
+360,AI Tool 360,Coding AI,Adobe,2020,56,Paid,No
+361,AI Tool 361,Video Generation,Meta,2021,138,Freemium,Yes
+362,AI Tool 362,Image Generation,Runway,2020,147,Free,No
+363,AI Tool 363,Image Generation,Adobe,2025,127,Freemium,Yes
+364,AI Tool 364,Video Generation,Adobe,2022,163,Paid,Yes
+365,AI Tool 365,LLM,OpenAI,2020,54,Free,Yes
+366,AI Tool 366,Voice AI,OpenAI,2021,110,Freemium,No
+367,AI Tool 367,Image Generation,Microsoft,2022,48,Free,No
+368,AI Tool 368,LLM,Amazon,2021,22,Free,Yes
+369,AI Tool 369,AI Agents,Meta,2020,188,Freemium,No
+370,AI Tool 370,Coding AI,Microsoft,2020,128,Free,Yes
+371,AI Tool 371,Coding AI,Stability AI,2025,121,Paid,No
+372,AI Tool 372,AI Agents,Runway,2025,65,Freemium,Yes
+373,AI Tool 373,LLM,Google,2020,166,Freemium,No
+374,AI Tool 374,Coding AI,Stability AI,2024,89,Freemium,No
+375,AI Tool 375,Chatbots,Runway,2020,118,Freemium,No
+376,AI Tool 376,Chatbots,Anthropic,2024,56,Freemium,No
+377,AI Tool 377,Coding AI,Microsoft,2022,190,Free,No
+378,AI Tool 378,LLM,OpenAI,2026,77,Free,Yes
+379,AI Tool 379,Coding AI,HuggingFace,2025,172,Freemium,No
+380,AI Tool 380,AI Agents,Runway,2021,13,Paid,Yes
+381,AI Tool 381,Chatbots,Microsoft,2020,44,Paid,Yes
+382,AI Tool 382,LLM,Adobe,2022,27,Free,No
+383,AI Tool 383,Coding AI,Microsoft,2026,166,Free,No
+384,AI Tool 384,Coding AI,Adobe,2024,181,Paid,Yes
+385,AI Tool 385,LLM,Runway,2020,85,Freemium,Yes
+386,AI Tool 386,Coding AI,Runway,2024,196,Paid,Yes
+387,AI Tool 387,Video Generation,Microsoft,2024,42,Freemium,No
+388,AI Tool 388,Chatbots,Amazon,2021,179,Freemium,No
+389,AI Tool 389,AI Agents,Adobe,2026,48,Paid,No
+390,AI Tool 390,Voice AI,Anthropic,2023,24,Free,No
+391,AI Tool 391,Voice AI,Stability AI,2024,17,Free,Yes
+392,AI Tool 392,Image Generation,Google,2021,169,Paid,No
+393,AI Tool 393,Productivity AI,Adobe,2025,40,Paid,No
+394,AI Tool 394,Productivity AI,OpenAI,2024,33,Paid,No
+395,AI Tool 395,Coding AI,Meta,2022,66,Free,Yes
+396,AI Tool 396,AI Agents,Stability AI,2026,171,Free,No
+397,AI Tool 397,AI Agents,Google,2024,61,Free,Yes
+398,AI Tool 398,Video Generation,OpenAI,2024,116,Paid,No
+399,AI Tool 399,Voice AI,OpenAI,2025,40,Freemium,Yes
+400,AI Tool 400,LLM,Microsoft,2020,165,Free,Yes
+401,AI Tool 401,Image Generation,Stability AI,2025,22,Freemium,No
+402,AI Tool 402,Voice AI,Microsoft,2026,126,Free,Yes
+403,AI Tool 403,Image Generation,Stability AI,2024,128,Paid,No
+404,AI Tool 404,Voice AI,Microsoft,2020,52,Free,No
+405,AI Tool 405,Productivity AI,OpenAI,2025,90,Free,Yes
+406,AI Tool 406,Video Generation,OpenAI,2024,52,Paid,Yes
+407,AI Tool 407,Productivity AI,Meta,2024,148,Freemium,Yes
+408,AI Tool 408,Productivity AI,Microsoft,2020,133,Paid,Yes
+409,AI Tool 409,Voice AI,Runway,2021,78,Paid,No
+410,AI Tool 410,AI Agents,OpenAI,2025,178,Paid,Yes
+411,AI Tool 411,Video Generation,Google,2024,171,Free,Yes
+412,AI Tool 412,Video Generation,Adobe,2025,129,Paid,Yes
+413,AI Tool 413,Voice AI,Amazon,2025,178,Free,No
+414,AI Tool 414,Coding AI,OpenAI,2022,195,Freemium,No
+415,AI Tool 415,Video Generation,Amazon,2022,70,Free,Yes
+416,AI Tool 416,Image Generation,Adobe,2024,67,Paid,Yes
+417,AI Tool 417,Video Generation,Google,2023,96,Free,Yes
+418,AI Tool 418,Chatbots,Stability AI,2020,79,Free,Yes
+419,AI Tool 419,Chatbots,Runway,2023,52,Paid,Yes
+420,AI Tool 420,LLM,OpenAI,2026,76,Free,No
+421,AI Tool 421,LLM,Meta,2022,42,Free,No
+422,AI Tool 422,LLM,OpenAI,2026,113,Freemium,Yes
+423,AI Tool 423,AI Agents,Adobe,2026,178,Paid,Yes
+424,AI Tool 424,Coding AI,Stability AI,2020,81,Paid,No
+425,AI Tool 425,LLM,Google,2025,138,Freemium,Yes
+426,AI Tool 426,Productivity AI,OpenAI,2026,151,Paid,Yes
+427,AI Tool 427,Voice AI,Meta,2024,73,Paid,No
+428,AI Tool 428,Image Generation,Anthropic,2022,84,Paid,Yes
+429,AI Tool 429,LLM,Stability AI,2024,10,Freemium,No
+430,AI Tool 430,Video Generation,Microsoft,2021,194,Free,No
+431,AI Tool 431,AI Agents,OpenAI,2021,187,Freemium,No
+432,AI Tool 432,Chatbots,OpenAI,2023,108,Paid,No
+433,AI Tool 433,AI Agents,Microsoft,2024,98,Free,Yes
+434,AI Tool 434,Video Generation,Meta,2023,93,Paid,Yes
+435,AI Tool 435,Image Generation,Meta,2025,123,Paid,No
+436,AI Tool 436,Chatbots,Runway,2022,151,Paid,No
+437,AI Tool 437,Chatbots,Microsoft,2020,70,Free,No
+438,AI Tool 438,LLM,Stability AI,2023,180,Paid,No
+439,AI Tool 439,Coding AI,Stability AI,2020,1,Freemium,Yes
+440,AI Tool 440,Video Generation,Anthropic,2025,20,Freemium,Yes
+441,AI Tool 441,Coding AI,Runway,2020,140,Free,No
+442,AI Tool 442,Voice AI,Stability AI,2025,107,Free,Yes
+443,AI Tool 443,Chatbots,Adobe,2022,136,Freemium,No
+444,AI Tool 444,Image Generation,HuggingFace,2021,161,Paid,Yes
+445,AI Tool 445,Productivity AI,Google,2024,134,Paid,Yes
+446,AI Tool 446,Chatbots,OpenAI,2020,68,Paid,No
+447,AI Tool 447,Productivity AI,Microsoft,2022,69,Free,No
+448,AI Tool 448,Video Generation,Meta,2025,126,Free,No
+449,AI Tool 449,AI Agents,Adobe,2025,67,Freemium,Yes
+450,AI Tool 450,Image Generation,HuggingFace,2022,82,Freemium,Yes
+451,AI Tool 451,Coding AI,Microsoft,2020,77,Free,No
+452,AI Tool 452,LLM,Google,2021,52,Paid,No
+453,AI Tool 453,Coding AI,OpenAI,2022,155,Free,Yes
+454,AI Tool 454,Image Generation,Microsoft,2024,136,Paid,Yes
+455,AI Tool 455,LLM,Amazon,2024,182,Freemium,Yes
+456,AI Tool 456,Voice AI,Microsoft,2025,130,Paid,Yes
+457,AI Tool 457,AI Agents,HuggingFace,2022,11,Freemium,Yes
+458,AI Tool 458,Image Generation,OpenAI,2022,157,Paid,No
+459,AI Tool 459,Chatbots,HuggingFace,2022,127,Freemium,No
+460,AI Tool 460,Productivity AI,Microsoft,2023,109,Freemium,Yes
+461,AI Tool 461,Video Generation,Runway,2020,134,Free,Yes
+462,AI Tool 462,Productivity AI,Runway,2024,144,Paid,Yes
+463,AI Tool 463,Chatbots,Stability AI,2024,105,Free,No
+464,AI Tool 464,AI Agents,Adobe,2024,29,Freemium,No
+465,AI Tool 465,Voice AI,Amazon,2024,128,Paid,No
+466,AI Tool 466,Coding AI,HuggingFace,2020,133,Free,No
+467,AI Tool 467,Voice AI,Microsoft,2020,111,Paid,No
+468,AI Tool 468,Video Generation,Anthropic,2022,71,Free,Yes
+469,AI Tool 469,LLM,Amazon,2022,177,Paid,Yes
+470,AI Tool 470,Voice AI,Google,2020,126,Freemium,No
+471,AI Tool 471,Chatbots,HuggingFace,2025,142,Freemium,No
+472,AI Tool 472,Voice AI,Microsoft,2020,44,Freemium,Yes
+473,AI Tool 473,Video Generation,Google,2021,4,Free,No
+474,AI Tool 474,Voice AI,Google,2021,138,Paid,Yes
+475,AI Tool 475,AI Agents,Microsoft,2021,71,Paid,Yes
+476,AI Tool 476,AI Agents,Adobe,2023,168,Paid,Yes
+477,AI Tool 477,Coding AI,Meta,2023,171,Freemium,Yes
+478,AI Tool 478,Video Generation,Meta,2022,41,Freemium,Yes
+479,AI Tool 479,Image Generation,Microsoft,2022,190,Free,No
+480,AI Tool 480,Coding AI,Adobe,2025,24,Freemium,No
+481,AI Tool 481,Voice AI,Anthropic,2021,156,Freemium,No
+482,AI Tool 482,AI Agents,Amazon,2020,5,Freemium,No
+483,AI Tool 483,Coding AI,Google,2023,11,Free,Yes
+484,AI Tool 484,Image Generation,Amazon,2025,13,Free,No
+485,AI Tool 485,Coding AI,HuggingFace,2021,148,Free,Yes
+486,AI Tool 486,Video Generation,Amazon,2021,71,Freemium,Yes
+487,AI Tool 487,AI Agents,Stability AI,2025,2,Freemium,Yes
+488,AI Tool 488,Productivity AI,OpenAI,2023,35,Freemium,Yes
+489,AI Tool 489,Coding AI,OpenAI,2026,82,Free,Yes
+490,AI Tool 490,Coding AI,Amazon,2021,36,Free,Yes
+491,AI Tool 491,AI Agents,Runway,2024,133,Freemium,Yes
+492,AI Tool 492,Video Generation,Runway,2020,65,Paid,No
+493,AI Tool 493,Chatbots,HuggingFace,2022,16,Paid,No
+494,AI Tool 494,Image Generation,Meta,2020,48,Free,No
+495,AI Tool 495,Coding AI,Anthropic,2024,119,Free,No
+496,AI Tool 496,Voice AI,Microsoft,2024,165,Free,Yes
+497,AI Tool 497,AI Agents,Microsoft,2022,26,Free,No
+498,AI Tool 498,Video Generation,Stability AI,2022,106,Paid,Yes
+499,AI Tool 499,AI Agents,Google,2026,50,Freemium,No
+500,AI Tool 500,AI Agents,Google,2023,195,Paid,Yes
+501,AI Tool 501,Coding AI,Stability AI,2025,193,Freemium,Yes
+502,AI Tool 502,Chatbots,Microsoft,2022,75,Free,No
+503,AI Tool 503,Chatbots,Stability AI,2024,37,Paid,No
+504,AI Tool 504,Image Generation,Adobe,2020,66,Paid,Yes
+505,AI Tool 505,Productivity AI,Stability AI,2021,123,Paid,Yes
+506,AI Tool 506,Coding AI,Adobe,2026,43,Paid,Yes
+507,AI Tool 507,LLM,Microsoft,2026,108,Freemium,No
+508,AI Tool 508,AI Agents,Adobe,2021,124,Paid,No
+509,AI Tool 509,Chatbots,Adobe,2025,78,Free,Yes
+510,AI Tool 510,AI Agents,Meta,2025,7,Freemium,Yes
+511,AI Tool 511,Voice AI,Amazon,2020,85,Free,No
+512,AI Tool 512,LLM,Anthropic,2020,131,Paid,No
+513,AI Tool 513,AI Agents,Microsoft,2025,40,Free,Yes
+514,AI Tool 514,Coding AI,Stability AI,2023,130,Paid,No
+515,AI Tool 515,Voice AI,Amazon,2020,168,Paid,Yes
+516,AI Tool 516,LLM,Anthropic,2023,168,Paid,Yes
+517,AI Tool 517,Productivity AI,Adobe,2026,24,Paid,Yes
+518,AI Tool 518,Chatbots,Microsoft,2026,196,Free,No
+519,AI Tool 519,Image Generation,HuggingFace,2026,119,Free,No
+520,AI Tool 520,Image Generation,Anthropic,2023,65,Free,No
+521,AI Tool 521,Productivity AI,Amazon,2021,150,Free,Yes
+522,AI Tool 522,Image Generation,Microsoft,2024,100,Freemium,No
+523,AI Tool 523,Chatbots,Amazon,2020,131,Paid,No
+524,AI Tool 524,LLM,Google,2020,175,Freemium,No
+525,AI Tool 525,Video Generation,HuggingFace,2020,155,Freemium,Yes
+526,AI Tool 526,Productivity AI,Google,2023,81,Free,Yes
+527,AI Tool 527,AI Agents,Runway,2022,98,Freemium,No
+528,AI Tool 528,Video Generation,Anthropic,2024,100,Paid,No
+529,AI Tool 529,Video Generation,Google,2021,180,Paid,Yes
+530,AI Tool 530,AI Agents,Runway,2021,108,Freemium,Yes
+531,AI Tool 531,LLM,Stability AI,2026,93,Free,No
+532,AI Tool 532,Productivity AI,HuggingFace,2026,152,Freemium,Yes
+533,AI Tool 533,Coding AI,Adobe,2022,122,Free,No
+534,AI Tool 534,Coding AI,Microsoft,2026,136,Free,Yes
+535,AI Tool 535,AI Agents,Runway,2023,169,Paid,No
+536,AI Tool 536,Voice AI,Amazon,2021,62,Paid,No
+537,AI Tool 537,LLM,Stability AI,2021,136,Freemium,Yes
+538,AI Tool 538,Coding AI,Adobe,2024,192,Free,No
+539,AI Tool 539,Image Generation,Google,2024,102,Free,Yes
+540,AI Tool 540,Image Generation,Adobe,2025,44,Free,No
+541,AI Tool 541,Productivity AI,HuggingFace,2021,92,Free,No
+542,AI Tool 542,Voice AI,Microsoft,2024,91,Paid,Yes
+543,AI Tool 543,AI Agents,Adobe,2022,198,Paid,No
+544,AI Tool 544,Video Generation,Stability AI,2023,94,Paid,Yes
+545,AI Tool 545,Image Generation,Microsoft,2020,31,Free,No
+546,AI Tool 546,Image Generation,Runway,2021,43,Freemium,Yes
+547,AI Tool 547,Image Generation,Runway,2024,117,Free,Yes
+548,AI Tool 548,Chatbots,Microsoft,2021,165,Paid,Yes
+549,AI Tool 549,Coding AI,Meta,2021,76,Freemium,Yes
+550,AI Tool 550,Chatbots,OpenAI,2021,56,Freemium,Yes
+551,AI Tool 551,Chatbots,Anthropic,2022,153,Paid,Yes
+552,AI Tool 552,AI Agents,Google,2020,64,Free,Yes
+553,AI Tool 553,Productivity AI,Meta,2024,152,Paid,No
+554,AI Tool 554,Video Generation,Google,2021,120,Freemium,No
+555,AI Tool 555,Voice AI,Google,2022,9,Paid,No
+556,AI Tool 556,Video Generation,Meta,2021,108,Freemium,Yes
+557,AI Tool 557,Productivity AI,Google,2022,155,Paid,No
+558,AI Tool 558,Image Generation,Adobe,2023,22,Paid,Yes
+559,AI Tool 559,Image Generation,Anthropic,2020,66,Freemium,Yes
+560,AI Tool 560,Chatbots,Adobe,2020,74,Paid,Yes
+561,AI Tool 561,Chatbots,OpenAI,2026,195,Free,Yes
+562,AI Tool 562,Chatbots,Microsoft,2026,70,Paid,Yes
+563,AI Tool 563,Productivity AI,Anthropic,2024,8,Paid,Yes
+564,AI Tool 564,Voice AI,Stability AI,2021,178,Paid,Yes
+565,AI Tool 565,Image Generation,Microsoft,2025,24,Free,Yes
+566,AI Tool 566,Image Generation,Amazon,2021,29,Freemium,No
+567,AI Tool 567,LLM,OpenAI,2022,169,Free,Yes
+568,AI Tool 568,Voice AI,Google,2026,184,Free,No
+569,AI Tool 569,LLM,Google,2023,12,Freemium,Yes
+570,AI Tool 570,Coding AI,Stability AI,2024,72,Paid,No
+571,AI Tool 571,Voice AI,HuggingFace,2026,161,Free,No
+572,AI Tool 572,Image Generation,Anthropic,2025,67,Paid,No
+573,AI Tool 573,Video Generation,Meta,2025,178,Freemium,No
+574,AI Tool 574,LLM,HuggingFace,2023,108,Freemium,Yes
+575,AI Tool 575,Productivity AI,OpenAI,2020,65,Freemium,Yes
+576,AI Tool 576,AI Agents,HuggingFace,2025,140,Paid,Yes
+577,AI Tool 577,AI Agents,Amazon,2025,197,Paid,Yes
+578,AI Tool 578,Chatbots,Adobe,2025,95,Paid,Yes
+579,AI Tool 579,Coding AI,Anthropic,2023,105,Free,No
+580,AI Tool 580,Productivity AI,Anthropic,2025,152,Paid,Yes
+581,AI Tool 581,Chatbots,Stability AI,2025,84,Freemium,Yes
+582,AI Tool 582,Voice AI,Meta,2025,167,Freemium,No
+583,AI Tool 583,Image Generation,Microsoft,2021,51,Free,No
+584,AI Tool 584,AI Agents,Google,2023,125,Freemium,No
+585,AI Tool 585,Video Generation,Stability AI,2026,192,Free,Yes
+586,AI Tool 586,LLM,HuggingFace,2021,150,Paid,No
+587,AI Tool 587,Voice AI,Microsoft,2021,66,Free,No
+588,AI Tool 588,Chatbots,Google,2021,171,Free,No
+589,AI Tool 589,Coding AI,Amazon,2023,116,Freemium,Yes
+590,AI Tool 590,Coding AI,HuggingFace,2026,70,Free,Yes
+591,AI Tool 591,Coding AI,Meta,2021,139,Paid,No
+592,AI Tool 592,Image Generation,Runway,2024,101,Paid,No
+593,AI Tool 593,Voice AI,Adobe,2023,5,Paid,No
+594,AI Tool 594,Image Generation,HuggingFace,2020,26,Freemium,Yes
+595,AI Tool 595,AI Agents,Amazon,2021,69,Freemium,Yes
+596,AI Tool 596,Video Generation,Adobe,2020,163,Free,Yes
+597,AI Tool 597,Chatbots,Adobe,2021,55,Freemium,No
+598,AI Tool 598,Image Generation,Runway,2025,146,Freemium,No
+599,AI Tool 599,Coding AI,Anthropic,2021,20,Free,No
+600,AI Tool 600,Image Generation,Google,2023,59,Free,Yes
+601,AI Tool 601,LLM,Stability AI,2026,151,Freemium,Yes
+602,AI Tool 602,Voice AI,Runway,2026,10,Free,No
+603,AI Tool 603,LLM,Meta,2025,37,Free,No
+604,AI Tool 604,AI Agents,OpenAI,2024,165,Paid,No
+605,AI Tool 605,Productivity AI,Runway,2024,153,Paid,Yes
+606,AI Tool 606,Image Generation,Runway,2025,164,Free,Yes
+607,AI Tool 607,Video Generation,Microsoft,2020,55,Freemium,No
+608,AI Tool 608,Voice AI,Meta,2025,119,Freemium,Yes
+609,AI Tool 609,Productivity AI,Microsoft,2022,49,Freemium,No
+610,AI Tool 610,Coding AI,Microsoft,2024,27,Paid,Yes
+611,AI Tool 611,AI Agents,OpenAI,2021,21,Paid,Yes
+612,AI Tool 612,LLM,HuggingFace,2022,65,Paid,Yes
+613,AI Tool 613,LLM,Adobe,2023,18,Freemium,No
+614,AI Tool 614,AI Agents,Runway,2022,199,Paid,No
+615,AI Tool 615,Video Generation,OpenAI,2024,8,Paid,Yes
+616,AI Tool 616,LLM,Adobe,2022,59,Freemium,No
+617,AI Tool 617,LLM,Runway,2023,39,Free,Yes
+618,AI Tool 618,Productivity AI,Stability AI,2023,138,Paid,No
+619,AI Tool 619,Coding AI,Amazon,2024,162,Free,No
+620,AI Tool 620,Chatbots,Google,2020,2,Free,No
+621,AI Tool 621,Coding AI,Adobe,2026,192,Paid,No
+622,AI Tool 622,Voice AI,OpenAI,2026,11,Free,No
+623,AI Tool 623,Chatbots,OpenAI,2024,115,Freemium,No
+624,AI Tool 624,LLM,HuggingFace,2024,74,Freemium,No
+625,AI Tool 625,Voice AI,Microsoft,2025,85,Paid,No
+626,AI Tool 626,Productivity AI,Anthropic,2021,170,Paid,Yes
+627,AI Tool 627,Video Generation,Anthropic,2025,47,Free,No
+628,AI Tool 628,Voice AI,HuggingFace,2021,108,Freemium,Yes
+629,AI Tool 629,LLM,Google,2026,111,Freemium,No
+630,AI Tool 630,Coding AI,Meta,2026,114,Free,No
+631,AI Tool 631,Video Generation,Adobe,2023,175,Free,No
+632,AI Tool 632,Voice AI,Adobe,2020,46,Paid,Yes
+633,AI Tool 633,Voice AI,Amazon,2025,71,Freemium,No
+634,AI Tool 634,Chatbots,Meta,2021,68,Paid,No
+635,AI Tool 635,Productivity AI,Google,2024,20,Freemium,Yes
+636,AI Tool 636,Image Generation,Anthropic,2023,19,Freemium,Yes
+637,AI Tool 637,Image Generation,Meta,2023,65,Paid,Yes
+638,AI Tool 638,LLM,Google,2023,69,Freemium,No
+639,AI Tool 639,AI Agents,Stability AI,2026,117,Free,No
+640,AI Tool 640,Voice AI,Google,2024,161,Free,Yes
+641,AI Tool 641,Voice AI,Google,2021,107,Paid,No
+642,AI Tool 642,Image Generation,Stability AI,2025,170,Freemium,Yes
+643,AI Tool 643,AI Agents,Adobe,2020,156,Paid,No
+644,AI Tool 644,AI Agents,Meta,2022,12,Free,Yes
+645,AI Tool 645,LLM,Google,2025,165,Paid,Yes
+646,AI Tool 646,Video Generation,Amazon,2026,33,Free,No
+647,AI Tool 647,Chatbots,Stability AI,2025,147,Freemium,Yes
+648,AI Tool 648,Voice AI,Amazon,2026,73,Free,Yes
+649,AI Tool 649,Image Generation,Stability AI,2023,177,Paid,Yes
+650,AI Tool 650,Image Generation,Adobe,2021,20,Freemium,No
+651,AI Tool 651,Productivity AI,Stability AI,2026,129,Paid,No
+652,AI Tool 652,Coding AI,Meta,2020,156,Paid,Yes
+653,AI Tool 653,Productivity AI,Anthropic,2022,153,Freemium,No
+654,AI Tool 654,Productivity AI,Amazon,2025,158,Freemium,No
+655,AI Tool 655,Voice AI,Microsoft,2023,192,Paid,Yes
+656,AI Tool 656,Productivity AI,Google,2026,170,Paid,No
+657,AI Tool 657,Voice AI,Adobe,2024,185,Free,Yes
+658,AI Tool 658,Chatbots,Microsoft,2021,198,Free,Yes
+659,AI Tool 659,Video Generation,Google,2025,119,Free,No
+660,AI Tool 660,Image Generation,Stability AI,2020,173,Free,Yes
+661,AI Tool 661,Voice AI,Meta,2025,83,Freemium,Yes
+662,AI Tool 662,Voice AI,OpenAI,2024,61,Paid,Yes
+663,AI Tool 663,Coding AI,Stability AI,2022,110,Paid,No
+664,AI Tool 664,Video Generation,Meta,2023,22,Free,No
+665,AI Tool 665,Image Generation,Runway,2020,41,Free,No
+666,AI Tool 666,Productivity AI,Google,2025,115,Free,Yes
+667,AI Tool 667,LLM,OpenAI,2024,125,Free,Yes
+668,AI Tool 668,Productivity AI,Microsoft,2020,106,Free,No
+669,AI Tool 669,Chatbots,Meta,2025,181,Paid,No
+670,AI Tool 670,Productivity AI,Stability AI,2025,106,Freemium,No
+671,AI Tool 671,Productivity AI,Amazon,2024,45,Paid,Yes
+672,AI Tool 672,Productivity AI,Amazon,2021,68,Free,Yes
+673,AI Tool 673,Video Generation,Amazon,2025,6,Paid,Yes
+674,AI Tool 674,Voice AI,Google,2025,73,Paid,No
+675,AI Tool 675,Voice AI,Adobe,2022,54,Free,Yes
+676,AI Tool 676,Chatbots,Stability AI,2021,152,Free,No
+677,AI Tool 677,LLM,Adobe,2021,150,Free,Yes
+678,AI Tool 678,Video Generation,Google,2021,32,Free,Yes
+679,AI Tool 679,Image Generation,Stability AI,2026,163,Free,No
+680,AI Tool 680,Video Generation,Amazon,2026,198,Free,Yes
+681,AI Tool 681,Productivity AI,Adobe,2023,19,Freemium,No
+682,AI Tool 682,Coding AI,Stability AI,2021,114,Paid,No
+683,AI Tool 683,Image Generation,Google,2025,140,Freemium,No
+684,AI Tool 684,Productivity AI,Microsoft,2021,99,Paid,Yes
+685,AI Tool 685,Chatbots,OpenAI,2023,80,Free,No
+686,AI Tool 686,Productivity AI,Stability AI,2024,49,Freemium,No
+687,AI Tool 687,Voice AI,Microsoft,2021,45,Free,Yes
+688,AI Tool 688,LLM,Anthropic,2025,4,Freemium,No
+689,AI Tool 689,LLM,OpenAI,2020,181,Free,Yes
+690,AI Tool 690,Video Generation,Adobe,2023,68,Free,No
+691,AI Tool 691,LLM,Adobe,2020,31,Paid,No
+692,AI Tool 692,LLM,Adobe,2023,122,Free,Yes
+693,AI Tool 693,AI Agents,Microsoft,2023,73,Paid,No
+694,AI Tool 694,Productivity AI,OpenAI,2026,11,Paid,Yes
+695,AI Tool 695,LLM,HuggingFace,2022,101,Freemium,No
+696,AI Tool 696,Productivity AI,OpenAI,2025,155,Paid,Yes
+697,AI Tool 697,Video Generation,Adobe,2024,137,Free,Yes
+698,AI Tool 698,Image Generation,Runway,2026,23,Freemium,Yes
+699,AI Tool 699,LLM,Runway,2022,24,Freemium,Yes
+700,AI Tool 700,Chatbots,Runway,2026,162,Free,Yes
+701,AI Tool 701,Productivity AI,Amazon,2021,120,Freemium,No
+702,AI Tool 702,LLM,Google,2021,31,Paid,Yes
+703,AI Tool 703,Video Generation,Stability AI,2021,102,Freemium,No
+704,AI Tool 704,Chatbots,HuggingFace,2026,50,Paid,No
+705,AI Tool 705,Image Generation,Anthropic,2025,122,Freemium,No
+706,AI Tool 706,LLM,Microsoft,2021,9,Free,No
+707,AI Tool 707,Chatbots,OpenAI,2025,49,Freemium,No
+708,AI Tool 708,Voice AI,Amazon,2021,112,Paid,No
+709,AI Tool 709,Voice AI,Stability AI,2021,126,Freemium,No
+710,AI Tool 710,Coding AI,Runway,2023,143,Paid,No
+711,AI Tool 711,LLM,HuggingFace,2020,46,Freemium,Yes
+712,AI Tool 712,Video Generation,Runway,2021,187,Freemium,No
+713,AI Tool 713,Voice AI,Adobe,2023,194,Paid,Yes
+714,AI Tool 714,Coding AI,OpenAI,2021,97,Freemium,No
+715,AI Tool 715,LLM,Google,2026,4,Freemium,Yes
+716,AI Tool 716,Chatbots,OpenAI,2022,120,Freemium,Yes
+717,AI Tool 717,Coding AI,Amazon,2023,52,Free,Yes
+718,AI Tool 718,Productivity AI,Microsoft,2023,137,Paid,No
+719,AI Tool 719,Image Generation,Stability AI,2024,162,Free,No
+720,AI Tool 720,Productivity AI,OpenAI,2022,191,Paid,No
+721,AI Tool 721,Chatbots,Runway,2023,162,Paid,No
+722,AI Tool 722,Image Generation,Anthropic,2025,157,Paid,No
+723,AI Tool 723,Chatbots,Adobe,2020,200,Paid,No
+724,AI Tool 724,Voice AI,HuggingFace,2025,48,Freemium,Yes
+725,AI Tool 725,Image Generation,Stability AI,2020,106,Freemium,Yes
+726,AI Tool 726,AI Agents,Microsoft,2025,33,Paid,No
+727,AI Tool 727,Coding AI,Google,2026,145,Freemium,Yes
+728,AI Tool 728,AI Agents,Runway,2025,40,Paid,No
+729,AI Tool 729,Image Generation,Adobe,2022,92,Paid,Yes
+730,AI Tool 730,Productivity AI,Stability AI,2023,117,Paid,Yes
+731,AI Tool 731,LLM,Amazon,2023,101,Paid,Yes
+732,AI Tool 732,Coding AI,HuggingFace,2022,18,Free,No
+733,AI Tool 733,Image Generation,Amazon,2020,171,Paid,No
+734,AI Tool 734,AI Agents,Amazon,2022,162,Freemium,Yes
+735,AI Tool 735,Image Generation,OpenAI,2020,127,Paid,Yes
+736,AI Tool 736,LLM,Adobe,2022,144,Freemium,No
+737,AI Tool 737,Chatbots,Runway,2026,1,Freemium,Yes
+738,AI Tool 738,Voice AI,Adobe,2025,149,Freemium,No
+739,AI Tool 739,Image Generation,Microsoft,2025,84,Freemium,No
+740,AI Tool 740,Voice AI,Amazon,2022,69,Freemium,No
+741,AI Tool 741,Productivity AI,Microsoft,2026,14,Paid,No
+742,AI Tool 742,Voice AI,Meta,2021,74,Freemium,No
+743,AI Tool 743,Coding AI,HuggingFace,2023,127,Free,Yes
+744,AI Tool 744,Image Generation,Anthropic,2022,79,Freemium,Yes
+745,AI Tool 745,Image Generation,OpenAI,2026,9,Freemium,No
+746,AI Tool 746,Coding AI,Meta,2024,181,Free,No
+747,AI Tool 747,Productivity AI,HuggingFace,2021,91,Freemium,Yes
+748,AI Tool 748,Coding AI,Google,2022,117,Free,Yes
+749,AI Tool 749,Voice AI,Amazon,2023,177,Free,No
+750,AI Tool 750,Coding AI,OpenAI,2025,49,Paid,No
+751,AI Tool 751,AI Agents,Google,2021,46,Free,Yes
+752,AI Tool 752,Coding AI,HuggingFace,2023,134,Free,Yes
+753,AI Tool 753,AI Agents,Anthropic,2024,107,Paid,Yes
+754,AI Tool 754,Image Generation,Meta,2025,84,Paid,No
+755,AI Tool 755,AI Agents,HuggingFace,2026,5,Free,Yes
+756,AI Tool 756,LLM,Adobe,2023,26,Freemium,No
+757,AI Tool 757,LLM,Runway,2026,36,Freemium,Yes
+758,AI Tool 758,Video Generation,Microsoft,2023,194,Free,Yes
+759,AI Tool 759,Chatbots,Adobe,2026,146,Free,Yes
+760,AI Tool 760,Image Generation,Stability AI,2023,192,Paid,Yes
+761,AI Tool 761,Voice AI,HuggingFace,2020,197,Freemium,No
+762,AI Tool 762,Productivity AI,Microsoft,2024,43,Free,Yes
+763,AI Tool 763,LLM,Meta,2026,80,Free,Yes
+764,AI Tool 764,Chatbots,Stability AI,2023,91,Freemium,Yes
+765,AI Tool 765,AI Agents,HuggingFace,2023,13,Paid,No
+766,AI Tool 766,Chatbots,Anthropic,2026,83,Freemium,Yes
+767,AI Tool 767,Video Generation,Meta,2021,137,Paid,No
+768,AI Tool 768,AI Agents,Runway,2025,193,Freemium,Yes
+769,AI Tool 769,Image Generation,Runway,2025,136,Freemium,Yes
+770,AI Tool 770,Productivity AI,OpenAI,2024,63,Free,Yes
+771,AI Tool 771,Chatbots,HuggingFace,2024,103,Free,Yes
+772,AI Tool 772,Voice AI,Anthropic,2024,61,Freemium,Yes
+773,AI Tool 773,Voice AI,Runway,2020,172,Freemium,Yes
+774,AI Tool 774,LLM,Google,2024,170,Free,No
+775,AI Tool 775,Image Generation,Amazon,2024,145,Freemium,No
+776,AI Tool 776,LLM,Amazon,2023,70,Free,Yes
+777,AI Tool 777,Productivity AI,Stability AI,2026,148,Free,Yes
+778,AI Tool 778,Video Generation,Stability AI,2026,4,Freemium,No
+779,AI Tool 779,LLM,Anthropic,2022,70,Paid,Yes
+780,AI Tool 780,LLM,OpenAI,2020,110,Free,Yes
+781,AI Tool 781,Voice AI,Google,2024,84,Free,No
+782,AI Tool 782,LLM,Runway,2023,138,Paid,Yes
+783,AI Tool 783,Coding AI,Meta,2025,184,Free,No
+784,AI Tool 784,Coding AI,Meta,2022,56,Free,No
+785,AI Tool 785,Coding AI,Stability AI,2023,149,Freemium,No
+786,AI Tool 786,Coding AI,Stability AI,2022,124,Free,Yes
+787,AI Tool 787,Voice AI,Anthropic,2026,79,Paid,Yes
+788,AI Tool 788,Coding AI,Google,2026,161,Paid,No
+789,AI Tool 789,AI Agents,Google,2025,32,Paid,Yes
+790,AI Tool 790,AI Agents,Runway,2021,116,Paid,Yes
+791,AI Tool 791,Chatbots,HuggingFace,2022,20,Freemium,No
+792,AI Tool 792,LLM,Stability AI,2022,59,Freemium,No
+793,AI Tool 793,Chatbots,HuggingFace,2021,133,Paid,Yes
+794,AI Tool 794,AI Agents,Meta,2025,194,Paid,Yes
+795,AI Tool 795,Image Generation,Anthropic,2020,145,Free,No
+796,AI Tool 796,LLM,Adobe,2021,73,Paid,No
+797,AI Tool 797,Chatbots,Anthropic,2023,166,Freemium,No
+798,AI Tool 798,AI Agents,OpenAI,2023,164,Free,Yes
+799,AI Tool 799,Video Generation,Runway,2020,176,Free,Yes
+800,AI Tool 800,Image Generation,Google,2023,157,Free,Yes
+801,AI Tool 801,Coding AI,Anthropic,2022,200,Free,No
+802,AI Tool 802,Voice AI,Runway,2020,173,Free,No
+803,AI Tool 803,Image Generation,Anthropic,2021,68,Paid,Yes
+804,AI Tool 804,Chatbots,Microsoft,2021,4,Freemium,Yes
+805,AI Tool 805,Coding AI,OpenAI,2021,163,Paid,No
+806,AI Tool 806,Voice AI,Anthropic,2024,17,Paid,No
+807,AI Tool 807,AI Agents,Meta,2025,73,Free,Yes
+808,AI Tool 808,Video Generation,Stability AI,2021,193,Free,Yes
+809,AI Tool 809,Coding AI,Stability AI,2024,158,Freemium,Yes
+810,AI Tool 810,Coding AI,OpenAI,2025,103,Freemium,Yes
+811,AI Tool 811,Voice AI,Microsoft,2022,187,Freemium,No
+812,AI Tool 812,Video Generation,Google,2021,4,Free,No
+813,AI Tool 813,Image Generation,Meta,2024,152,Freemium,Yes
+814,AI Tool 814,Coding AI,Adobe,2021,76,Free,Yes
+815,AI Tool 815,Voice AI,Anthropic,2023,91,Paid,Yes
+816,AI Tool 816,Productivity AI,Anthropic,2025,17,Free,Yes
+817,AI Tool 817,Image Generation,Adobe,2022,194,Freemium,Yes
+818,AI Tool 818,Chatbots,Google,2020,172,Free,No
+819,AI Tool 819,Video Generation,Adobe,2022,7,Free,No
+820,AI Tool 820,AI Agents,Stability AI,2021,86,Free,No
+821,AI Tool 821,Video Generation,Anthropic,2021,132,Free,Yes
+822,AI Tool 822,AI Agents,HuggingFace,2026,54,Freemium,No
+823,AI Tool 823,AI Agents,Stability AI,2024,137,Free,Yes
+824,AI Tool 824,LLM,OpenAI,2021,138,Paid,Yes
+825,AI Tool 825,Video Generation,Stability AI,2024,47,Paid,No
+826,AI Tool 826,Image Generation,Anthropic,2024,167,Paid,Yes
+827,AI Tool 827,Image Generation,Google,2022,90,Free,Yes
+828,AI Tool 828,Voice AI,Adobe,2020,128,Free,Yes
+829,AI Tool 829,AI Agents,Anthropic,2024,100,Paid,No
+830,AI Tool 830,Image Generation,Google,2023,30,Freemium,No
+831,AI Tool 831,Image Generation,HuggingFace,2021,110,Freemium,Yes
+832,AI Tool 832,AI Agents,OpenAI,2022,33,Free,No
+833,AI Tool 833,Video Generation,Adobe,2025,34,Paid,Yes
+834,AI Tool 834,Voice AI,OpenAI,2023,91,Free,No
+835,AI Tool 835,AI Agents,Adobe,2026,108,Free,No
+836,AI Tool 836,Productivity AI,Amazon,2020,133,Free,No
+837,AI Tool 837,LLM,OpenAI,2025,175,Paid,No
+838,AI Tool 838,AI Agents,Anthropic,2025,1,Free,No
+839,AI Tool 839,Voice AI,Google,2024,9,Freemium,No
+840,AI Tool 840,AI Agents,Runway,2026,10,Free,No
+841,AI Tool 841,Voice AI,Adobe,2020,46,Freemium,Yes
+842,AI Tool 842,LLM,HuggingFace,2025,105,Free,Yes
+843,AI Tool 843,Productivity AI,Stability AI,2020,172,Free,No
+844,AI Tool 844,Image Generation,Adobe,2024,16,Free,Yes
+845,AI Tool 845,Productivity AI,Amazon,2020,22,Free,Yes
+846,AI Tool 846,Coding AI,HuggingFace,2022,38,Free,No
+847,AI Tool 847,AI Agents,Adobe,2022,126,Paid,No
+848,AI Tool 848,Coding AI,Runway,2020,61,Free,Yes
+849,AI Tool 849,Productivity AI,Google,2026,23,Freemium,No
+850,AI Tool 850,Video Generation,HuggingFace,2020,118,Paid,No
+851,AI Tool 851,AI Agents,OpenAI,2023,195,Free,No
+852,AI Tool 852,LLM,Meta,2023,120,Free,No
+853,AI Tool 853,AI Agents,Runway,2024,108,Free,Yes
+854,AI Tool 854,Coding AI,Microsoft,2025,124,Paid,No
+855,AI Tool 855,Video Generation,Adobe,2025,184,Free,Yes
+856,AI Tool 856,AI Agents,HuggingFace,2025,19,Free,Yes
+857,AI Tool 857,Productivity AI,OpenAI,2026,82,Freemium,Yes
+858,AI Tool 858,Productivity AI,Anthropic,2021,107,Free,Yes
+859,AI Tool 859,Image Generation,Anthropic,2023,146,Paid,No
+860,AI Tool 860,Chatbots,HuggingFace,2026,81,Freemium,No
+861,AI Tool 861,Voice AI,Microsoft,2021,91,Paid,Yes
+862,AI Tool 862,Image Generation,Amazon,2022,64,Freemium,No
+863,AI Tool 863,Productivity AI,OpenAI,2020,182,Paid,No
+864,AI Tool 864,Voice AI,HuggingFace,2025,162,Freemium,Yes
+865,AI Tool 865,AI Agents,Adobe,2021,46,Freemium,Yes
+866,AI Tool 866,Productivity AI,Stability AI,2024,97,Paid,Yes
+867,AI Tool 867,AI Agents,Adobe,2023,47,Free,No
+868,AI Tool 868,Coding AI,Google,2023,133,Freemium,No
+869,AI Tool 869,Productivity AI,OpenAI,2020,39,Freemium,Yes
+870,AI Tool 870,AI Agents,Runway,2021,153,Free,Yes
+871,AI Tool 871,LLM,Google,2024,14,Free,Yes
+872,AI Tool 872,Coding AI,Anthropic,2026,54,Paid,No
+873,AI Tool 873,Coding AI,Anthropic,2020,186,Freemium,Yes
+874,AI Tool 874,AI Agents,Microsoft,2022,189,Paid,Yes
+875,AI Tool 875,Chatbots,Meta,2020,96,Free,Yes
+876,AI Tool 876,Image Generation,Stability AI,2026,65,Freemium,No
+877,AI Tool 877,Coding AI,Stability AI,2026,136,Paid,No
+878,AI Tool 878,AI Agents,Microsoft,2022,198,Free,No
+879,AI Tool 879,LLM,OpenAI,2025,174,Freemium,No
+880,AI Tool 880,Image Generation,Meta,2021,26,Paid,Yes
+881,AI Tool 881,Productivity AI,Stability AI,2023,94,Freemium,No
+882,AI Tool 882,Productivity AI,Stability AI,2025,49,Free,No
+883,AI Tool 883,Image Generation,Stability AI,2021,24,Paid,No
+884,AI Tool 884,Coding AI,Adobe,2024,117,Freemium,No
+885,AI Tool 885,Productivity AI,Amazon,2021,17,Free,No
+886,AI Tool 886,Voice AI,Google,2023,199,Freemium,Yes
+887,AI Tool 887,Coding AI,Adobe,2021,25,Paid,No
+888,AI Tool 888,Image Generation,Amazon,2020,83,Free,No
+889,AI Tool 889,Chatbots,Anthropic,2024,108,Free,No
+890,AI Tool 890,Voice AI,Microsoft,2023,160,Freemium,Yes
+891,AI Tool 891,Chatbots,Anthropic,2024,22,Paid,Yes
+892,AI Tool 892,Chatbots,Google,2020,164,Paid,Yes
+893,AI Tool 893,AI Agents,Meta,2020,158,Freemium,Yes
+894,AI Tool 894,Productivity AI,Amazon,2022,19,Free,Yes
+895,AI Tool 895,Coding AI,Runway,2026,57,Freemium,No
+896,AI Tool 896,Productivity AI,Meta,2026,33,Freemium,No
+897,AI Tool 897,Video Generation,OpenAI,2022,165,Free,Yes
+898,AI Tool 898,Video Generation,Runway,2020,147,Freemium,No
+899,AI Tool 899,Image Generation,HuggingFace,2020,21,Paid,No
+900,AI Tool 900,Chatbots,Runway,2024,37,Free,No
+901,AI Tool 901,Coding AI,Stability AI,2021,183,Free,No
+902,AI Tool 902,LLM,HuggingFace,2024,131,Free,Yes
+903,AI Tool 903,Coding AI,Amazon,2021,69,Paid,Yes
+904,AI Tool 904,Voice AI,Meta,2021,110,Paid,No
+905,AI Tool 905,AI Agents,Google,2021,151,Free,Yes
+906,AI Tool 906,AI Agents,HuggingFace,2023,129,Paid,No
+907,AI Tool 907,AI Agents,HuggingFace,2024,170,Freemium,No
+908,AI Tool 908,Video Generation,HuggingFace,2025,51,Free,Yes
+909,AI Tool 909,Productivity AI,Meta,2023,102,Free,No
+910,AI Tool 910,Voice AI,OpenAI,2025,170,Freemium,Yes
+911,AI Tool 911,Productivity AI,Runway,2024,145,Freemium,Yes
+912,AI Tool 912,Chatbots,Amazon,2022,91,Free,No
+913,AI Tool 913,Productivity AI,Anthropic,2025,151,Freemium,No
+914,AI Tool 914,AI Agents,Anthropic,2023,62,Free,No
+915,AI Tool 915,Image Generation,Runway,2023,73,Free,No
+916,AI Tool 916,AI Agents,Google,2024,116,Paid,No
+917,AI Tool 917,Voice AI,HuggingFace,2022,111,Paid,Yes
+918,AI Tool 918,Voice AI,Anthropic,2021,54,Free,Yes
+919,AI Tool 919,Image Generation,Adobe,2020,182,Free,Yes
+920,AI Tool 920,Voice AI,Anthropic,2026,99,Freemium,Yes
+921,AI Tool 921,LLM,Runway,2021,116,Freemium,No
+922,AI Tool 922,Chatbots,OpenAI,2021,134,Free,No
+923,AI Tool 923,LLM,Adobe,2021,53,Free,No
+924,AI Tool 924,AI Agents,HuggingFace,2021,16,Paid,No
+925,AI Tool 925,AI Agents,OpenAI,2026,4,Paid,Yes
+926,AI Tool 926,Image Generation,Anthropic,2022,164,Paid,Yes
+927,AI Tool 927,AI Agents,Amazon,2020,85,Free,Yes
+928,AI Tool 928,Chatbots,Adobe,2023,200,Freemium,No
+929,AI Tool 929,LLM,Microsoft,2022,155,Free,No
+930,AI Tool 930,Coding AI,HuggingFace,2025,155,Freemium,No
+931,AI Tool 931,Chatbots,Stability AI,2020,61,Free,No
+932,AI Tool 932,Productivity AI,Runway,2022,36,Free,Yes
+933,AI Tool 933,Coding AI,Runway,2024,5,Paid,Yes
+934,AI Tool 934,AI Agents,Runway,2024,36,Free,Yes
+935,AI Tool 935,Productivity AI,Google,2024,20,Freemium,Yes
+936,AI Tool 936,Coding AI,Amazon,2020,100,Freemium,Yes
+937,AI Tool 937,AI Agents,Runway,2022,122,Freemium,No
+938,AI Tool 938,Coding AI,Microsoft,2022,164,Free,No
+939,AI Tool 939,Video Generation,OpenAI,2020,34,Paid,No
+940,AI Tool 940,Video Generation,Runway,2020,126,Paid,Yes
+941,AI Tool 941,Chatbots,Stability AI,2022,166,Free,Yes
+942,AI Tool 942,Image Generation,HuggingFace,2021,164,Free,No
+943,AI Tool 943,Video Generation,Microsoft,2023,20,Free,No
+944,AI Tool 944,Voice AI,Microsoft,2023,12,Free,Yes
+945,AI Tool 945,Chatbots,Stability AI,2025,190,Free,No
+946,AI Tool 946,Productivity AI,Runway,2021,34,Freemium,Yes
+947,AI Tool 947,Productivity AI,OpenAI,2023,42,Paid,No
+948,AI Tool 948,Video Generation,Meta,2026,1,Paid,Yes
+949,AI Tool 949,LLM,OpenAI,2025,195,Freemium,No
+950,AI Tool 950,Video Generation,Stability AI,2024,45,Free,Yes
+951,AI Tool 951,Coding AI,Stability AI,2024,199,Freemium,Yes
+952,AI Tool 952,Image Generation,Stability AI,2021,182,Freemium,Yes
+953,AI Tool 953,Coding AI,Stability AI,2025,197,Free,Yes
+954,AI Tool 954,Video Generation,OpenAI,2022,131,Free,No
+955,AI Tool 955,LLM,OpenAI,2020,30,Freemium,Yes
+956,AI Tool 956,Coding AI,HuggingFace,2021,180,Freemium,Yes
+957,AI Tool 957,Image Generation,Runway,2020,189,Freemium,No
+958,AI Tool 958,LLM,Anthropic,2023,47,Free,Yes
+959,AI Tool 959,Voice AI,Stability AI,2025,149,Freemium,No
+960,AI Tool 960,Chatbots,Stability AI,2023,8,Freemium,No
+961,AI Tool 961,Image Generation,Meta,2025,108,Freemium,No
+962,AI Tool 962,Chatbots,Anthropic,2021,152,Paid,Yes
+963,AI Tool 963,AI Agents,Stability AI,2021,62,Paid,Yes
+964,AI Tool 964,Video Generation,Meta,2025,159,Paid,No
+965,AI Tool 965,Image Generation,Google,2026,3,Paid,No
+966,AI Tool 966,Coding AI,OpenAI,2026,62,Freemium,Yes
+967,AI Tool 967,LLM,Runway,2022,185,Paid,Yes
+968,AI Tool 968,Video Generation,Amazon,2025,62,Paid,Yes
+969,AI Tool 969,Video Generation,Runway,2023,80,Freemium,No
+970,AI Tool 970,AI Agents,HuggingFace,2022,31,Paid,No
+971,AI Tool 971,Image Generation,Amazon,2021,52,Freemium,No
+972,AI Tool 972,Coding AI,Meta,2025,193,Free,Yes
+973,AI Tool 973,Chatbots,Google,2020,99,Free,No
+974,AI Tool 974,Coding AI,OpenAI,2024,95,Paid,Yes
+975,AI Tool 975,Voice AI,Adobe,2026,70,Free,No
+976,AI Tool 976,Voice AI,Stability AI,2025,9,Freemium,Yes
+977,AI Tool 977,Video Generation,Microsoft,2020,192,Freemium,No
+978,AI Tool 978,Video Generation,Anthropic,2021,39,Freemium,Yes
+979,AI Tool 979,AI Agents,Stability AI,2026,159,Paid,Yes
+980,AI Tool 980,Voice AI,Amazon,2026,3,Free,Yes
+981,AI Tool 981,Chatbots,Adobe,2026,179,Free,Yes
+982,AI Tool 982,Productivity AI,OpenAI,2024,176,Free,Yes
+983,AI Tool 983,Coding AI,Anthropic,2022,122,Freemium,No
+984,AI Tool 984,Chatbots,HuggingFace,2025,52,Freemium,No
+985,AI Tool 985,Chatbots,Amazon,2021,72,Paid,Yes
+986,AI Tool 986,LLM,Stability AI,2024,41,Paid,Yes
+987,AI Tool 987,Voice AI,OpenAI,2023,93,Paid,No
+988,AI Tool 988,Image Generation,Runway,2021,31,Freemium,Yes
+989,AI Tool 989,Coding AI,Microsoft,2024,186,Free,Yes
+990,AI Tool 990,LLM,Microsoft,2024,73,Free,Yes
+991,AI Tool 991,LLM,Runway,2025,183,Paid,No
+992,AI Tool 992,LLM,Runway,2025,43,Paid,No
+993,AI Tool 993,Voice AI,Google,2020,115,Freemium,Yes
+994,AI Tool 994,Productivity AI,Stability AI,2022,9,Free,No
+995,AI Tool 995,Voice AI,Runway,2024,47,Free,No
+996,AI Tool 996,Chatbots,Adobe,2021,170,Free,Yes
+997,AI Tool 997,Productivity AI,Microsoft,2026,134,Freemium,No
+998,AI Tool 998,Productivity AI,Anthropic,2022,51,Paid,No
+999,AI Tool 999,LLM,Meta,2023,53,Freemium,Yes
+1000,AI Tool 1000,AI Agents,Google,2025,97,Freemium,No
+1001,AI Tool 1001,Chatbots,Stability AI,2022,126,Paid,No
+1002,AI Tool 1002,Voice AI,Stability AI,2022,92,Free,Yes
+1003,AI Tool 1003,Image Generation,Stability AI,2020,173,Freemium,Yes
+1004,AI Tool 1004,AI Agents,HuggingFace,2020,187,Free,Yes
+1005,AI Tool 1005,Video Generation,Google,2021,125,Freemium,No
+1006,AI Tool 1006,LLM,OpenAI,2025,133,Free,No
+1007,AI Tool 1007,Voice AI,Google,2021,110,Freemium,No
+1008,AI Tool 1008,Chatbots,Anthropic,2026,181,Freemium,Yes
+1009,AI Tool 1009,Productivity AI,Adobe,2025,147,Paid,No
+1010,AI Tool 1010,Coding AI,Stability AI,2026,104,Free,No
+1011,AI Tool 1011,Video Generation,Amazon,2021,184,Paid,Yes
+1012,AI Tool 1012,Image Generation,Adobe,2022,160,Freemium,No
+1013,AI Tool 1013,Video Generation,Meta,2020,132,Freemium,Yes
+1014,AI Tool 1014,AI Agents,Meta,2026,111,Free,No
+1015,AI Tool 1015,Productivity AI,HuggingFace,2023,1,Free,No
+1016,AI Tool 1016,Video Generation,Adobe,2023,179,Paid,No
+1017,AI Tool 1017,Image Generation,Amazon,2024,74,Paid,No
+1018,AI Tool 1018,Video Generation,HuggingFace,2025,1,Paid,Yes
+1019,AI Tool 1019,LLM,Google,2023,106,Free,Yes
+1020,AI Tool 1020,Coding AI,Anthropic,2023,19,Freemium,No
+1021,AI Tool 1021,LLM,Runway,2020,110,Paid,Yes
+1022,AI Tool 1022,Voice AI,Stability AI,2024,50,Freemium,Yes
+1023,AI Tool 1023,Chatbots,Anthropic,2023,124,Free,Yes
+1024,AI Tool 1024,Coding AI,Meta,2026,198,Free,No
+1025,AI Tool 1025,Voice AI,OpenAI,2020,185,Freemium,Yes
+1026,AI Tool 1026,Voice AI,Amazon,2021,8,Paid,No
+1027,AI Tool 1027,Image Generation,Stability AI,2023,164,Free,Yes
+1028,AI Tool 1028,LLM,Anthropic,2021,181,Free,No
+1029,AI Tool 1029,Productivity AI,HuggingFace,2026,111,Free,No
+1030,AI Tool 1030,Productivity AI,Runway,2022,173,Paid,No
+1031,AI Tool 1031,Video Generation,Meta,2021,192,Free,Yes
+1032,AI Tool 1032,Coding AI,Adobe,2026,162,Paid,Yes
+1033,AI Tool 1033,Voice AI,Anthropic,2023,80,Freemium,No
+1034,AI Tool 1034,Chatbots,Meta,2022,66,Freemium,Yes
+1035,AI Tool 1035,Chatbots,Amazon,2020,163,Free,Yes
+1036,AI Tool 1036,Voice AI,Amazon,2022,84,Paid,Yes
+1037,AI Tool 1037,Coding AI,Meta,2024,12,Freemium,No
+1038,AI Tool 1038,Voice AI,Anthropic,2020,62,Free,No
+1039,AI Tool 1039,Voice AI,Runway,2022,82,Paid,Yes
+1040,AI Tool 1040,Image Generation,HuggingFace,2022,86,Paid,No
+1041,AI Tool 1041,Video Generation,HuggingFace,2021,163,Paid,No
+1042,AI Tool 1042,Video Generation,Google,2025,1,Freemium,Yes
+1043,AI Tool 1043,Image Generation,Meta,2026,177,Free,No
+1044,AI Tool 1044,Productivity AI,Adobe,2023,145,Paid,Yes
+1045,AI Tool 1045,Voice AI,Stability AI,2024,114,Freemium,No
+1046,AI Tool 1046,AI Agents,Anthropic,2025,130,Paid,Yes
+1047,AI Tool 1047,Coding AI,OpenAI,2026,90,Free,Yes
+1048,AI Tool 1048,LLM,Anthropic,2026,181,Free,No
+1049,AI Tool 1049,Productivity AI,Amazon,2023,82,Freemium,No
+1050,AI Tool 1050,Productivity AI,Microsoft,2021,45,Freemium,Yes
+1051,AI Tool 1051,Image Generation,Google,2021,61,Freemium,Yes
+1052,AI Tool 1052,AI Agents,Google,2023,86,Freemium,No
+1053,AI Tool 1053,Video Generation,Meta,2025,100,Paid,No
+1054,AI Tool 1054,Coding AI,Google,2026,138,Freemium,No
+1055,AI Tool 1055,Video Generation,Google,2020,101,Freemium,No
+1056,AI Tool 1056,LLM,Meta,2023,44,Free,No
+1057,AI Tool 1057,Chatbots,Amazon,2023,92,Paid,No
+1058,AI Tool 1058,AI Agents,Stability AI,2021,27,Paid,No
+1059,AI Tool 1059,Video Generation,Amazon,2021,119,Paid,Yes
+1060,AI Tool 1060,Video Generation,Google,2021,182,Free,No
+1061,AI Tool 1061,Coding AI,Runway,2026,151,Freemium,No
+1062,AI Tool 1062,LLM,Google,2024,64,Paid,No
+1063,AI Tool 1063,LLM,OpenAI,2023,9,Free,No
+1064,AI Tool 1064,LLM,Google,2026,169,Paid,Yes
+1065,AI Tool 1065,Productivity AI,Runway,2020,140,Paid,Yes
+1066,AI Tool 1066,Productivity AI,OpenAI,2021,198,Free,Yes
+1067,AI Tool 1067,Chatbots,Meta,2021,36,Free,No
+1068,AI Tool 1068,Coding AI,Meta,2020,134,Paid,No
+1069,AI Tool 1069,Productivity AI,Google,2023,127,Free,No
+1070,AI Tool 1070,AI Agents,HuggingFace,2020,81,Paid,Yes
+1071,AI Tool 1071,Voice AI,Meta,2023,127,Paid,Yes
+1072,AI Tool 1072,Productivity AI,Meta,2023,13,Paid,Yes
+1073,AI Tool 1073,LLM,Anthropic,2023,93,Freemium,Yes
+1074,AI Tool 1074,Chatbots,HuggingFace,2022,5,Freemium,Yes
+1075,AI Tool 1075,Image Generation,Runway,2020,112,Freemium,No
+1076,AI Tool 1076,Coding AI,Runway,2020,41,Free,No
+1077,AI Tool 1077,Coding AI,Amazon,2020,98,Free,No
+1078,AI Tool 1078,Video Generation,Runway,2026,94,Free,Yes
+1079,AI Tool 1079,Voice AI,Meta,2026,150,Paid,No
+1080,AI Tool 1080,Chatbots,Google,2026,142,Freemium,Yes
+1081,AI Tool 1081,LLM,Adobe,2024,83,Free,Yes
+1082,AI Tool 1082,Image Generation,Microsoft,2026,51,Paid,No
+1083,AI Tool 1083,Voice AI,HuggingFace,2020,150,Paid,Yes
+1084,AI Tool 1084,Coding AI,Amazon,2020,40,Freemium,Yes
+1085,AI Tool 1085,Voice AI,Adobe,2022,2,Paid,No
+1086,AI Tool 1086,LLM,Microsoft,2024,80,Paid,No
+1087,AI Tool 1087,Coding AI,Adobe,2022,140,Paid,Yes
+1088,AI Tool 1088,Voice AI,Amazon,2025,141,Freemium,Yes
+1089,AI Tool 1089,LLM,Adobe,2022,72,Free,No
+1090,AI Tool 1090,AI Agents,Anthropic,2025,113,Free,Yes
+1091,AI Tool 1091,AI Agents,Stability AI,2022,65,Freemium,No
+1092,AI Tool 1092,Voice AI,Stability AI,2025,10,Freemium,No
+1093,AI Tool 1093,Video Generation,Anthropic,2020,23,Paid,Yes
+1094,AI Tool 1094,AI Agents,Runway,2022,152,Free,Yes
+1095,AI Tool 1095,AI Agents,Anthropic,2025,116,Paid,Yes
+1096,AI Tool 1096,Coding AI,OpenAI,2022,95,Freemium,No
+1097,AI Tool 1097,LLM,Stability AI,2026,70,Paid,Yes
+1098,AI Tool 1098,Image Generation,Microsoft,2020,66,Paid,Yes
+1099,AI Tool 1099,Productivity AI,Anthropic,2021,127,Free,No
+1100,AI Tool 1100,Voice AI,Anthropic,2026,24,Free,No
+1101,AI Tool 1101,Image Generation,Stability AI,2024,198,Paid,No
+1102,AI Tool 1102,Voice AI,Runway,2026,137,Paid,Yes
+1103,AI Tool 1103,LLM,Amazon,2021,75,Paid,Yes
+1104,AI Tool 1104,Voice AI,Anthropic,2021,112,Freemium,No
+1105,AI Tool 1105,Chatbots,HuggingFace,2026,68,Free,Yes
+1106,AI Tool 1106,Productivity AI,Anthropic,2021,37,Freemium,No
+1107,AI Tool 1107,Coding AI,Stability AI,2024,95,Paid,No
+1108,AI Tool 1108,Chatbots,Runway,2022,33,Paid,No
+1109,AI Tool 1109,AI Agents,Google,2022,120,Free,No
+1110,AI Tool 1110,AI Agents,Amazon,2023,51,Freemium,Yes
+1111,AI Tool 1111,LLM,Amazon,2020,156,Paid,No
+1112,AI Tool 1112,Video Generation,Google,2024,75,Free,Yes
+1113,AI Tool 1113,Chatbots,OpenAI,2024,180,Paid,No
+1114,AI Tool 1114,AI Agents,Anthropic,2022,134,Free,Yes
+1115,AI Tool 1115,Voice AI,HuggingFace,2021,149,Freemium,No
+1116,AI Tool 1116,AI Agents,HuggingFace,2025,25,Free,No
+1117,AI Tool 1117,Productivity AI,Runway,2020,80,Freemium,No
+1118,AI Tool 1118,Chatbots,Amazon,2025,50,Freemium,Yes
+1119,AI Tool 1119,Chatbots,Microsoft,2026,74,Paid,No
+1120,AI Tool 1120,Voice AI,Adobe,2023,123,Freemium,Yes
+1121,AI Tool 1121,AI Agents,Runway,2022,175,Paid,No
+1122,AI Tool 1122,Image Generation,Anthropic,2022,197,Freemium,No
+1123,AI Tool 1123,Video Generation,Adobe,2020,52,Paid,No
+1124,AI Tool 1124,Voice AI,Google,2023,185,Free,Yes
+1125,AI Tool 1125,Video Generation,Stability AI,2026,42,Free,No
+1126,AI Tool 1126,Coding AI,Amazon,2024,16,Freemium,No
+1127,AI Tool 1127,Coding AI,Amazon,2022,153,Freemium,Yes
+1128,AI Tool 1128,Voice AI,Amazon,2023,42,Paid,No
+1129,AI Tool 1129,Productivity AI,Amazon,2022,132,Freemium,Yes
+1130,AI Tool 1130,Image Generation,Meta,2026,133,Paid,Yes
+1131,AI Tool 1131,Chatbots,Anthropic,2024,44,Paid,No
+1132,AI Tool 1132,Video Generation,Anthropic,2026,176,Paid,Yes
+1133,AI Tool 1133,Productivity AI,Amazon,2023,1,Free,Yes
+1134,AI Tool 1134,Chatbots,HuggingFace,2022,14,Free,No
+1135,AI Tool 1135,Image Generation,Meta,2021,50,Freemium,No
+1136,AI Tool 1136,Coding AI,Microsoft,2025,24,Paid,No
+1137,AI Tool 1137,Image Generation,Microsoft,2021,174,Free,No
+1138,AI Tool 1138,LLM,Google,2026,13,Free,Yes
+1139,AI Tool 1139,Voice AI,Amazon,2024,64,Paid,Yes
+1140,AI Tool 1140,Voice AI,Microsoft,2025,31,Paid,No
+1141,AI Tool 1141,Productivity AI,Anthropic,2023,67,Free,Yes
+1142,AI Tool 1142,Image Generation,Meta,2022,155,Freemium,No
+1143,AI Tool 1143,LLM,Runway,2023,79,Paid,No
+1144,AI Tool 1144,Chatbots,Meta,2021,30,Paid,Yes
+1145,AI Tool 1145,Voice AI,Google,2021,173,Paid,No
+1146,AI Tool 1146,Chatbots,Runway,2025,141,Free,Yes
+1147,AI Tool 1147,AI Agents,HuggingFace,2024,12,Freemium,No
+1148,AI Tool 1148,Coding AI,Stability AI,2023,38,Freemium,No
+1149,AI Tool 1149,Image Generation,Microsoft,2020,6,Free,Yes
+1150,AI Tool 1150,AI Agents,OpenAI,2026,125,Paid,Yes
+1151,AI Tool 1151,Chatbots,Meta,2024,7,Paid,No
+1152,AI Tool 1152,LLM,HuggingFace,2025,170,Freemium,No
+1153,AI Tool 1153,AI Agents,OpenAI,2020,82,Free,No
+1154,AI Tool 1154,AI Agents,Anthropic,2020,188,Free,No
+1155,AI Tool 1155,AI Agents,Runway,2024,150,Free,Yes
+1156,AI Tool 1156,AI Agents,Microsoft,2024,160,Paid,No
+1157,AI Tool 1157,Video Generation,OpenAI,2022,51,Free,No
+1158,AI Tool 1158,Voice AI,Google,2023,96,Paid,No
+1159,AI Tool 1159,Chatbots,Amazon,2020,28,Freemium,No
+1160,AI Tool 1160,LLM,Anthropic,2024,141,Free,No
+1161,AI Tool 1161,Image Generation,Anthropic,2022,51,Free,Yes
+1162,AI Tool 1162,Chatbots,Google,2026,155,Freemium,Yes
+1163,AI Tool 1163,Productivity AI,Meta,2025,1,Free,Yes
+1164,AI Tool 1164,LLM,Google,2020,41,Freemium,Yes
+1165,AI Tool 1165,Coding AI,Runway,2021,36,Paid,No
+1166,AI Tool 1166,Coding AI,Amazon,2020,1,Freemium,Yes
+1167,AI Tool 1167,Coding AI,Runway,2020,42,Paid,Yes
+1168,AI Tool 1168,AI Agents,Meta,2024,114,Paid,Yes
+1169,AI Tool 1169,Video Generation,Stability AI,2020,65,Paid,No
+1170,AI Tool 1170,Image Generation,Amazon,2022,83,Paid,No
+1171,AI Tool 1171,AI Agents,Stability AI,2023,43,Freemium,Yes
+1172,AI Tool 1172,Chatbots,Stability AI,2023,173,Free,No
+1173,AI Tool 1173,Video Generation,Meta,2022,93,Freemium,No
+1174,AI Tool 1174,AI Agents,Runway,2025,112,Free,No
+1175,AI Tool 1175,Productivity AI,HuggingFace,2021,73,Free,No
+1176,AI Tool 1176,Productivity AI,Amazon,2023,99,Freemium,Yes
+1177,AI Tool 1177,Productivity AI,HuggingFace,2024,61,Freemium,Yes
+1178,AI Tool 1178,AI Agents,Adobe,2023,77,Free,No
+1179,AI Tool 1179,Chatbots,Anthropic,2020,31,Freemium,No
+1180,AI Tool 1180,AI Agents,Meta,2021,3,Freemium,Yes
+1181,AI Tool 1181,Voice AI,Google,2022,74,Free,No
+1182,AI Tool 1182,AI Agents,Stability AI,2026,14,Paid,Yes
+1183,AI Tool 1183,Video Generation,HuggingFace,2025,177,Free,Yes
+1184,AI Tool 1184,Voice AI,Adobe,2022,1,Free,No
+1185,AI Tool 1185,AI Agents,Runway,2022,22,Free,No
+1186,AI Tool 1186,Chatbots,HuggingFace,2021,175,Paid,No
+1187,AI Tool 1187,Voice AI,Amazon,2022,182,Freemium,Yes
+1188,AI Tool 1188,Video Generation,Adobe,2025,176,Paid,Yes
+1189,AI Tool 1189,Voice AI,Google,2023,175,Paid,Yes
+1190,AI Tool 1190,Coding AI,Amazon,2024,119,Free,No
+1191,AI Tool 1191,Image Generation,Google,2024,60,Paid,No
+1192,AI Tool 1192,Chatbots,Amazon,2022,102,Paid,No
+1193,AI Tool 1193,AI Agents,OpenAI,2022,197,Freemium,No
+1194,AI Tool 1194,Voice AI,HuggingFace,2023,34,Freemium,Yes
+1195,AI Tool 1195,Coding AI,Amazon,2021,12,Free,No
+1196,AI Tool 1196,Voice AI,OpenAI,2020,129,Free,No
+1197,AI Tool 1197,Image Generation,Microsoft,2021,49,Paid,Yes
+1198,AI Tool 1198,Productivity AI,Adobe,2023,23,Freemium,No
+1199,AI Tool 1199,Productivity AI,Stability AI,2020,100,Paid,No
+1200,AI Tool 1200,Coding AI,Anthropic,2023,119,Free,No
+1201,AI Tool 1201,Voice AI,Microsoft,2026,189,Free,Yes
+1202,AI Tool 1202,Productivity AI,Adobe,2021,115,Freemium,No
+1203,AI Tool 1203,Chatbots,Amazon,2022,111,Paid,Yes
+1204,AI Tool 1204,AI Agents,Google,2024,57,Free,Yes
+1205,AI Tool 1205,Video Generation,Adobe,2025,4,Freemium,No
+1206,AI Tool 1206,Coding AI,Anthropic,2021,191,Freemium,No
+1207,AI Tool 1207,AI Agents,Microsoft,2020,98,Free,No
+1208,AI Tool 1208,Productivity AI,HuggingFace,2026,63,Paid,No
+1209,AI Tool 1209,Voice AI,Meta,2024,131,Free,Yes
+1210,AI Tool 1210,Image Generation,Adobe,2024,91,Free,No
+1211,AI Tool 1211,AI Agents,Stability AI,2020,122,Free,Yes
+1212,AI Tool 1212,Video Generation,HuggingFace,2022,143,Free,No
+1213,AI Tool 1213,Coding AI,Runway,2020,105,Freemium,No
+1214,AI Tool 1214,LLM,Meta,2024,139,Freemium,Yes
+1215,AI Tool 1215,Productivity AI,Anthropic,2020,156,Free,No
+1216,AI Tool 1216,Voice AI,OpenAI,2023,117,Free,No
+1217,AI Tool 1217,Image Generation,Amazon,2020,5,Freemium,No
+1218,AI Tool 1218,LLM,OpenAI,2020,1,Free,No
+1219,AI Tool 1219,LLM,Runway,2023,153,Free,Yes
+1220,AI Tool 1220,Chatbots,OpenAI,2022,146,Paid,Yes
+1221,AI Tool 1221,Image Generation,Meta,2025,78,Free,Yes
+1222,AI Tool 1222,Chatbots,Microsoft,2023,47,Free,No
+1223,AI Tool 1223,Video Generation,Stability AI,2022,42,Free,No
+1224,AI Tool 1224,AI Agents,Microsoft,2024,151,Freemium,Yes
+1225,AI Tool 1225,Productivity AI,Runway,2025,146,Freemium,No
+1226,AI Tool 1226,Image Generation,Google,2022,17,Paid,Yes
+1227,AI Tool 1227,Image Generation,Stability AI,2022,115,Freemium,Yes
+1228,AI Tool 1228,Coding AI,Microsoft,2024,91,Freemium,No
+1229,AI Tool 1229,Image Generation,Runway,2024,116,Freemium,No
+1230,AI Tool 1230,Video Generation,Runway,2026,73,Freemium,No
+1231,AI Tool 1231,Chatbots,Runway,2021,25,Free,Yes
+1232,AI Tool 1232,Video Generation,Runway,2025,126,Paid,No
+1233,AI Tool 1233,Voice AI,Microsoft,2024,156,Paid,Yes
+1234,AI Tool 1234,Chatbots,Google,2025,140,Paid,No
+1235,AI Tool 1235,Productivity AI,Meta,2024,173,Paid,Yes
+1236,AI Tool 1236,Productivity AI,Meta,2026,187,Paid,No
+1237,AI Tool 1237,Video Generation,Microsoft,2022,185,Freemium,No
+1238,AI Tool 1238,Chatbots,Amazon,2022,33,Free,No
+1239,AI Tool 1239,Voice AI,Meta,2022,139,Paid,Yes
+1240,AI Tool 1240,AI Agents,OpenAI,2021,27,Paid,Yes
+1241,AI Tool 1241,Chatbots,Amazon,2022,178,Free,Yes
+1242,AI Tool 1242,Chatbots,Adobe,2023,68,Paid,No
+1243,AI Tool 1243,LLM,Adobe,2022,188,Paid,Yes
+1244,AI Tool 1244,LLM,OpenAI,2026,39,Free,Yes
+1245,AI Tool 1245,AI Agents,Meta,2023,98,Free,No
+1246,AI Tool 1246,Coding AI,Microsoft,2021,54,Freemium,No
+1247,AI Tool 1247,Productivity AI,Runway,2024,190,Free,No
+1248,AI Tool 1248,Voice AI,Microsoft,2020,137,Free,Yes
+1249,AI Tool 1249,Image Generation,Adobe,2021,10,Freemium,No
+1250,AI Tool 1250,Video Generation,Google,2026,177,Free,No
+1251,AI Tool 1251,Voice AI,HuggingFace,2026,181,Paid,No
+1252,AI Tool 1252,Image Generation,Microsoft,2025,136,Freemium,Yes
+1253,AI Tool 1253,Video Generation,Microsoft,2026,169,Free,No
+1254,AI Tool 1254,Coding AI,Adobe,2020,102,Free,No
+1255,AI Tool 1255,LLM,Runway,2026,1,Paid,No
+1256,AI Tool 1256,Voice AI,Adobe,2025,139,Freemium,Yes
+1257,AI Tool 1257,AI Agents,Runway,2021,98,Free,Yes
+1258,AI Tool 1258,Video Generation,Anthropic,2020,162,Freemium,No
+1259,AI Tool 1259,LLM,HuggingFace,2022,42,Freemium,No
+1260,AI Tool 1260,LLM,Meta,2025,180,Freemium,No
+1261,AI Tool 1261,Chatbots,Google,2020,101,Freemium,Yes
+1262,AI Tool 1262,Voice AI,OpenAI,2023,187,Free,No
+1263,AI Tool 1263,Chatbots,Stability AI,2023,89,Freemium,Yes
+1264,AI Tool 1264,Voice AI,Microsoft,2024,31,Freemium,Yes
+1265,AI Tool 1265,Coding AI,Anthropic,2024,19,Freemium,No
+1266,AI Tool 1266,Image Generation,Adobe,2025,168,Freemium,Yes
+1267,AI Tool 1267,Productivity AI,Google,2026,100,Free,Yes
+1268,AI Tool 1268,Coding AI,Google,2026,34,Paid,Yes
+1269,AI Tool 1269,Image Generation,Anthropic,2023,10,Free,Yes
+1270,AI Tool 1270,Chatbots,Runway,2020,40,Free,Yes
+1271,AI Tool 1271,Productivity AI,Amazon,2022,141,Freemium,No
+1272,AI Tool 1272,Productivity AI,Amazon,2026,99,Paid,No
+1273,AI Tool 1273,Image Generation,Meta,2020,26,Freemium,No
+1274,AI Tool 1274,Voice AI,OpenAI,2026,184,Free,No
+1275,AI Tool 1275,Image Generation,OpenAI,2020,65,Freemium,No
+1276,AI Tool 1276,Productivity AI,Google,2025,102,Free,No
+1277,AI Tool 1277,AI Agents,Stability AI,2026,157,Paid,Yes
+1278,AI Tool 1278,Productivity AI,OpenAI,2021,128,Free,No
+1279,AI Tool 1279,Image Generation,Amazon,2020,13,Paid,No
+1280,AI Tool 1280,Productivity AI,OpenAI,2026,23,Freemium,Yes
+1281,AI Tool 1281,Chatbots,Meta,2026,108,Free,No
+1282,AI Tool 1282,Image Generation,Runway,2020,146,Paid,Yes
+1283,AI Tool 1283,Voice AI,HuggingFace,2023,118,Free,Yes
+1284,AI Tool 1284,LLM,Runway,2020,59,Freemium,No
+1285,AI Tool 1285,AI Agents,HuggingFace,2024,169,Paid,Yes
+1286,AI Tool 1286,Video Generation,Anthropic,2025,155,Free,Yes
+1287,AI Tool 1287,Chatbots,Google,2020,79,Free,No
+1288,AI Tool 1288,Voice AI,HuggingFace,2026,129,Paid,No
+1289,AI Tool 1289,Productivity AI,Amazon,2020,199,Freemium,Yes
+1290,AI Tool 1290,Image Generation,OpenAI,2022,42,Paid,Yes
+1291,AI Tool 1291,Voice AI,Meta,2023,55,Paid,Yes
+1292,AI Tool 1292,LLM,Google,2023,13,Free,No
+1293,AI Tool 1293,Video Generation,Google,2024,195,Freemium,No
+1294,AI Tool 1294,Voice AI,Runway,2021,163,Free,No
+1295,AI Tool 1295,Chatbots,Amazon,2022,141,Freemium,No
+1296,AI Tool 1296,Video Generation,Meta,2024,15,Free,No
+1297,AI Tool 1297,AI Agents,HuggingFace,2022,118,Freemium,Yes
+1298,AI Tool 1298,Productivity AI,Microsoft,2026,38,Paid,No
+1299,AI Tool 1299,Video Generation,Stability AI,2025,41,Free,No
+1300,AI Tool 1300,Coding AI,OpenAI,2021,97,Freemium,Yes
+1301,AI Tool 1301,AI Agents,Runway,2021,2,Free,No
+1302,AI Tool 1302,Voice AI,Anthropic,2020,82,Free,Yes
+1303,AI Tool 1303,AI Agents,Microsoft,2021,164,Freemium,No
+1304,AI Tool 1304,Coding AI,Meta,2022,43,Freemium,Yes
+1305,AI Tool 1305,Coding AI,Anthropic,2020,198,Freemium,No
+1306,AI Tool 1306,Chatbots,Anthropic,2020,22,Freemium,Yes
+1307,AI Tool 1307,AI Agents,Runway,2024,68,Freemium,Yes
+1308,AI Tool 1308,Voice AI,Adobe,2026,156,Freemium,Yes
+1309,AI Tool 1309,Video Generation,OpenAI,2026,91,Free,No
+1310,AI Tool 1310,Image Generation,Microsoft,2025,94,Paid,Yes
+1311,AI Tool 1311,Coding AI,Google,2023,160,Freemium,Yes
+1312,AI Tool 1312,Video Generation,Amazon,2020,67,Free,Yes
+1313,AI Tool 1313,LLM,Meta,2026,14,Freemium,Yes
+1314,AI Tool 1314,Voice AI,HuggingFace,2025,100,Paid,Yes
+1315,AI Tool 1315,Coding AI,OpenAI,2025,187,Freemium,Yes
+1316,AI Tool 1316,Image Generation,Microsoft,2025,57,Free,Yes
+1317,AI Tool 1317,Chatbots,Adobe,2020,176,Paid,Yes
+1318,AI Tool 1318,Voice AI,Adobe,2026,145,Paid,Yes
+1319,AI Tool 1319,LLM,HuggingFace,2023,177,Freemium,No
+1320,AI Tool 1320,Image Generation,Microsoft,2025,162,Paid,No
+1321,AI Tool 1321,Image Generation,Amazon,2026,41,Freemium,Yes
+1322,AI Tool 1322,LLM,Meta,2022,10,Paid,Yes
+1323,AI Tool 1323,Coding AI,Google,2025,27,Paid,Yes
+1324,AI Tool 1324,LLM,Anthropic,2024,100,Free,No
+1325,AI Tool 1325,Video Generation,Amazon,2025,76,Freemium,No
+1326,AI Tool 1326,AI Agents,Microsoft,2021,73,Freemium,No
+1327,AI Tool 1327,AI Agents,Amazon,2025,124,Free,No
+1328,AI Tool 1328,Productivity AI,Google,2020,77,Free,No
+1329,AI Tool 1329,Coding AI,OpenAI,2022,159,Freemium,Yes
+1330,AI Tool 1330,Chatbots,Google,2022,29,Free,No
+1331,AI Tool 1331,Voice AI,Anthropic,2022,107,Free,No
+1332,AI Tool 1332,Chatbots,Meta,2021,123,Paid,No
+1333,AI Tool 1333,Chatbots,Runway,2025,85,Free,Yes
+1334,AI Tool 1334,Image Generation,Meta,2022,107,Free,Yes
+1335,AI Tool 1335,AI Agents,OpenAI,2024,134,Freemium,No
+1336,AI Tool 1336,Chatbots,Google,2024,131,Freemium,No
+1337,AI Tool 1337,Image Generation,Anthropic,2025,160,Paid,No
+1338,AI Tool 1338,Voice AI,Anthropic,2025,184,Freemium,Yes
+1339,AI Tool 1339,Image Generation,Meta,2025,1,Free,Yes
+1340,AI Tool 1340,AI Agents,Runway,2026,73,Paid,Yes
+1341,AI Tool 1341,Video Generation,Anthropic,2024,155,Paid,No
+1342,AI Tool 1342,Productivity AI,Anthropic,2021,43,Paid,Yes
+1343,AI Tool 1343,Voice AI,Stability AI,2026,23,Free,Yes
+1344,AI Tool 1344,Productivity AI,Google,2025,3,Free,No
+1345,AI Tool 1345,LLM,Runway,2021,130,Free,No
+1346,AI Tool 1346,LLM,Meta,2022,20,Freemium,No
+1347,AI Tool 1347,Productivity AI,Microsoft,2023,194,Paid,No
+1348,AI Tool 1348,Video Generation,Google,2026,107,Freemium,Yes
+1349,AI Tool 1349,Voice AI,Amazon,2021,83,Free,No
+1350,AI Tool 1350,Chatbots,Amazon,2020,193,Freemium,No
+1351,AI Tool 1351,Coding AI,Adobe,2023,49,Paid,Yes
+1352,AI Tool 1352,Chatbots,Adobe,2020,52,Freemium,Yes
+1353,AI Tool 1353,Chatbots,HuggingFace,2026,67,Freemium,Yes
+1354,AI Tool 1354,LLM,Stability AI,2023,27,Paid,No
+1355,AI Tool 1355,LLM,Adobe,2024,50,Paid,No
+1356,AI Tool 1356,Image Generation,Stability AI,2021,66,Free,No
+1357,AI Tool 1357,Voice AI,Stability AI,2026,120,Paid,Yes
+1358,AI Tool 1358,Image Generation,HuggingFace,2026,179,Free,No
+1359,AI Tool 1359,Productivity AI,HuggingFace,2024,96,Free,No
+1360,AI Tool 1360,Productivity AI,Meta,2025,152,Free,No
+1361,AI Tool 1361,LLM,Google,2022,162,Free,Yes
+1362,AI Tool 1362,LLM,Stability AI,2020,195,Free,Yes
+1363,AI Tool 1363,Image Generation,Anthropic,2022,142,Free,No
+1364,AI Tool 1364,Coding AI,Stability AI,2025,28,Paid,No
+1365,AI Tool 1365,Video Generation,Adobe,2024,84,Paid,Yes
+1366,AI Tool 1366,Voice AI,OpenAI,2020,96,Free,Yes
+1367,AI Tool 1367,AI Agents,Runway,2025,63,Paid,No
+1368,AI Tool 1368,Productivity AI,Meta,2022,191,Paid,Yes
+1369,AI Tool 1369,Productivity AI,Amazon,2020,99,Freemium,Yes
+1370,AI Tool 1370,Video Generation,OpenAI,2021,134,Freemium,Yes
+1371,AI Tool 1371,LLM,Meta,2020,97,Free,No
+1372,AI Tool 1372,Image Generation,HuggingFace,2020,174,Paid,No
+1373,AI Tool 1373,AI Agents,HuggingFace,2021,194,Paid,No
+1374,AI Tool 1374,Productivity AI,OpenAI,2026,36,Freemium,Yes
+1375,AI Tool 1375,LLM,Amazon,2025,76,Free,Yes
+1376,AI Tool 1376,Voice AI,Stability AI,2023,55,Free,No
+1377,AI Tool 1377,LLM,Runway,2022,118,Free,No
+1378,AI Tool 1378,Coding AI,Meta,2024,159,Paid,Yes
+1379,AI Tool 1379,Image Generation,Runway,2021,149,Paid,No
+1380,AI Tool 1380,Coding AI,Anthropic,2025,106,Free,Yes
+1381,AI Tool 1381,Productivity AI,Microsoft,2024,57,Paid,No
+1382,AI Tool 1382,Image Generation,HuggingFace,2025,111,Free,Yes
+1383,AI Tool 1383,LLM,Stability AI,2022,192,Free,No
+1384,AI Tool 1384,Image Generation,Google,2022,63,Paid,No
+1385,AI Tool 1385,LLM,Microsoft,2025,91,Free,No
+1386,AI Tool 1386,Coding AI,Runway,2024,169,Freemium,Yes
+1387,AI Tool 1387,Chatbots,Google,2023,14,Paid,Yes
+1388,AI Tool 1388,Chatbots,OpenAI,2025,102,Free,No
+1389,AI Tool 1389,Video Generation,Stability AI,2026,106,Paid,No
+1390,AI Tool 1390,Chatbots,Anthropic,2020,48,Freemium,Yes
+1391,AI Tool 1391,Productivity AI,HuggingFace,2020,100,Freemium,No
+1392,AI Tool 1392,Chatbots,Adobe,2026,158,Free,No
+1393,AI Tool 1393,Voice AI,OpenAI,2020,137,Paid,No
+1394,AI Tool 1394,Video Generation,Google,2023,103,Paid,No
+1395,AI Tool 1395,LLM,Microsoft,2023,66,Free,Yes
+1396,AI Tool 1396,Chatbots,Meta,2024,193,Paid,No
+1397,AI Tool 1397,Video Generation,Stability AI,2026,190,Freemium,Yes
+1398,AI Tool 1398,LLM,Runway,2022,86,Free,Yes
+1399,AI Tool 1399,Voice AI,Runway,2021,138,Paid,No
+1400,AI Tool 1400,Chatbots,Meta,2024,156,Paid,No
+1401,AI Tool 1401,Chatbots,Microsoft,2023,132,Freemium,Yes
+1402,AI Tool 1402,AI Agents,Adobe,2025,169,Paid,No
+1403,AI Tool 1403,Coding AI,Anthropic,2026,154,Freemium,No
+1404,AI Tool 1404,Productivity AI,Amazon,2023,13,Freemium,Yes
+1405,AI Tool 1405,Coding AI,Meta,2021,15,Paid,No
+1406,AI Tool 1406,Video Generation,Runway,2026,31,Freemium,Yes
+1407,AI Tool 1407,Coding AI,Stability AI,2025,44,Freemium,Yes
+1408,AI Tool 1408,Image Generation,Adobe,2020,2,Free,Yes
+1409,AI Tool 1409,Video Generation,Stability AI,2024,70,Paid,No
+1410,AI Tool 1410,Image Generation,HuggingFace,2021,159,Paid,No
+1411,AI Tool 1411,Voice AI,Amazon,2021,11,Freemium,Yes
+1412,AI Tool 1412,AI Agents,HuggingFace,2020,128,Freemium,Yes
+1413,AI Tool 1413,Video Generation,Runway,2025,173,Paid,No
+1414,AI Tool 1414,Productivity AI,OpenAI,2024,123,Free,No
+1415,AI Tool 1415,LLM,Meta,2023,125,Paid,No
+1416,AI Tool 1416,Chatbots,Anthropic,2024,17,Freemium,No
+1417,AI Tool 1417,Voice AI,Stability AI,2022,60,Freemium,Yes
+1418,AI Tool 1418,LLM,Amazon,2023,196,Freemium,No
+1419,AI Tool 1419,Productivity AI,OpenAI,2023,129,Paid,Yes
+1420,AI Tool 1420,LLM,Google,2025,198,Paid,No
+1421,AI Tool 1421,Image Generation,Runway,2022,82,Free,Yes
+1422,AI Tool 1422,Image Generation,HuggingFace,2021,69,Paid,Yes
+1423,AI Tool 1423,Voice AI,Meta,2022,142,Paid,No
+1424,AI Tool 1424,Image Generation,Microsoft,2021,101,Freemium,No
+1425,AI Tool 1425,Video Generation,Meta,2021,167,Paid,Yes
+1426,AI Tool 1426,Chatbots,Stability AI,2022,59,Freemium,No
+1427,AI Tool 1427,Video Generation,OpenAI,2021,60,Free,Yes
+1428,AI Tool 1428,AI Agents,Adobe,2022,123,Freemium,No
+1429,AI Tool 1429,Chatbots,Anthropic,2021,154,Free,Yes
+1430,AI Tool 1430,Chatbots,Amazon,2025,62,Freemium,No
+1431,AI Tool 1431,LLM,Google,2025,48,Free,Yes
+1432,AI Tool 1432,Voice AI,HuggingFace,2023,40,Free,No
+1433,AI Tool 1433,LLM,Anthropic,2025,142,Freemium,No
+1434,AI Tool 1434,LLM,Adobe,2022,162,Freemium,Yes
+1435,AI Tool 1435,Chatbots,Google,2024,140,Free,Yes
+1436,AI Tool 1436,Image Generation,HuggingFace,2021,162,Free,Yes
+1437,AI Tool 1437,Productivity AI,Meta,2026,145,Paid,Yes
+1438,AI Tool 1438,Chatbots,Amazon,2025,117,Freemium,No
+1439,AI Tool 1439,LLM,OpenAI,2023,109,Freemium,No
+1440,AI Tool 1440,Chatbots,HuggingFace,2020,139,Freemium,Yes
+1441,AI Tool 1441,LLM,OpenAI,2022,105,Paid,No
+1442,AI Tool 1442,AI Agents,Meta,2025,104,Free,Yes
+1443,AI Tool 1443,Voice AI,Runway,2022,156,Paid,No
+1444,AI Tool 1444,Image Generation,Runway,2026,88,Free,No
+1445,AI Tool 1445,LLM,Amazon,2022,74,Freemium,No
+1446,AI Tool 1446,Image Generation,Adobe,2020,67,Free,No
+1447,AI Tool 1447,AI Agents,Amazon,2025,34,Freemium,Yes
+1448,AI Tool 1448,Chatbots,HuggingFace,2021,14,Free,No
+1449,AI Tool 1449,LLM,Adobe,2021,110,Paid,No
+1450,AI Tool 1450,AI Agents,HuggingFace,2021,187,Freemium,No
+1451,AI Tool 1451,AI Agents,Runway,2022,136,Paid,Yes
+1452,AI Tool 1452,LLM,HuggingFace,2020,193,Free,Yes
+1453,AI Tool 1453,AI Agents,HuggingFace,2025,149,Free,Yes
+1454,AI Tool 1454,LLM,Amazon,2021,19,Free,Yes
+1455,AI Tool 1455,Video Generation,Meta,2021,140,Free,Yes
+1456,AI Tool 1456,Productivity AI,Amazon,2021,2,Free,Yes
+1457,AI Tool 1457,Productivity AI,Microsoft,2021,52,Freemium,No
+1458,AI Tool 1458,Image Generation,Meta,2021,91,Paid,No
+1459,AI Tool 1459,Chatbots,HuggingFace,2024,72,Freemium,Yes
+1460,AI Tool 1460,Voice AI,Runway,2026,16,Free,Yes
+1461,AI Tool 1461,AI Agents,Adobe,2020,69,Paid,No
+1462,AI Tool 1462,LLM,Microsoft,2020,43,Free,No
+1463,AI Tool 1463,AI Agents,Adobe,2024,136,Freemium,No
+1464,AI Tool 1464,Image Generation,Adobe,2020,122,Free,No
+1465,AI Tool 1465,Image Generation,OpenAI,2021,56,Free,Yes
+1466,AI Tool 1466,Voice AI,Runway,2021,75,Freemium,Yes
+1467,AI Tool 1467,Voice AI,Stability AI,2025,27,Freemium,No
+1468,AI Tool 1468,Coding AI,HuggingFace,2025,153,Freemium,Yes
+1469,AI Tool 1469,Chatbots,OpenAI,2026,133,Free,Yes
+1470,AI Tool 1470,Voice AI,Stability AI,2025,82,Free,Yes
+1471,AI Tool 1471,Image Generation,Microsoft,2021,134,Freemium,No
+1472,AI Tool 1472,Video Generation,Meta,2026,148,Paid,Yes
+1473,AI Tool 1473,AI Agents,Microsoft,2024,57,Freemium,Yes
+1474,AI Tool 1474,Image Generation,Google,2020,183,Freemium,Yes
+1475,AI Tool 1475,AI Agents,Meta,2024,57,Free,No
+1476,AI Tool 1476,LLM,HuggingFace,2020,188,Free,Yes
+1477,AI Tool 1477,LLM,Anthropic,2025,1,Paid,Yes
+1478,AI Tool 1478,Chatbots,Meta,2024,12,Free,No
+1479,AI Tool 1479,Video Generation,Microsoft,2025,104,Free,No
+1480,AI Tool 1480,Productivity AI,Adobe,2020,19,Free,Yes
+1481,AI Tool 1481,AI Agents,Anthropic,2023,112,Free,No
+1482,AI Tool 1482,Image Generation,Stability AI,2021,38,Free,No
+1483,AI Tool 1483,Chatbots,Stability AI,2026,47,Freemium,Yes
+1484,AI Tool 1484,Chatbots,Google,2025,73,Freemium,No
+1485,AI Tool 1485,Coding AI,HuggingFace,2026,19,Paid,Yes
+1486,AI Tool 1486,Voice AI,Google,2022,30,Free,Yes
+1487,AI Tool 1487,LLM,Meta,2023,42,Paid,No
+1488,AI Tool 1488,LLM,Meta,2020,86,Free,Yes
+1489,AI Tool 1489,Voice AI,Stability AI,2023,102,Freemium,Yes
+1490,AI Tool 1490,Coding AI,Amazon,2021,142,Freemium,Yes
+1491,AI Tool 1491,LLM,Microsoft,2024,94,Paid,No
+1492,AI Tool 1492,Productivity AI,Microsoft,2021,140,Free,Yes
+1493,AI Tool 1493,Image Generation,Stability AI,2021,101,Paid,No
+1494,AI Tool 1494,LLM,Adobe,2023,114,Free,No
+1495,AI Tool 1495,Image Generation,Runway,2022,171,Freemium,No
+1496,AI Tool 1496,Chatbots,Adobe,2023,170,Paid,No
+1497,AI Tool 1497,Chatbots,Anthropic,2023,107,Freemium,Yes
+1498,AI Tool 1498,LLM,Meta,2022,112,Freemium,Yes
+1499,AI Tool 1499,Productivity AI,Stability AI,2024,143,Free,No
+1500,AI Tool 1500,Image Generation,Runway,2021,3,Paid,No
