@@ -224,6 +224,7 @@ ts_visual <- ggplot(data=stock_price_joined
              , aes(xintercept = reported_date)
              , linetype = 2
              , color = "#1e5977") +
+  # geom_label function only works for static image graph :(
   geom_label(data=text_labels
             , aes(
               x = REPD
