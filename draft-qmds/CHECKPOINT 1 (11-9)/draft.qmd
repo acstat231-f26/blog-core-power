@@ -627,10 +627,7 @@ stock_summary <- microsoft_summary |>
   full_join(apple_summary) |>
   full_join(tesla_summary)
 
-# Create kable
-stock_summary |> kable(digits = 2
-                       , caption = "Company Stock Price Summary Statistics (in dollars)"
-                       , format.args = list(big.mark = ","))
+
 
 
 # ------------------------------------------------------------------------------
@@ -716,6 +713,11 @@ rd_summary <- microsoft_rd |>
 #| label: summary-statistics-table
 
 # Create and format table
+# Create kable
+stock_summary |> kable(digits = 2
+                       , caption = "Company Stock Price Summary Statistics (in dollars)"
+                       , format.args = list(big.mark = ","))
+
 rd_summary |> kable(digits = 2
                     , caption = "Company R&D Expense Summary Statistics (in millions)"
                     , format.args = list(big.mark = ","))
