@@ -213,15 +213,25 @@ ts_visual <- ggplot(data=stock_price_joined
                     , aes(
                       x = Date
                       , y = Close
-                      , color = COMP)) +
+                      , color = COMP
+                      , text = )) +
   geom_line() +
   facet_wrap(~COMP) +
   scale_color_paletteer_d("MetBrewer::Archambault") +
   geom_point(data=text_labels
              , aes(x = REPD
-                 , y = Close)) +  
+                 , y = Close
+                 , text = paste0(
+                   "\nCompany: ", COMP, 
+                   "\nReport Date: ", REPD, 
+                   "\nR&D Expense: ", RD
+                 ))) +  
   geom_vline(data=vertical_lines
-             , aes(xintercept = reported_date)
+             , aes(xintercept = reported_date
+                   , text = paste0(
+                     "\nReport Date: ", reported_date, 
+                     "\nR&D Expense: ", COMP
+                   ))
              , linetype = 2
              , color = "#1e5977") +
   # geom_label function only works for static image graph :(
@@ -240,7 +250,7 @@ ts_visual <- ggplot(data=stock_price_joined
   theme(legend.position = "none")
 
 ts_visual
-ggplotly(ts_visual)
+ggplotly(ts_visual, tooltip = "text")
          
 
 ```
@@ -251,14 +261,23 @@ ten_qs <- read_csv("data/scraped-10qs.csv") |>
   rename(Date = "REP-D"
          , Company = "COMP")
 
-dp_visual <- ggplot(data = ten_qs, aes(color = Company, x = Company, y = RD, label = Date)) + 
+dp_visual <- ggplot(data = ten_qs
+                    , aes(color = Company
+                          , x = Company
+                          , y = RD
+                          , label = Date
+                          , text = paste0(
+                   "\nCompany: ", Company, 
+                   "\nReport Date: ", Date, 
+                   "\nR&D Expense: ", RD
+                 ))) + 
   geom_point(size = 3) + 
   labs(color = "Company") +
   scale_color_paletteer_d("MetBrewer::Archambault") +
   theme_minimal() +
   theme(legend.position = "none")
 
-ggplotly(dp_visual)
+ggplotly(dp_visual, tooltip = "text")
 ```
 
 # Getting started
