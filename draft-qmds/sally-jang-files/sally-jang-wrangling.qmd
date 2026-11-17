@@ -275,7 +275,7 @@ ten_Qs_text_analysis <- ten_Qs_text_wrangled |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d"))
 
-ten_Qs_text_analysis_1 <- ten_Qs_text_wrangled |>
+ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d")) |>
@@ -284,7 +284,7 @@ ten_Qs_text_analysis_1 <- ten_Qs_text_wrangled |>
   summarize(
     sentiment = mean(value))
 
-ten_Qs_text_analysis_2 <- ten_Qs_text_wrangled |>
+ten_Qs_sentiment_analysis_2 <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d")) |>
