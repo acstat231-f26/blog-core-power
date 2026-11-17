@@ -275,7 +275,7 @@ ten_Qs_text_analysis <- ten_Qs_text_wrangled |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d"))
 
-ten_Qs_text_analysis_1 <- ten_Qs_text_wrangled |>
+ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d")) |>
@@ -284,7 +284,7 @@ ten_Qs_text_analysis_1 <- ten_Qs_text_wrangled |>
   summarize(
     sentiment = mean(value))
 
-ten_Qs_text_analysis_2 <- ten_Qs_text_wrangled |>
+ten_Qs_sentiment_analysis_2 <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d")) |>
@@ -315,11 +315,11 @@ text_analysis_meta <- ten_Qs_text_analysis_3 |>
 
 text_analysis_apple <- ten_Qs_text_analysis_3 |>
   filter(document_id %in% c("Apple 1", "Apple 2", "Apple 3", "Apple 4")) |>
-  arrange(desc(tf_idf))
+  arrange(desc(tf))
 
 text_analysis_nvidia <- ten_Qs_text_analysis_3 |>
   filter(document_id %in% c("Nvidia 1", "Nvidia 2", "Nvidia 3", "Nvidia 4")) |>
-  arrange(desc(tf_idf))
+  arrange(desc(tf))
 
 text_analysis_tesla <- ten_Qs_text_analysis_3 |>
   filter(document_id %in% c("Tesla 1", "Tesla 2", "Tesla 3", "Tesla 4")) |>
