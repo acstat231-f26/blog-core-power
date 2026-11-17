@@ -273,7 +273,7 @@ dp_visual <- ggplot(data = ten_qs
                           , text = paste0(
                    "\nCompany: ", Company, 
                    "\nReport Date: ", Date, 
-                   "\nR&D Expense: ", RD
+                   "\nR&D Expense: $", round(RD, 2)
                  ))) + 
   geom_point(size = 3) + 
   labs(color = "Company") +
