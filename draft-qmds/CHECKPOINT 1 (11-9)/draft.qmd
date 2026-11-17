@@ -547,6 +547,8 @@ ggplot(final_data_changes,
 ggplot(data = scraped_ten_Qs, aes(color = COMP, x = COMP, y = RD)) + 
   geom_point(size = 3) + 
   labs(color = "Company")
+
+# put labels of 1, 2, 3, 4?
 ```
 
 # Tables
