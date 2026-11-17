@@ -214,7 +214,11 @@ ts_visual <- ggplot(data=stock_price_joined
                       x = Date
                       , y = Close
                       , color = COMP
-                      , text = )) +
+                      , text = paste0(
+                        "\nCompany: ", COMP, 
+                        "\nClose Price: $", round(Close, 2)
+                      )
+                      , group = 1)) +
   geom_line() +
   facet_wrap(~COMP) +
   scale_color_paletteer_d("MetBrewer::Archambault") +
@@ -224,13 +228,13 @@ ts_visual <- ggplot(data=stock_price_joined
                  , text = paste0(
                    "\nCompany: ", COMP, 
                    "\nReport Date: ", REPD, 
-                   "\nR&D Expense: ", RD
+                   "\nR&D Expense: $", round(RD, 2), 
+                   "\nClose Price: $", round(Close, 2)
                  ))) +  
   geom_vline(data=vertical_lines
              , aes(xintercept = reported_date
                    , text = paste0(
-                     "\nReport Date: ", reported_date, 
-                     "\nR&D Expense: ", COMP
+                     "\nReport Date: ", reported_date
                    ))
              , linetype = 2
              , color = "#1e5977") +
@@ -240,7 +244,7 @@ ts_visual <- ggplot(data=stock_price_joined
               x = REPD
               , y = y_position
               , label = paste(REPD,
-                              "\n$", RD)
+                              "\n$", round(RD, 2))
               , nudge_x = 15
             )
             , size = 2
