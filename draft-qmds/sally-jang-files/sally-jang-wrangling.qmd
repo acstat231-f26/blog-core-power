@@ -252,6 +252,8 @@ for (i in 1:4) {
                                       str_replace_all("/n", " ")
 }
 
+
+## FIX MUTATE !!! (second line)
 ten_Qs_text_wrangled <- ten_Qs_text_scraped |>
   mutate(id = rep(4:1, times = 6)) |>
   mutate(document_id = glue("{ten_Qs_text_scraped$COMP} {ten_Qs_text_wrangled$id}"))
@@ -332,21 +334,19 @@ text_analysis_tesla <- ten_Qs_text_analysis_3 |>
 ```
 
 ```{r}
-#| label: fig-layout
-#| fig-cap: "Three figures in a complex layout"
-#| fig-subcap: 
-#|   - "cars"
-#|   - "pressure"
-#|   - "mtcars"
-#| layout: [[4, -1, 4], [1]] 
+#| label: text-analysis-scatterplot
 
-ggplot(cars, aes(speed, dist)) +
+## FIX mutate
+ten_qs_text_scatterplot_1 <- ten_qs_updated |>
+  mutate(id = rep(4:1, times = 6)) |>
+  mutate(document_id = glue("{ten_qs_updated$COMP} {ten_qs_text_scatterplot$id}"))
+
+ten_Qs_text_scatterplot_2 <- ten_Qs_sentiment_analysis_2 |>
+  left_join(ten_qs_text_scatterplot, by = "document_id")
+
+ggplot(data = ten_Qs_text_scatterplot_2, aes(x = sentiment, y = RD)) +
   geom_point()
 
-ggplot(pressure, aes(temperature, pressure)) +
-  geom_point()
-
-ggplot(mtcars, aes(hp, mpg)) +
-  geom_point()
+# change in stock price overall vs. sentiment analysis?
 ```
 
