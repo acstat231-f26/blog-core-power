@@ -2,6 +2,8 @@
 title: "Alisha Xu Scraping"
 format: pdf
 editor: visual
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Core Power 10Q Webscraping Script
@@ -15,6 +17,11 @@ library(robotstxt)
 library(knitr)
 library(kableExtra)
 library(quantmod)
+library(dygraphs)
+library(glue)
+library(plotly)
+library(paletteer)
+library(ggrepel)
 ```
 
 ```{r}
@@ -215,6 +222,8 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 ```
 
+## Scraping
+
 ```{r}
 #| eval: false
 # ------------------------------------------------------------------------------
@@ -376,6 +385,8 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 ```
 
+## Stock Time Series
+
 ```{r}
 #| label: stock-time-series
 
@@ -417,9 +428,20 @@ tesla_stock <- getSymbols("TSLA", src = "yahoo", from = "2025-03-01", to = "2026
   rename(Close = TSLA.Close) |>
   mutate(COMP = "TSLA")
 
-stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, apple_stock, nvidia_stock, tesla_stock)
+all_days <- seq(start(AAPL), end(AAPL), by = "day") |>
+  as_tibble_col("Date")
+
+# one iteration test
+microsoft_all_days <- microsoft_stock |>
+  merge(all_days, by = "Date", all = TRUE) |>
+  # LOCF
+    fill(Close, COMP)
+
+
 
 ```
+
+## Tables
 
 ```{r}
 #| label: summary-statistics-table
@@ -567,4 +589,139 @@ rd_summary |> kable(digits = 2
                     , caption = "Company R&D Expense Summary Statistics"
                     , format.args = list(big.mark = ","))
 
+```
+
+## Interactive Graphs
+
+```{r}
+#| label: interactive-graphs
+
+# working on making visualizations interactive
+
+scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
+
+# Ensuring that company name formats conform between scraped 10-Qs and stock 
+# price data set
+companies <- 
+  tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+         name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
+named_ten_Qs <- scraped_ten_Qs |> left_join(companies, by = c("COMP" = "name1"))
+
+# To create accurate time series visualization elements (vertical lines for 
+# 10-Q report dates and labels for corresponding quarterly R&D expenses)
+vertical_lines <- named_ten_Qs |>
+  select(name2, "REP-D") |>
+  rename(COMP = "name2", reported_date = "REP-D")
+
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", reported_date = "REP-D") |>
+  mutate(x_position = reported_date - days(5), 
+         y_position = 1000,
+         text_values = glue("Quarterly R&D Expense: {named_ten_Qs$RD}   
+                            million"))
+
+# ggplot
+ggplot(data=stock_price_joined, aes(x = Date, y = Close)) +
+  geom_line() +
+  facet_wrap(~COMP) +
+  geom_vline(data=vertical_lines, aes(xintercept = reported_date))
+
+```
+
+```{r}
+# -----------------------------Alisha Xu Work-----------------------------------
+# AAPL and NVDA report on Saturdays, when there is no closing price, so we have to take the price for the previous day
+
+# from = "2025-03-01", to = "2026-11-01"
+all_days <- seq(start(AAPL), end(AAPL), by = "day") |>
+  as_tibble_col("Date")
+
+# using tidyverse fill() function to fill missing data for all companies
+companies <- c("microsoft", "alphabet", "meta", "apple", "nvidia", "tesla")
+for (i in companies) {
+  df <- get(paste0(i,"_stock")) |>
+  merge(all_days, by = "Date", all = TRUE) |>
+  # LOCF
+  fill(Close, COMP)
+  
+  assign(paste0(i, "_all_days"), df)
+}
+
+stock_price_joined <- bind_rows(microsoft_all_days, alphabet_all_days, meta_all_days, apple_all_days, nvidia_all_days, tesla_all_days)
+
+# editing this variable to include closing price
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", REPD = "REP-D") |>
+  left_join(stock_price_joined
+             , join_by(COMP, REPD == Date)) |>
+  mutate(y_position = c(
+    # MSFT
+    700, 600, 700, 600,
+    # GOOG
+    700, 600, 700, 600, 
+    # META
+    300, 200, 300, 200,
+    # AAPL
+    700, 600, 700, 600,
+    # NVDA
+    700, 600, 700, 600,
+    # TSLA
+    700, 600, 700, 600
+  ), 
+  x_offset = 30)
+
+
+
+# ggplot
+ts_visual <- ggplot(data=stock_price_joined
+                    , aes(
+                      x = Date
+                      , y = Close
+                      , color = COMP)) +
+  geom_line() +
+  facet_wrap(~COMP) +
+  scale_color_paletteer_d("MetBrewer::Archambault") +
+  geom_point(data=text_labels
+             , aes(x = REPD
+                 , y = Close)) +  
+  geom_vline(data=vertical_lines
+             , aes(xintercept = reported_date)
+             , linetype = 2
+             , color = "#1e5977") +
+  geom_label(data=text_labels
+            , aes(
+              x = REPD
+              , y = y_position
+              , label = paste(REPD,
+                              "\n$", RD)
+              , nudge_x = 15
+            )
+            , size = 2
+            , hjust = "left"
+            ) +
+  theme_classic() +
+  theme(legend.position = "none")
+
+ts_visual
+ggplotly(ts_visual)
+
+```
+
+```{r}
+#| label: dp-visual
+
+ten_qs <- read_csv("data/scraped-10qs.csv") |>
+  rename(Date = "REP-D"
+         , Company = "COMP")
+
+dp_visual <- ggplot(data = ten_qs, aes(color = Company, x = Company, y = RD, label = Date)) + 
+  geom_point(size = 3) + 
+  labs(color = "Company") +
+  scale_color_paletteer_d("MetBrewer::Archambault") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+ggplotly(dp_visual)
 ```
