@@ -995,3 +995,15 @@ text_scatterplot <- ggplot(data = ten_Qs_text_scatterplot_2, aes(x = sentiment, 
 ggplotly(text_scatterplot)
 
 # change in stock price overall vs. sentiment analysis?
+```
+
+
+```{r}
+#| label: code-checking-chunk
+
+# checking if full text has been scraped correctly for Meta
+cat(ten_Qs_text_scraped$text[12])
+
+
+
+```
