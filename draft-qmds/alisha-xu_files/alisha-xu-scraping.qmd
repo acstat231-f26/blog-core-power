@@ -22,6 +22,7 @@ library(glue)
 library(plotly)
 library(paletteer)
 library(ggrepel)
+library(httr)
 ```
 
 ```{r}
@@ -222,7 +223,7 @@ write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
 
 ```
 
-## Scraping
+## Scraping Script – Can be found as separate R file in alisha-xu-files
 
 ```{r}
 #| eval: false
@@ -441,7 +442,7 @@ microsoft_all_days <- microsoft_stock |>
 
 ```
 
-## Tables
+## Summary Tables
 
 ```{r}
 #| label: summary-statistics-table
@@ -594,7 +595,9 @@ rd_summary |> kable(digits = 2
 ## Interactive Graphs
 
 ```{r}
-#| label: interactive-graphs
+#| label: interactive-graphs-sally's-code
+#| eval: false
+#| echo: false
 
 # working on making visualizations interactive
 
@@ -630,6 +633,7 @@ ggplot(data=stock_price_joined, aes(x = Date, y = Close)) +
 ```
 
 ```{r}
+#| label: my-code
 # -----------------------------Alisha Xu Work-----------------------------------
 # AAPL and NVDA report on Saturdays, when there is no closing price, so we have to take the price for the previous day
 
@@ -725,3 +729,269 @@ dp_visual <- ggplot(data = ten_qs, aes(color = Company, x = Company, y = RD, lab
 
 ggplotly(dp_visual)
 ```
+
+## Text Analysis Review
+
+```{r}
+#| label: text-analysis-scraping
+
+ten_Qs_text <- readxl::read_xlsx("data/10q-links.xlsx")
+
+# compartmentalize each variable
+# Microsoft
+microsoft <- ten_Qs_text |>
+  filter(COMP == "Microsoft")
+
+# Google
+google <- ten_Qs_text |>
+  filter(COMP == "Google")
+
+# Meta
+meta <- ten_Qs_text |>
+  filter(COMP == "Meta")
+
+# Apple
+apple <- ten_Qs_text |>
+  filter(COMP == "Apple")
+
+# Nvidia
+nvidia <- ten_Qs_text |>
+  filter(COMP == "Nvidia")
+
+# Tesla
+tesla <- ten_Qs_text |>
+  filter(COMP == "Tesla")
+
+# create sec session
+my_ua <- "AmherstCollege alxu27@amherst.edu"
+sec_session <- session("https://www.sec.gov", user_agent(my_ua))
+
+# add empty column to store values
+ten_Qs_text_scraped <- ten_Qs_text |>
+  mutate(text = NA)
+
+# -------------------------------Scraping---------------------------------------
+# Microsoft
+for (i in 1:4) {
+  all_text_microsoft <- session_jump_to(sec_session, microsoft$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_microsoft, "ITEM 2. MANAGEMENT’S"))
+  
+  detect_2 <- which(str_detect(all_text_microsoft, "ITEM 3. QUANTITATIVE"))
+  
+  scraped_text_microsoft <- all_text_microsoft[detect_1:detect_2]
+  
+  ten_Qs_text_scraped$text[i] <- paste(scraped_text_microsoft, collapse = "/n") |>
+                                   str_replace_all("/n", " ")
+}
+
+# Google
+for (i in 1:4) {
+  all_text_google <- session_jump_to(sec_session, google$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_google, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text_google, "QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  scraped_text_google <- all_text_google[detect_1:detect_2]
+  
+  ten_Qs_text_scraped$text[i+4] <- paste(scraped_text_google, collapse = "/n") |>
+                                      str_replace_all("/n", " ")
+}
+
+# Meta
+for (i in 1:4) {
+  all_text_meta <- session_jump_to(sec_session, meta$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_meta, "Management's Discussion and Analysis of Financial Condition and Results of Operations")) [2]
+  
+  detect_2 <- which(str_detect(all_text_meta, "Quantitative and Qualitative Disclosures About Market Risk")) [2]
+  scraped_text_meta <- all_text_meta[detect_1:detect_2]
+  
+  ten_Qs_text_scraped$text[i+8] <- paste(scraped_text_meta, collapse = "/n") |>
+                                      str_replace_all("/n", " ")
+}
+
+# Apple
+for (i in 1:4) {
+  all_text_apple <- session_jump_to(sec_session, apple$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_apple, "Management’s Discussion and Analysis of Financial Condition and Results of Operations"))[2]
+  
+  detect_2 <- which(str_detect(all_text_apple, "Quantitative and Qualitative Disclosures About Market Risk"))[2]
+  
+  scraped_text_apple <- all_text_apple[detect_1:detect_2]
+  
+  ten_Qs_text_scraped$text[i+12] <- paste(scraped_text_apple, collapse = "/n") |>
+                                      str_replace_all("/n", " ")
+}
+
+# Nvidia
+for (i in 1:4) {
+  all_text_nvidia <- session_jump_to(sec_session, nvidia$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_nvidia, "Item 2."))[3]
+  
+  detect_2 <- which(str_detect(all_text_nvidia, "Item 3\\."))[2]
+  
+  scraped_text_nvidia <- all_text_nvidia[detect_1:detect_2]
+  
+  ten_Qs_text_scraped$text[i+16] <- paste(scraped_text_nvidia, collapse = "/n") |>
+                                      str_replace_all("/n", " ")
+}
+
+# Tesla
+for (i in 1:4) {
+  all_text_tesla <- session_jump_to(sec_session, tesla$HTML[i]) |>
+    read_html() |>
+    html_elements("span") |>
+    html_text2()
+  
+  detect_1 <- which(str_detect(all_text_tesla, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
+  
+  detect_2 <- which(str_detect(all_text_tesla, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
+  
+  scraped_text_tesla <- all_text_tesla[detect_1:detect_2]
+  
+  ten_Qs_text_scraped$text[i+20] <- paste(scraped_text_tesla, collapse = "/n") |>
+                                      str_replace_all("/n", " ")
+}
+
+
+## FIX MUTATE !!! (second line)
+ten_Qs_text_wrangled <- ten_Qs_text_scraped |>
+  mutate(id = rep(4:1, times = 6)) |>
+  mutate(document_id = glue("{ten_Qs_text_scraped$COMP} {ten_Qs_text_wrangled$id}"))
+
+# relocate columns?
+
+write_csv(ten_Qs_text_scraped, "data/ten_Qs_text_scraped.csv")
+
+```
+
+```{r}
+#| label: text-analysis
+
+#---------------------------------for review-----------------------------------------------------
+afinn_lexicon <- get_sentiments("afinn")
+nrc_lexicon <- get_sentiments("nrc")
+
+data(stop_words)
+
+ten_Qs_text_analysis <- ten_Qs_text_wrangled |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d"))
+
+ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d")) |>
+  inner_join(afinn_lexicon, by = "word") |>
+  group_by(COMP) |>
+  summarize(
+    sentiment = mean(value))
+
+ten_Qs_sentiment_analysis_2 <- ten_Qs_text_wrangled |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d")) |>
+  inner_join(afinn_lexicon, by = "word") |>
+  group_by(document_id) |>
+  summarize(
+    sentiment = mean(value))
+
+ten_Qs_text_analysis_3 <- ten_Qs_text_wrangled |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d")) |>
+  group_by(document_id) |>
+  count(word) |>
+  bind_tf_idf(term=word, document=document_id, n=n)
+
+ten_Qs_text_analysis_4 <- ten_Qs_text_scraped |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d")) |> 
+  group_by(COMP) |>
+  count(word) |>
+  bind_tf_idf(term = word, document = COMP, n = n)
+
+## Microsoft = example of running tf_idf analysis for one document against other Microsoft 
+# documents (corpus = 4 Microsoft 10-Qs)
+text_analysis_microsoft <- ten_Qs_text_analysis |>
+  filter(document_id %in% c("Microsoft 1", "Microsoft 2", "Microsoft 3", "Microsoft 4")) |>
+  group_by(document_id) |>
+  count(word) |>
+  bind_tf_idf(term=word, document=document_id, n=n) |>
+  arrange(desc(tf_idf)) |>
+  filter(document_id == "Microsoft 2")
+
+## Google = example of running tf_idf analysis for one company (all 4 10-Qs consolidated under the
+# company) against other companies (all 4 10-Qs of each company consolidated under their label))
+text_analysis_google <- ten_Qs_text_analysis_4 |>
+  filter(COMP == "Google") |>
+  arrange(desc(tf_idf))
+
+#------------------------------------------------------------------------------------------------
+
+text_analysis_meta <- ten_Qs_text_analysis_4 |>
+  filter(COMP == "Meta") |>
+  arrange(desc(tf_idf))
+
+text_analysis_apple <- ten_Qs_text_analysis_4 |>
+  filter(COMP == "Apple") |>
+  arrange(desc(tf_idf))
+
+text_analysis_nvidia <- ten_Qs_text_analysis_3 |>
+  filter(document_id %in% c("Nvidia 1", "Nvidia 2", "Nvidia 3", "Nvidia 4")) |>
+  arrange(desc(tf))
+
+text_analysis_tesla <- ten_Qs_text_analysis_3 |>
+  filter(document_id %in% c("Tesla 1", "Tesla 2", "Tesla 3", "Tesla 4")) |>
+  arrange(desc(tf_idf))
+  
+  # group by COMP (too broad-sweeping)? or by 10-Q??
+  # what is informative?? (which method? COMP vs. document? etc.)
+  # what kind of visualization to share info?
+
+```
+
+
+```{r}
+#| label: sally-jang-text-analysis-scatterplot
+
+## FIX mutate
+ten_qs_text_scatterplot_1 <- ten_qs_updated |>
+  mutate(id = rep(4:1, times = 6)) |>
+  mutate(document_id = glue("{ten_qs_updated$COMP} {ten_qs_text_scatterplot_1$id}"))
+
+ten_Qs_text_scatterplot_2 <- ten_Qs_sentiment_analysis_2 |>
+  left_join(ten_qs_text_scatterplot_1, by = "document_id")
+
+text_scatterplot <- ggplot(data = ten_Qs_text_scatterplot_2, aes(x = sentiment, y = RD, color = name2)) +
+  geom_point() +
+  labs(title = "R&D Expense vs. Sentiment Score",
+       subtitle = "Analyzed with AFINN Lexicon",
+       color = "Company",
+       x = "Sentiment Score", 
+       y = "R&D Expense")
+
+ggplotly(text_scatterplot)
+
+# change in stock price overall vs. sentiment analysis?
