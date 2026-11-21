@@ -21,6 +21,7 @@ library(httr)
 library(rvest)
 library(tidytext)
 library(stringr)
+library(plotly)
 ```
 
 # Getting started
@@ -267,6 +268,7 @@ write_csv(ten_Qs_text_scraped, "data/ten_Qs_text_scraped.csv")
 ```{r}
 #| label: text-analysis
 
+#---------------------------------for review-----------------------------------------------------
 afinn_lexicon <- get_sentiments("afinn")
 nrc_lexicon <- get_sentiments("nrc")
 
@@ -303,21 +305,39 @@ ten_Qs_text_analysis_3 <- ten_Qs_text_wrangled |>
   count(word) |>
   bind_tf_idf(term=word, document=document_id, n=n)
 
-text_analysis_microsoft <- ten_Qs_text_analysis_3 |>
+ten_Qs_text_analysis_4 <- ten_Qs_text_scraped |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d")) |> 
+  group_by(COMP) |>
+  count(word) |>
+  bind_tf_idf(term = word, document = COMP, n = n)
+
+## Microsoft = example of running tf_idf analysis for one document against other Microsoft 
+# documents (corpus = 4 Microsoft 10-Qs)
+text_analysis_microsoft <- ten_Qs_text_analysis |>
   filter(document_id %in% c("Microsoft 1", "Microsoft 2", "Microsoft 3", "Microsoft 4")) |>
+  group_by(document_id) |>
+  count(word) |>
+  bind_tf_idf(term=word, document=document_id, n=n) |>
+  arrange(desc(tf_idf)) |>
+  filter(document_id == "Microsoft 2")
+
+## Google = example of running tf_idf analysis for one company (all 4 10-Qs consolidated under the
+# company) against other companies (all 4 10-Qs of each company consolidated under their label))
+text_analysis_google <- ten_Qs_text_analysis_4 |>
+  filter(COMP == "Google") |>
   arrange(desc(tf_idf))
 
-text_analysis_google <- ten_Qs_text_analysis_3 |>
-  filter(document_id %in% c("Google 1", "Google 2", "Google 3", "Google 4")) |>
+#------------------------------------------------------------------------------------------------
+
+text_analysis_meta <- ten_Qs_text_analysis_4 |>
+  filter(COMP == "Meta") |>
   arrange(desc(tf_idf))
 
-text_analysis_meta <- ten_Qs_text_analysis_3 |>
-  filter(document_id %in% c("Meta 1", "Meta 2", "Meta 3", "Meta 4")) |>
+text_analysis_apple <- ten_Qs_text_analysis_4 |>
+  filter(COMP == "Apple") |>
   arrange(desc(tf_idf))
-
-text_analysis_apple <- ten_Qs_text_analysis_3 |>
-  filter(document_id %in% c("Apple 1", "Apple 2", "Apple 3", "Apple 4")) |>
-  arrange(desc(tf))
 
 text_analysis_nvidia <- ten_Qs_text_analysis_3 |>
   filter(document_id %in% c("Nvidia 1", "Nvidia 2", "Nvidia 3", "Nvidia 4")) |>
@@ -339,13 +359,20 @@ text_analysis_tesla <- ten_Qs_text_analysis_3 |>
 ## FIX mutate
 ten_qs_text_scatterplot_1 <- ten_qs_updated |>
   mutate(id = rep(4:1, times = 6)) |>
-  mutate(document_id = glue("{ten_qs_updated$COMP} {ten_qs_text_scatterplot$id}"))
+  mutate(document_id = glue("{ten_qs_updated$COMP} {ten_qs_text_scatterplot_1$id}"))
 
 ten_Qs_text_scatterplot_2 <- ten_Qs_sentiment_analysis_2 |>
-  left_join(ten_qs_text_scatterplot, by = "document_id")
+  left_join(ten_qs_text_scatterplot_1, by = "document_id")
 
-ggplot(data = ten_Qs_text_scatterplot_2, aes(x = sentiment, y = RD)) +
-  geom_point()
+text_scatterplot <- ggplot(data = ten_Qs_text_scatterplot_2, aes(x = sentiment, y = RD, color = name2)) +
+  geom_point() +
+  labs(title = "R&D Expense vs. Sentiment Score",
+       subtitle = "Analyzed with AFINN Lexicon",
+       color = "Company",
+       x = "Sentiment Score", 
+       y = "R&D Expense")
+
+ggplotly(text_scatterplot)
 
 # change in stock price overall vs. sentiment analysis?
 ```
