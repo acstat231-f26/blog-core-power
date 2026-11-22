@@ -23,6 +23,7 @@ library(plotly)
 library(paletteer)
 library(ggrepel)
 library(httr)
+library(tidytext)
 ```
 
 ```{r}
@@ -875,7 +876,9 @@ for (i in 1:4) {
 
 ## FIX MUTATE !!! (second line)
 ten_Qs_text_wrangled <- ten_Qs_text_scraped |>
-  mutate(id = rep(4:1, times = 6)) |>
+  mutate(id = rep(4:1, times = 6))
+
+ten_Qs_text_wrangled <- ten_Qs_text_wrangled |>
   mutate(document_id = glue("{ten_Qs_text_scraped$COMP} {ten_Qs_text_wrangled$id}"))
 
 # relocate columns?
@@ -893,11 +896,13 @@ nrc_lexicon <- get_sentiments("nrc")
 
 data(stop_words)
 
+# wrangled unnest tokens
 ten_Qs_text_analysis <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d"))
 
+# aggregate company sentiment across all reports
 ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
@@ -907,6 +912,7 @@ ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled |>
   summarize(
     sentiment = mean(value))
 
+# sentiment split up by company
 ten_Qs_sentiment_analysis_2 <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
@@ -916,21 +922,25 @@ ten_Qs_sentiment_analysis_2 <- ten_Qs_text_wrangled |>
   summarize(
     sentiment = mean(value))
 
+#text analysis by report
 ten_Qs_text_analysis_3 <- ten_Qs_text_wrangled |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d")) |>
   group_by(document_id) |>
   count(word) |>
-  bind_tf_idf(term=word, document=document_id, n=n)
+  bind_tf_idf(term=word, document=document_id, n=n) |> 
+  arrange(desc(tf))
 
+# text analysis by company
 ten_Qs_text_analysis_4 <- ten_Qs_text_scraped |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
   filter(!str_detect(word, "\\d")) |> 
   group_by(COMP) |>
   count(word) |>
-  bind_tf_idf(term = word, document = COMP, n = n)
+  bind_tf_idf(term = word, document = COMP, n = n) |>
+  arrange(desc(tf))
 
 ## Microsoft = example of running tf_idf analysis for one document against other Microsoft 
 # documents (corpus = 4 Microsoft 10-Qs)
@@ -976,9 +986,12 @@ text_analysis_tesla <- ten_Qs_text_analysis_3 |>
 ```{r}
 #| label: sally-jang-text-analysis-scatterplot
 
+ten_qs_updated <- ten_qs |> left_join(companies, by = c("COMP" = "name1"))
+
 ## FIX mutate
 ten_qs_text_scatterplot_1 <- ten_qs_updated |>
-  mutate(id = rep(4:1, times = 6)) |>
+  mutate(id = rep(4:1, times = 6))
+ten_qs_text_scatterplot_1 <-ten_qs_text_scatterplot_1 |>
   mutate(document_id = glue("{ten_qs_updated$COMP} {ten_qs_text_scatterplot_1$id}"))
 
 ten_Qs_text_scatterplot_2 <- ten_Qs_sentiment_analysis_2 |>
@@ -999,10 +1012,24 @@ ggplotly(text_scatterplot)
 
 
 ```{r}
-#| label: code-checking-chunk
+#| label: text-analysis-code
 
 # checking if full text has been scraped correctly for Meta
 cat(ten_Qs_text_scraped$text[12])
+
+# export the text analysis for shiny app
+companies <- c("Meta", "Apple", "Google", "Nvidia", "Tesla", "Microsoft")
+
+# for loop for exporting all companies
+for (i in companies) {
+  text_analysis <- ten_Qs_text_analysis_4 |>
+    filter(COMP == i) |>
+    arrange(desc(tf_idf))
+  
+  assign(paste0("text_analysis_", i), text_analysis)
+  write_csv(text_analysis, paste0("data/text_analysis_", i, ".csv"))
+}
+
 
 
 
