@@ -24,6 +24,7 @@ library(paletteer)
 library(ggrepel)
 library(httr)
 library(tidytext)
+library(wordcloud)
 ```
 
 ```{r}
@@ -985,6 +986,8 @@ text_analysis_tesla <- ten_Qs_text_analysis_3 |>
 
 ```{r}
 #| label: sally-jang-text-analysis-scatterplot
+#| eval: false
+#| echo: false
 
 ten_qs_updated <- ten_qs |> left_join(companies, by = c("COMP" = "name1"))
 
@@ -1013,6 +1016,8 @@ ggplotly(text_scatterplot)
 
 ```{r}
 #| label: text-analysis-code
+#| eval: false
+#| echo: false
 
 # checking if full text has been scraped correctly for Meta
 cat(ten_Qs_text_scraped$text[12])
@@ -1030,7 +1035,15 @@ for (i in companies) {
   write_csv(text_analysis, paste0("data/text_analysis_", i, ".csv"))
 }
 
+# all companies csv
+write_csv(ten_Qs_text_analysis_4, "data/text_analysis_all.csv")
 
+ta_Apple <- read_csv("data/text_analysis_Apple.csv")
+
+tf_idf_apple <- ta_Apple |>
+  with(wordcloud(words = word
+                 , freq = tf_idf
+                 , max.words = 5))
 
 
 ```

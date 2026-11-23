@@ -284,6 +284,10 @@ dp_visual <- ggplot(data = ten_qs
 ggplotly(dp_visual, tooltip = "text")
 ```
 
+```{r}
+include_app("https://alxu-27.shinyapps.io/blog-proj-shny/", height = "600px")
+
+```
 # Getting started
 
 This is an example of a Quarto website. All the [Quarto markdown features](https://quarto.org/docs/authoring/markdown-basics.html) we learned for formatting text, adding headings and subheadings, adding code and output, adding labels and captions and whatnot work as usual. 

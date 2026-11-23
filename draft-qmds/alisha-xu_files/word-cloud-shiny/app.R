@@ -7,35 +7,34 @@ library(shiny)
 library(bslib)        # for functions controlling the user interface layout 
 library(shinythemes)  # to change overall appearance of shiny app using different themes
 library(tidyverse)
+library(RColorBrewer)
+library(wordcloud)
 
 # ------------------- import data
-companies <- c("Meta", "Apple", "Google", "Nvidia", "Tesla", "Microsoft")
+ta <- read_csv("data/text_analysis_all.csv")
 
-# for loop for exporting all companies
-for (i in companies) {
-  df <- read_csv(paste0("data/text_analysis_", i, ".csv"))
-  
-  assign(paste0("ta_", i), df)
-}
+# specify choices object 
+company_choices <- c("Meta", "Apple", "Google", "Nvidia", "Tesla", "Microsoft")
+frequency_choices <- c("tf", "idf", "tf_idf")
+
+# specify color palette
+num_colors <- 5
+pal <- brewer.pal(num_colors, "Dark2")
 
 # =============================================================================
 # User interface 
 # =============================================================================
 
-fluidPage(
+ui <- fluidPage(
   # Application title
-  titlePanel("Word Cloud"),
+  titlePanel("Word Cloud for Quarterly Reports of the Magnificent 6"),
   
   sidebarLayout(
     # Sidebar with a slider and selection inputs
     sidebarPanel(
-      selectInput("selection", "Company:",
-                  choices = books),
-      actionButton("update", "Change"),
+      selectInput("selection", "Company",
+                  choices = company_choices),
       hr(),
-      sliderInput("freq",
-                  "Minimum Frequency:",
-                  min = 1,  max = 50, value = 15),
       sliderInput("max",
                   "Maximum Number of Words:",
                   min = 1,  max = 300,  value = 100)
@@ -52,27 +51,18 @@ fluidPage(
 # Server
 # =============================================================================
 
-function(input, output, session) {
-  # Define a reactive expression for the document term matrix
-  terms <- reactive({
-    # Change when the "update" button is pressed...
-    input$update
-    # ...but not for anything else
-    isolate({
-      withProgress({
-        setProgress(message = "Processing corpus...")
-        getTermMatrix(input$selection)
-      })
-    })
-  })
+server <- function(input,output){
   
-  # Make the wordcloud drawing predictable during a session
-  wordcloud_rep <- repeatable(wordcloud)
   
   output$plot <- renderPlot({
-    v <- terms()
-    wordcloud_rep(names(v), v, scale=c(4,0.5),
-                  min.freq = input$freq, max.words=input$max,
-                  colors=brewer.pal(8, "Dark2"))
+    ta |>
+      filter(COMP == input$selection) |>
+      with(wordcloud(words = word
+                     , freq = tf_idf
+                     , max.words = input$max
+                     , colors = pal
+                     , random.order = TRUE))
   })
 }
+
+shinyApp(ui = ui, server = server)
