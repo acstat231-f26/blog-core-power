@@ -168,7 +168,6 @@ p<-ggplot(final_data_changes,
     y = "Stock Price Change (%)",
     color = "Company"
   ) +
-
   theme_minimal()
 
 ggplotly(p, tooltip = "text")
