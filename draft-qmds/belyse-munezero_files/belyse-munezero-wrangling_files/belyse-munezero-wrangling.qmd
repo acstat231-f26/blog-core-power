@@ -145,29 +145,29 @@ final_data_changes <- final_data |>
 ```
 
 ```{r}
-p<-ggplot(final_data_changes,
-       aes(x = change_RD, y = stock_change_pct, color = COMP)) +
-  
+p <- ggplot(final_data_changes,
+            aes(x = change_RD, y = stock_change_pct, color = COMP)) +
+
   geom_hline(yintercept = 0, color = "black") +
   geom_vline(xintercept = 0, color = "black") +
 
-  geom_point(size = 3, alpha = 0.7) +
-  geom_point(data=final_data_changes
-             , aes(x = change_RD
-                 , y = stock_change_pct
-                 , text = paste0(
-                   "\nCompany: ", COMP, 
-                   "\nChange in RD: $", change_RD, 
-                   "\nChange in stock price: $", stock_change_pct, 
-              
-                 ))) + 
+  geom_point(
+    size = 3,
+    alpha = 0.7,
+    aes(text = paste0(
+      "Company: ", COMP,
+      "\nChange in RD: $", change_RD,
+      "\nChange in stock price: ", round(stock_change_pct, 2), "%"
+    ))
+  ) +
 
   labs(
     title = "Change in R&D Expenses vs. Stock Price Reaction",
-    x = "Change in R&D Expenses",
+    x = "Change in R&D Expenses ($)",
     y = "Stock Price Change (%)",
     color = "Company"
   ) +
+
   theme_minimal()
 
 ggplotly(p, tooltip = "text")
