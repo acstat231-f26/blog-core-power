@@ -32,6 +32,7 @@ ui <- fluidPage(
   sidebarLayout(
     # Sidebar with a slider and selection inputs
     sidebarPanel(
+      width = 3,
       selectInput("selection", "Company",
                   choices = company_choices),
       hr(),
@@ -42,7 +43,7 @@ ui <- fluidPage(
     
     # Show Word Cloud
     mainPanel(
-      plotOutput("plot")
+      plotOutput("plot", width = "600px", height = "600px")
     )
   )
 )

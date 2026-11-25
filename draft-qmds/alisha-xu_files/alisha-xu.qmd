@@ -284,8 +284,8 @@ dp_visual <- ggplot(data = ten_qs
 ggplotly(dp_visual, tooltip = "text")
 ```
 
-```{r}
-include_app("https://alxu-27.shinyapps.io/blog-proj-shny/", height = "600px")
+```{r, out.width="100%"}
+include_app("https://alxu-27.shinyapps.io/blog-proj-shny/", height = "800px")
 
 ```
 # Getting started
