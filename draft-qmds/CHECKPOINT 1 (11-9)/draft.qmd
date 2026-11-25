@@ -30,6 +30,7 @@ library(ggplot2)
 library(lubridate)
 library(glue)
 library(ggrepel)
+library(paletteer)
 ```
 
 # Wrangled data
