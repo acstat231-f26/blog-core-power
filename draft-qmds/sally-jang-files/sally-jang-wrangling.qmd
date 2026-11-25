@@ -372,6 +372,7 @@ text_scatterplot <- ggplot(data = ten_Qs_text_scatterplot_2, aes(x = sentiment, 
        x = "Sentiment Score", 
        y = "R&D Expense")
 
+# fix variable names for interactive points
 ggplotly(text_scatterplot)
 
 # change in stock price overall vs. sentiment analysis?

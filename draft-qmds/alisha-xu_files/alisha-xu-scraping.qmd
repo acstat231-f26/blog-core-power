@@ -983,7 +983,6 @@ text_analysis_tesla <- ten_Qs_text_analysis_3 |>
 
 ```
 
-
 ```{r}
 #| label: sally-jang-text-analysis-scatterplot
 #| eval: false
@@ -1012,7 +1011,6 @@ ggplotly(text_scatterplot)
 
 # change in stock price overall vs. sentiment analysis?
 ```
-
 
 ```{r}
 #| label: text-analysis-code
