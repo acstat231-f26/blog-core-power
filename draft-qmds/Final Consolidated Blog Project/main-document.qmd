@@ -564,6 +564,11 @@ text_scatterplot <- ggplot(
 
 ggplotly(text_scatterplot)
 ```
+```{r, out.width="100%"}
+#| label: word-cloud-td-idf
+include_app("https://alxu-27.shinyapps.io/blog-proj-shny/", height = "800px")
+
+```
 
 # Getting started
 
