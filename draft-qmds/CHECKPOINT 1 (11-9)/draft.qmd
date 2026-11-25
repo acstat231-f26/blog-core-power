@@ -31,6 +31,7 @@ library(lubridate)
 library(glue)
 library(ggrepel)
 library(paletteer)
+library(plotly)
 ```
 
 # Wrangled data
