@@ -32,6 +32,7 @@ library(glue)
 library(ggrepel)
 library(paletteer)
 library(plotly)
+library(tidytext)
 ```
 
 # Wrangled data
@@ -649,6 +650,9 @@ ggplotly(sp_visual, tooltip = "text")
 #| label: dot-plot 
 
 # Student that worked on this section: Sally and Alisha
+companies <- 
+  tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+         name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
 
 ten_Qs_dp <- scraped_ten_Qs |>
   left_join(companies, by = c("COMP" = "name1")) |>
