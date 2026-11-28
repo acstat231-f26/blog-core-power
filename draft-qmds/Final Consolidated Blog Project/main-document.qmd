@@ -40,11 +40,14 @@ library(tidytext)
 ```{r}
 #| label: import-data
 
-# scraping files can be found in the same folder
+# Scraping files which web scrape the R&D expenses and MD&A analysis from each 
+# 10-Q's SEC HTML site and import stock prices from yahoo for each company can 
+# be found in the same "Final Consolidated Blog Project" folder
 scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
 stock_price_joined <- read_csv("data/stock_price_joined.csv")
 ten_Qs_text_scraped <- read_csv("data/ten_Qs_text_scraped.csv")
-# for loop for importing separate stock time series
+
+# For loop for importing separate stock time series
 companies <- c("microsoft", "alphabet", "meta", "apple", "nvidia", "tesla")
 for (i in companies) {
   df <- read_csv(paste0("data/", i, "_stock.csv"))
@@ -101,7 +104,6 @@ dated_ten_Qs <- scraped_ten_Qs |>
 
 # Making a new dataset with stock price after the 10-Q filing data and the 
 # day of the filing
-
 stock_filing <- stock_price_joined |>
   rename(
     stock_date_filing = Date,
@@ -136,7 +138,6 @@ final_data <- filing |>
 # Calculating change in stock price and change in RD
 
 # Change in stock price
-
 final_data <- final_data |>
   mutate(
     stock_change = stock_price_filing - stock_price_before,
@@ -158,10 +159,10 @@ final_data_changes <- final_data |>
 ```
 
 ```{r}
-#| label: text-analysis
+#| label: text-analysis-wrangling
 #| include: false
 
-# Further wrangling to ID each 10-Q for text analysis
+# Further wrangling to ID each 10-Q for sentiment and tf-idf analysis
 ten_Qs_text_wrangled <- ten_Qs_text_scraped |>
   mutate(id = rep(4:1, times = 6)) |>
   rename(Company = COMP)
@@ -180,7 +181,7 @@ ten_Qs_text_wrangled_final <- ten_Qs_text_wrangled |>
 # AAPL and NVDA report on Saturdays, when there is no closing price
 # so we have to take the price for the previous day
 
-# From = "2025-03-01", to = "2026-11-01"
+# From = "2025-03-01" to = "2026-11-01"
 apple_stock <- getSymbols("AAPL", src = "yahoo", 
                           from = "2025-03-01", to = "2026-11-01") |>
   data.frame(Date = index(AAPL), coredata(AAPL)) |>
@@ -268,6 +269,7 @@ ggplotly(ts_visual, tooltip = "text")
 
 # Student who worked on this section: Belyse
 
+#ggplot
 sp_visual <- ggplot(final_data_changes,
             aes(x = change_RD, y = stock_change_pct, color = COMP)) +
   geom_hline(yintercept = 0, color = "black") +
@@ -298,6 +300,8 @@ ggplotly(sp_visual, tooltip = "text")
 #| label: dot-plot 
 
 # Student that worked on this section: Sally and Alisha
+
+# Ensuring that company name format conforms to ticker symbol for dot plot
 companies <- 
   tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
          name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
@@ -307,6 +311,7 @@ ten_Qs_dp <- scraped_ten_Qs |>
   rename(Date = "REP-D"
          , Company = "name2")
 
+# ggplot
 dp_visual <- ggplot(data = ten_Qs_dp
                     , aes(color = Company
                           , x = Company
@@ -505,11 +510,12 @@ rd_summary |> kable(digits = 2
 #| label: sentiment-analysis
 #| include: false
 
+# Importing AFINN sentiment lexicon and stop_words dataset 
 afinn_lexicon <- get_sentiments("afinn")
-nrc_lexicon <- get_sentiments("nrc")
 
 data(stop_words)
 
+# Dataset for sentiment analysis by company
 ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled_final |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
@@ -519,6 +525,7 @@ ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled_final |>
   summarize(
     Sentiment = mean(value))
 
+# Dataset for sentiment analysis by document
 ten_Qs_sentiment_analysis_2 <- ten_Qs_text_wrangled_final |>
   unnest_tokens(output = word, input = text) |>
   anti_join(stop_words, by = "word") |>
@@ -540,8 +547,8 @@ ten_Qs_sentiment_analysis_1 |> kable(digits = 3
 ```{r}
 #| label: sentiment-analysis-scatterplot
 
-## FIX mutate
-
+# Repeating document ID process with original named 10-Qs dataset to create
+# a new dataset including both sentiment score and R&D expense by 10-Q
 ten_Qs_text_scatterplot_1 <- named_ten_Qs |>
   mutate(id = rep(4:1, times = 6))
 
@@ -552,6 +559,7 @@ ten_Qs_text_scatterplot_final <- ten_Qs_sentiment_analysis_2 |>
     left_join(ten_Qs_text_scatterplot_2, by = "document_id") |>
     rename(Company = name2)
 
+#ggplot
 text_scatterplot <- ggplot(
                       data = ten_Qs_text_scatterplot_final, 
                       aes(x = sentiment, y = RD, color = Company)) +
@@ -564,8 +572,12 @@ text_scatterplot <- ggplot(
 
 ggplotly(text_scatterplot)
 ```
+
 ```{r, out.width="100%"}
 #| label: word-cloud-td-idf
+
+# Shiny app showing interactive wordcloud display for top tf-idf words in MD&A 
+# text by company
 include_app("https://alxu-27.shinyapps.io/blog-proj-shny/", height = "800px")
 
 ```
