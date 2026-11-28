@@ -491,22 +491,20 @@ rd_summary <- microsoft_rd |>
 
 ::: {.panel-tabset}
 
-#### Stock Summary
+## Stock Summary
 
 ```{r}
-#| echo: false
-
+#| label: stock-summary
 stock_summary |> kable(digits = 2
                        , caption = "Company Stock Price Summary Statistics (in dollars)"
                        , format.args = list(big.mark = ","))
 ```
 
 
-#### R&D Expenses Summary
+## R&D Expenses Summary
 
 ```{r}
-#| label: summary-statistics-table
-#| echo: false
+#| label: rd-summary
 
 rd_summary |> kable(digits = 2
                     , caption = "Company R&D Expense Summary Statistics (in millions)"

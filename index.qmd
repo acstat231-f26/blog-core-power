@@ -502,20 +502,30 @@ rd_summary <- microsoft_rd |>
 
 ```
 
-```{r}
-#| label: summary-statistics-table
+::: {.panel-tabset}
 
-# Create and format table
-# Create kable
+#### Stock Summary
+
+```{r}
+#| label: stock-summary
 stock_summary |> kable(digits = 2
                        , caption = "Company Stock Price Summary Statistics (in dollars)"
                        , format.args = list(big.mark = ","))
+```
+
+
+#### R&D Expenses Summary
+
+```{r}
+#| label: rd-summary
 
 rd_summary |> kable(digits = 2
                     , caption = "Company R&D Expense Summary Statistics (in millions)"
                     , format.args = list(big.mark = ","))
 
 ```
+
+:::
 
 ## Part 2. Looking at the Text
 
