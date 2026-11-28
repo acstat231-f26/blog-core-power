@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-11-28">
+
+<title>Scraping Scripts – Team Core Power: F26 Blog Project</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e79f559232431a713323595866dc1a18.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-cc9ff53e9b4da4ea04670417b8d8b41e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e79f559232431a713323595866dc1a18.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Team Core Power: F26 Blog Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> <i class="bi bi-house" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./scripts-page.html" aria-current="page"> <i class="bi bi-code-square" role="img">
+</i> 
+<span class="menu-text">View Raw Scraping Scripts</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#raw-scraping-scripts" id="toc-raw-scraping-scripts" class="nav-link active" data-scroll-target="#raw-scraping-scripts">Raw Scraping Scripts</a></li>
+  <li><a href="#q-rd-numbers" id="toc-q-rd-numbers" class="nav-link" data-scroll-target="#q-rd-numbers">10Q R&amp;D Numbers</a></li>
+  <li><a href="#stock-price-time-series" id="toc-stock-price-time-series" class="nav-link" data-scroll-target="#stock-price-time-series">Stock Price Time Series</a></li>
+  <li><a href="#text-scraping" id="toc-text-scraping" class="nav-link" data-scroll-target="#text-scraping">Text Scraping</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Scraping Scripts</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Last updated</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 28, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="raw-scraping-scripts" class="level1">
+<h1>Raw Scraping Scripts</h1>
+<p>Here, we attach the raw scraping scripts for the company 10Qs including the scripts for R&amp;D values and the Item 2 section of each report for text analysis.</p>
+</section>
+<section id="q-rd-numbers" class="level1">
+<h1>10Q R&amp;D Numbers</h1>
+<p>Main student who worked on this: Alisha</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-label="1"></a><span class="co"># Student that worked on this section: Alisha</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-label="2"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-label="3"></a><span class="co"># This is the code for scraping 10-Q R&amp;D expenses from the SEC website's HTML </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-label="4"></a><span class="co"># files for Microsoft, Google, Meta, Apple, Nvidia, and Tesla</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-label="5"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-label="6"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-label="7"></a><span class="co"># packages</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-label="8"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-label="9"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-label="10"></a><span class="fu">library</span>(robotstxt)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-label="11"></a><span class="fu">library</span>(httr)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-label="12"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-label="13"></a><span class="co"># Import dataset </span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-label="14"></a><span class="co"># Variable Explanations:</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-label="15"></a><span class="co"># COMP: Company Name</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-label="16"></a><span class="co"># FIL-D: Filing Date</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-label="17"></a><span class="co"># REP-D: Reporting For Date</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-label="18"></a><span class="co"># HTML: HTML link</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-label="19"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-label="20"></a><span class="co"># find data in sibling folder</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-label="21"></a>ten_Qs <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"../data/10q-links.xlsx"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-label="22"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-label="23"></a><span class="co"># Compartmentalize each variable</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-label="24"></a><span class="co"># Microsoft</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-label="25"></a>microsoft <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-label="26"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Microsoft"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-label="27"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-label="28"></a><span class="co"># Google</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-label="29"></a>google <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-label="30"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Google"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-label="31"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-label="32"></a><span class="co"># Meta</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-label="33"></a>meta <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-label="34"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Meta"</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-label="35"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-label="36"></a><span class="co"># Apple</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-label="37"></a>apple <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-label="38"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Apple"</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-label="39"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-label="40"></a><span class="co"># Nvidia</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-label="41"></a>nvidia <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-label="42"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Nvidia"</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-label="43"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-label="44"></a><span class="co"># Tesla</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-label="45"></a>tesla <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-label="46"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Tesla"</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-label="47"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-label="48"></a><span class="co"># Create SEC session</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-label="49"></a>my_ua <span class="ot">&lt;-</span> <span class="st">"AmherstCollege alxu27@amherst.edu"</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-label="50"></a>sec_session <span class="ot">&lt;-</span> <span class="fu">session</span>(<span class="st">"https://www.sec.gov"</span>, <span class="fu">user_agent</span>(my_ua))</span>
+<span id="cb1-51"><a href="#cb1-51" aria-label="51"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-label="52"></a><span class="co"># Add empty column to store values</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-label="53"></a>ten_Qs <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-label="54"></a>  <span class="fu">mutate</span>(<span class="at">RD =</span> <span class="cn">NA</span>)</span>
+<span id="cb1-55"><a href="#cb1-55" aria-label="55"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-label="56"></a><span class="co"># -------------------------------Scraping---------------------------------------</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-label="57"></a><span class="co"># Microsoft</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-label="58"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb1-59"><a href="#cb1-59" aria-label="59"></a>  ten_Qs<span class="sc">$</span>RD[i] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, microsoft<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-label="60"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-label="61"></a>    <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-label="62"></a>    purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-label="63"></a>    <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-label="64"></a>    <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-label="65"></a>    <span class="fu">select</span>(X4)</span>
+<span id="cb1-66"><a href="#cb1-66" aria-label="66"></a>}</span>
+<span id="cb1-67"><a href="#cb1-67" aria-label="67"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-label="68"></a><span class="co"># Google</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-label="69"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb1-70"><a href="#cb1-70" aria-label="70"></a>  ten_Qs<span class="sc">$</span>RD[i<span class="sc">+</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, google<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-label="71"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-label="72"></a>    <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-label="73"></a>    purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">14</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-label="74"></a>    <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-label="75"></a>    <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-label="76"></a>    <span class="fu">select</span>(X10)</span>
+<span id="cb1-77"><a href="#cb1-77" aria-label="77"></a>}</span>
+<span id="cb1-78"><a href="#cb1-78" aria-label="78"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-label="79"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) {</span>
+<span id="cb1-80"><a href="#cb1-80" aria-label="80"></a>  ten_Qs<span class="sc">$</span>RD[i<span class="sc">+</span><span class="dv">6</span>] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, google<span class="sc">$</span>HTML[i<span class="sc">+</span><span class="dv">2</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-label="81"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-label="82"></a>    <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-label="83"></a>    purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">15</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-label="84"></a>    <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-label="85"></a>    <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-label="86"></a>    <span class="fu">select</span>(X10)</span>
+<span id="cb1-87"><a href="#cb1-87" aria-label="87"></a>}  </span>
+<span id="cb1-88"><a href="#cb1-88" aria-label="88"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-label="89"></a><span class="co"># Meta</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-label="90"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb1-91"><a href="#cb1-91" aria-label="91"></a>  ten_Qs<span class="sc">$</span>RD[i<span class="sc">+</span><span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, meta<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-label="92"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-label="93"></a>    <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-label="94"></a>    purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-label="95"></a>    <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-label="96"></a>    <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-label="97"></a>    <span class="fu">select</span>(X4)</span>
+<span id="cb1-98"><a href="#cb1-98" aria-label="98"></a>}</span>
+<span id="cb1-99"><a href="#cb1-99" aria-label="99"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-label="100"></a><span class="co"># Meta third 10-Q</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-label="101"></a>ten_Qs<span class="sc">$</span>RD[<span class="dv">11</span>] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, meta<span class="sc">$</span>HTML[<span class="dv">3</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-label="102"></a>  <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-label="103"></a>  <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-label="104"></a>  purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-label="105"></a>  <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-label="106"></a>  <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-label="107"></a>  <span class="fu">select</span>(X16)</span>
+<span id="cb1-108"><a href="#cb1-108" aria-label="108"></a></span>
+<span id="cb1-109"><a href="#cb1-109" aria-label="109"></a><span class="co"># Apple</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-label="110"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb1-111"><a href="#cb1-111" aria-label="111"></a>  ten_Qs<span class="sc">$</span>RD[i<span class="sc">+</span><span class="dv">12</span>] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, apple<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-label="112"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-label="113"></a>    <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-label="114"></a>    purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">13</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-label="115"></a>    <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-label="116"></a>    <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-label="117"></a>    <span class="fu">select</span>(X4)</span>
+<span id="cb1-118"><a href="#cb1-118" aria-label="118"></a>}</span>
+<span id="cb1-119"><a href="#cb1-119" aria-label="119"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-label="120"></a><span class="co"># Nvidia</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-label="121"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb1-122"><a href="#cb1-122" aria-label="122"></a>  ten_Qs<span class="sc">$</span>RD[i<span class="sc">+</span><span class="dv">16</span>] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, nvidia<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-label="123"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-label="124"></a>    <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-label="125"></a>    purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">8</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-label="126"></a>    <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-label="127"></a>    <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-label="128"></a>    <span class="fu">select</span>(X4)</span>
+<span id="cb1-129"><a href="#cb1-129" aria-label="129"></a>}</span>
+<span id="cb1-130"><a href="#cb1-130" aria-label="130"></a></span>
+<span id="cb1-131"><a href="#cb1-131" aria-label="131"></a><span class="co"># Tesla</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-label="132"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb1-133"><a href="#cb1-133" aria-label="133"></a>  ten_Qs<span class="sc">$</span>RD[i<span class="sc">+</span><span class="dv">20</span>] <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, tesla<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-label="134"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-label="135"></a>    <span class="fu">html_elements</span>(<span class="st">"table"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-label="136"></a>    purrr<span class="sc">::</span><span class="fu">pluck</span>(<span class="dv">11</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-label="137"></a>    <span class="fu">html_table</span>() <span class="sc">|&gt;</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-label="138"></a>    <span class="fu">filter</span>(X1 <span class="sc">==</span> <span class="st">"Research and development"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-label="139"></a>    <span class="fu">select</span>(X4)</span>
+<span id="cb1-140"><a href="#cb1-140" aria-label="140"></a>}</span>
+<span id="cb1-141"><a href="#cb1-141" aria-label="141"></a></span>
+<span id="cb1-142"><a href="#cb1-142" aria-label="142"></a>ten_Qs_RD <span class="ot">&lt;-</span> ten_Qs <span class="sc">|&gt;</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-label="143"></a>  <span class="fu">select</span>(<span class="sc">!</span>HTML)</span>
+<span id="cb1-144"><a href="#cb1-144" aria-label="144"></a></span>
+<span id="cb1-145"><a href="#cb1-145" aria-label="145"></a><span class="co"># convert RD column into numeric type column</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-label="146"></a>ten_Qs_RD <span class="ot">&lt;-</span> ten_Qs_RD <span class="sc">|&gt;</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-label="147"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-148"><a href="#cb1-148" aria-label="148"></a>    <span class="at">RD_clean =</span> <span class="fu">str_remove_all</span>(RD, <span class="st">"[$, ]"</span>), </span>
+<span id="cb1-149"><a href="#cb1-149" aria-label="149"></a>    <span class="at">RD =</span> <span class="fu">as.numeric</span>(RD_clean)) <span class="sc">|&gt;</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-label="150"></a>  <span class="fu">select</span>(<span class="sc">!</span>RD_clean)</span>
+<span id="cb1-151"><a href="#cb1-151" aria-label="151"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-label="152"></a><span class="co"># export</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-label="153"></a><span class="fu">write_csv</span>(ten_Qs_RD, <span class="st">"../data/scraped-10qs.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="stock-price-time-series" class="level1">
+<h1>Stock Price Time Series</h1>
+<p>Main student who worked on this: Sally</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-label="1"></a><span class="co"># Student that worked on this section: Sally</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-label="2"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-label="3"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-label="4"></a><span class="co"># This is the code for importing and wrangling stock prices for all 6 companies </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-label="5"></a><span class="co"># by using the quantmod package</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-label="6"></a><span class="co"># Because the 10-Q reporting time frames are different for each company, we</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-label="7"></a><span class="co"># used a standardized, informative time frame (2025-03-01 to 2026-11-01) that </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-label="8"></a><span class="co"># captured all 4 10-Qs for each company </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-label="9"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-label="10"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-label="11"></a><span class="co"># packages</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-label="12"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-label="13"></a><span class="fu">library</span>(quantmod)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-label="14"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-label="15"></a><span class="co"># Microsoft</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-label="16"></a>microsoft_stock <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">"MSFT"</span>, <span class="at">src =</span> <span class="st">"yahoo"</span>, </span>
+<span id="cb2-17"><a href="#cb2-17" aria-label="17"></a>                              <span class="at">from =</span> <span class="st">"2025-03-01"</span>, <span class="at">to =</span> <span class="st">"2026-11-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-label="18"></a>  <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(MSFT), <span class="fu">coredata</span>(MSFT)) <span class="sc">|&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-label="19"></a>  <span class="fu">select</span>(Date, MSFT.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-label="20"></a>  <span class="fu">rename</span>(<span class="at">Close =</span> MSFT.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-label="21"></a>  <span class="fu">mutate</span>(<span class="at">COMP =</span> <span class="st">"MSFT"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-label="22"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-label="23"></a><span class="co"># Alphabet</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-label="24"></a>alphabet_stock <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">"GOOG"</span>, <span class="at">src =</span> <span class="st">"yahoo"</span>, </span>
+<span id="cb2-25"><a href="#cb2-25" aria-label="25"></a>                             <span class="at">from =</span> <span class="st">"2025-03-01"</span>, <span class="at">to =</span> <span class="st">"2026-11-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-label="26"></a>  <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(GOOG), <span class="fu">coredata</span>(GOOG)) <span class="sc">|&gt;</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-label="27"></a>  <span class="fu">select</span>(Date, GOOG.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-label="28"></a>  <span class="fu">rename</span>(<span class="at">Close =</span> GOOG.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-label="29"></a>  <span class="fu">mutate</span>(<span class="at">COMP =</span> <span class="st">"GOOG"</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-label="30"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-label="31"></a><span class="co"># Meta</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-label="32"></a>meta_stock <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">"META"</span>, <span class="at">src =</span> <span class="st">"yahoo"</span>, </span>
+<span id="cb2-33"><a href="#cb2-33" aria-label="33"></a>                         <span class="at">from =</span> <span class="st">"2025-03-01"</span>, <span class="at">to =</span> <span class="st">"2026-11-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-label="34"></a>  <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(META), <span class="fu">coredata</span>(META)) <span class="sc">|&gt;</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-label="35"></a>  <span class="fu">select</span>(Date, META.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-label="36"></a>  <span class="fu">rename</span>(<span class="at">Close =</span> META.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-label="37"></a>  <span class="fu">mutate</span>(<span class="at">COMP =</span> <span class="st">"META"</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-label="38"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-label="39"></a><span class="co"># Apple</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-label="40"></a>apple_stock <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">"AAPL"</span>, <span class="at">src =</span> <span class="st">"yahoo"</span>, </span>
+<span id="cb2-41"><a href="#cb2-41" aria-label="41"></a>                          <span class="at">from =</span> <span class="st">"2025-03-01"</span>, <span class="at">to =</span> <span class="st">"2026-11-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-label="42"></a>  <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(AAPL), <span class="fu">coredata</span>(AAPL)) <span class="sc">|&gt;</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-label="43"></a>  <span class="fu">select</span>(Date, AAPL.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-label="44"></a>  <span class="fu">rename</span>(<span class="at">Close =</span> AAPL.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-label="45"></a>  <span class="fu">mutate</span>(<span class="at">COMP =</span> <span class="st">"AAPL"</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-label="46"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-label="47"></a><span class="co"># Nvidia</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-label="48"></a>nvidia_stock <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">"NVDA"</span>, <span class="at">src =</span> <span class="st">"yahoo"</span>, </span>
+<span id="cb2-49"><a href="#cb2-49" aria-label="49"></a>                           <span class="at">from =</span> <span class="st">"2025-03-01"</span>, <span class="at">to =</span> <span class="st">"2026-11-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-label="50"></a>  <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(NVDA), <span class="fu">coredata</span>(NVDA)) <span class="sc">|&gt;</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-label="51"></a>  <span class="fu">select</span>(Date, NVDA.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-label="52"></a>  <span class="fu">rename</span>(<span class="at">Close =</span> NVDA.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-label="53"></a>  <span class="fu">mutate</span>(<span class="at">COMP =</span> <span class="st">"NVDA"</span>)</span>
+<span id="cb2-54"><a href="#cb2-54" aria-label="54"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-label="55"></a><span class="co"># Tesla</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-label="56"></a>tesla_stock <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">"TSLA"</span>, <span class="at">src =</span> <span class="st">"yahoo"</span>, </span>
+<span id="cb2-57"><a href="#cb2-57" aria-label="57"></a>                          <span class="at">from =</span> <span class="st">"2025-03-01"</span>, <span class="at">to =</span> <span class="st">"2026-11-01"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-label="58"></a>  <span class="fu">data.frame</span>(<span class="at">Date =</span> <span class="fu">index</span>(TSLA), <span class="fu">coredata</span>(TSLA)) <span class="sc">|&gt;</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-label="59"></a>  <span class="fu">select</span>(Date, TSLA.Close) <span class="sc">|&gt;</span>   </span>
+<span id="cb2-60"><a href="#cb2-60" aria-label="60"></a>  <span class="fu">rename</span>(<span class="at">Close =</span> TSLA.Close) <span class="sc">|&gt;</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-label="61"></a>  <span class="fu">mutate</span>(<span class="at">COMP =</span> <span class="st">"TSLA"</span>)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-label="62"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-label="63"></a><span class="co"># Binding rows to consolidate all stock price points into one data set in </span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-label="64"></a><span class="co"># preparation for faceted time series visualization</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-label="65"></a>stock_price_joined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(microsoft_stock, alphabet_stock, meta_stock, </span>
+<span id="cb2-66"><a href="#cb2-66" aria-label="66"></a>                                apple_stock, nvidia_stock, tesla_stock)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-label="67"></a></span>
+<span id="cb2-68"><a href="#cb2-68" aria-label="68"></a><span class="fu">write_csv</span>(stock_price_joined, <span class="st">"../data/stock_price_joined.csv"</span>)</span>
+<span id="cb2-69"><a href="#cb2-69" aria-label="69"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-label="70"></a><span class="fu">write_csv</span>(microsoft_stock, <span class="st">"../data/microsoft_stock.csv"</span>)</span>
+<span id="cb2-71"><a href="#cb2-71" aria-label="71"></a><span class="fu">write_csv</span>(alphabet_stock, <span class="st">"../data/alphabet_stock.csv"</span>)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-label="72"></a><span class="fu">write_csv</span>(meta_stock, <span class="st">"../data/meta_stock.csv"</span>)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-label="73"></a><span class="fu">write_csv</span>(apple_stock, <span class="st">"../data/apple_stock.csv"</span>)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-label="74"></a><span class="fu">write_csv</span>(nvidia_stock, <span class="st">"../data/nvidia_stock.csv"</span>)</span>
+<span id="cb2-75"><a href="#cb2-75" aria-label="75"></a><span class="fu">write_csv</span>(tesla_stock, <span class="st">"../data/tesla_stock.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="text-scraping" class="level1">
+<h1>Text Scraping</h1>
+<p>Main student who worked on this: Sally</p>
+<p>Debugging: Alisha</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-label="1"></a><span class="co"># Students that worked on this section: Sally and Alisha</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-label="2"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-label="3"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-label="4"></a><span class="co"># This is the code for scraping 10-Qs' MD&amp;A text from the SEC website's HTML </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-label="5"></a><span class="co"># files for Microsoft, Google, Meta, Apple, Nvidia, and Tesla</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-label="6"></a><span class="co"># -----------------------------------------------------------------------------</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-label="7"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-label="8"></a><span class="co"># packages</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-label="9"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-label="10"></a><span class="fu">library</span>(rvest)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-label="11"></a><span class="fu">library</span>(robotstxt)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-label="12"></a><span class="fu">library</span>(httr)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-label="13"></a><span class="fu">library</span>(glue)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-label="14"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-label="15"></a>ten_Qs_text <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"../data/10q-links.xlsx"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-label="16"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-label="17"></a><span class="co"># Compartmentalize each variable</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-label="18"></a><span class="co"># Microsoft</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-label="19"></a>microsoft <span class="ot">&lt;-</span> ten_Qs_text <span class="sc">|&gt;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-label="20"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Microsoft"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-label="21"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-label="22"></a><span class="co"># Google</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-label="23"></a>google <span class="ot">&lt;-</span> ten_Qs_text <span class="sc">|&gt;</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-label="24"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Google"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-label="25"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-label="26"></a><span class="co"># Meta</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-label="27"></a>meta <span class="ot">&lt;-</span> ten_Qs_text <span class="sc">|&gt;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-label="28"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Meta"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-label="29"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-label="30"></a><span class="co"># Apple</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-label="31"></a>apple <span class="ot">&lt;-</span> ten_Qs_text <span class="sc">|&gt;</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-label="32"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Apple"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-label="33"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-label="34"></a><span class="co"># Nvidia</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-label="35"></a>nvidia <span class="ot">&lt;-</span> ten_Qs_text <span class="sc">|&gt;</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-label="36"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Nvidia"</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-label="37"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-label="38"></a><span class="co"># Tesla</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-label="39"></a>tesla <span class="ot">&lt;-</span> ten_Qs_text <span class="sc">|&gt;</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-label="40"></a>  <span class="fu">filter</span>(COMP <span class="sc">==</span> <span class="st">"Tesla"</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-label="41"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-label="42"></a><span class="co"># Create sec session</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-label="43"></a>my_ua <span class="ot">&lt;-</span> <span class="st">"AmherstCollege yjang27@amherst.edu"</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-label="44"></a>sec_session <span class="ot">&lt;-</span> <span class="fu">session</span>(<span class="st">"https://www.sec.gov"</span>, <span class="fu">user_agent</span>(my_ua))</span>
+<span id="cb3-45"><a href="#cb3-45" aria-label="45"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-label="46"></a><span class="co"># Add empty column to store values</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-label="47"></a>ten_Qs_text_scraped <span class="ot">&lt;-</span> ten_Qs_text <span class="sc">|&gt;</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-label="48"></a>  <span class="fu">mutate</span>(<span class="at">text =</span> <span class="cn">NA</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-label="49"></a></span>
+<span id="cb3-50"><a href="#cb3-50" aria-label="50"></a><span class="co"># -------------------------------Scraping---------------------------------------</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-label="51"></a><span class="co"># Microsoft</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-label="52"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb3-53"><a href="#cb3-53" aria-label="53"></a>  all_text_microsoft <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, microsoft<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-label="54"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-label="55"></a>    <span class="fu">html_elements</span>(<span class="st">"span"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-label="56"></a>    <span class="fu">html_text2</span>()</span>
+<span id="cb3-57"><a href="#cb3-57" aria-label="57"></a>  </span>
+<span id="cb3-58"><a href="#cb3-58" aria-label="58"></a>  detect_1 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_microsoft, <span class="st">"ITEM 2. MANAGEMENT’S"</span>))</span>
+<span id="cb3-59"><a href="#cb3-59" aria-label="59"></a>  </span>
+<span id="cb3-60"><a href="#cb3-60" aria-label="60"></a>  detect_2 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_microsoft, <span class="st">"ITEM 3. QUANTITATIVE"</span>))</span>
+<span id="cb3-61"><a href="#cb3-61" aria-label="61"></a>  </span>
+<span id="cb3-62"><a href="#cb3-62" aria-label="62"></a>  scraped_text_microsoft <span class="ot">&lt;-</span> all_text_microsoft[detect_1<span class="sc">:</span>detect_2]</span>
+<span id="cb3-63"><a href="#cb3-63" aria-label="63"></a>  </span>
+<span id="cb3-64"><a href="#cb3-64" aria-label="64"></a>  ten_Qs_text_scraped<span class="sc">$</span>text[i] <span class="ot">&lt;-</span> <span class="fu">paste</span>(scraped_text_microsoft, <span class="at">collapse =</span> <span class="st">"/n"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-label="65"></a>    <span class="fu">str_replace_all</span>(<span class="st">"/n"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-label="66"></a>}</span>
+<span id="cb3-67"><a href="#cb3-67" aria-label="67"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-label="68"></a><span class="co"># Google</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-label="69"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb3-70"><a href="#cb3-70" aria-label="70"></a>  all_text_google <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, google<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-label="71"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-label="72"></a>    <span class="fu">html_elements</span>(<span class="st">"span"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-label="73"></a>    <span class="fu">html_text2</span>()</span>
+<span id="cb3-74"><a href="#cb3-74" aria-label="74"></a>  </span>
+<span id="cb3-75"><a href="#cb3-75" aria-label="75"></a>  detect_1 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_google, <span class="st">"MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"</span>))</span>
+<span id="cb3-76"><a href="#cb3-76" aria-label="76"></a>  </span>
+<span id="cb3-77"><a href="#cb3-77" aria-label="77"></a>  detect_2 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_google, <span class="st">"QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"</span>))</span>
+<span id="cb3-78"><a href="#cb3-78" aria-label="78"></a>  </span>
+<span id="cb3-79"><a href="#cb3-79" aria-label="79"></a>  scraped_text_google <span class="ot">&lt;-</span> all_text_google[detect_1<span class="sc">:</span>detect_2]</span>
+<span id="cb3-80"><a href="#cb3-80" aria-label="80"></a>  </span>
+<span id="cb3-81"><a href="#cb3-81" aria-label="81"></a>  ten_Qs_text_scraped<span class="sc">$</span>text[i<span class="sc">+</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(scraped_text_google, <span class="at">collapse =</span> <span class="st">"/n"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-label="82"></a>    <span class="fu">str_replace_all</span>(<span class="st">"/n"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-83"><a href="#cb3-83" aria-label="83"></a>}</span>
+<span id="cb3-84"><a href="#cb3-84" aria-label="84"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-label="85"></a><span class="co"># Meta</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-label="86"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb3-87"><a href="#cb3-87" aria-label="87"></a>  all_text_meta <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, meta<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-label="88"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-label="89"></a>    <span class="fu">html_elements</span>(<span class="st">"span"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-label="90"></a>    <span class="fu">html_text2</span>()</span>
+<span id="cb3-91"><a href="#cb3-91" aria-label="91"></a>  </span>
+<span id="cb3-92"><a href="#cb3-92" aria-label="92"></a>  detect_1 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_meta, <span class="st">"Management's Discussion and Analysis of Financial Condition and Results of Operations"</span>)) [<span class="dv">2</span>]</span>
+<span id="cb3-93"><a href="#cb3-93" aria-label="93"></a>  </span>
+<span id="cb3-94"><a href="#cb3-94" aria-label="94"></a>  detect_2 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_meta, <span class="st">"Quantitative and Qualitative Disclosures About Market Risk"</span>)) [<span class="dv">2</span>]</span>
+<span id="cb3-95"><a href="#cb3-95" aria-label="95"></a>  </span>
+<span id="cb3-96"><a href="#cb3-96" aria-label="96"></a>  scraped_text_meta <span class="ot">&lt;-</span> all_text_meta[detect_1<span class="sc">:</span>detect_2]</span>
+<span id="cb3-97"><a href="#cb3-97" aria-label="97"></a>  </span>
+<span id="cb3-98"><a href="#cb3-98" aria-label="98"></a>  ten_Qs_text_scraped<span class="sc">$</span>text[i<span class="sc">+</span><span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(scraped_text_meta, <span class="at">collapse =</span> <span class="st">"/n"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-label="99"></a>    <span class="fu">str_replace_all</span>(<span class="st">"/n"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-100"><a href="#cb3-100" aria-label="100"></a>}</span>
+<span id="cb3-101"><a href="#cb3-101" aria-label="101"></a></span>
+<span id="cb3-102"><a href="#cb3-102" aria-label="102"></a><span class="co"># Apple</span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-label="103"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb3-104"><a href="#cb3-104" aria-label="104"></a>  all_text_apple <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, apple<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-label="105"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-label="106"></a>    <span class="fu">html_elements</span>(<span class="st">"span"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-label="107"></a>    <span class="fu">html_text2</span>()</span>
+<span id="cb3-108"><a href="#cb3-108" aria-label="108"></a>  </span>
+<span id="cb3-109"><a href="#cb3-109" aria-label="109"></a>  detect_1 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_apple, <span class="st">"Management’s Discussion and Analysis of Financial Condition and Results of Operations"</span>))[<span class="dv">2</span>]</span>
+<span id="cb3-110"><a href="#cb3-110" aria-label="110"></a>  </span>
+<span id="cb3-111"><a href="#cb3-111" aria-label="111"></a>  detect_2 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_apple, <span class="st">"Quantitative and Qualitative Disclosures About Market Risk"</span>))[<span class="dv">2</span>]</span>
+<span id="cb3-112"><a href="#cb3-112" aria-label="112"></a>  </span>
+<span id="cb3-113"><a href="#cb3-113" aria-label="113"></a>  scraped_text_apple <span class="ot">&lt;-</span> all_text_apple[detect_1<span class="sc">:</span>detect_2]</span>
+<span id="cb3-114"><a href="#cb3-114" aria-label="114"></a>  </span>
+<span id="cb3-115"><a href="#cb3-115" aria-label="115"></a>  ten_Qs_text_scraped<span class="sc">$</span>text[i<span class="sc">+</span><span class="dv">12</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(scraped_text_apple, <span class="at">collapse =</span> <span class="st">"/n"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-label="116"></a>    <span class="fu">str_replace_all</span>(<span class="st">"/n"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-117"><a href="#cb3-117" aria-label="117"></a>}</span>
+<span id="cb3-118"><a href="#cb3-118" aria-label="118"></a></span>
+<span id="cb3-119"><a href="#cb3-119" aria-label="119"></a><span class="co"># Nvidia</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-label="120"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb3-121"><a href="#cb3-121" aria-label="121"></a>  all_text_nvidia <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, nvidia<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-label="122"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-label="123"></a>    <span class="fu">html_elements</span>(<span class="st">"span"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-label="124"></a>    <span class="fu">html_text2</span>()</span>
+<span id="cb3-125"><a href="#cb3-125" aria-label="125"></a>  </span>
+<span id="cb3-126"><a href="#cb3-126" aria-label="126"></a>  detect_1 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_nvidia, <span class="st">"Item 2."</span>))[<span class="dv">3</span>]</span>
+<span id="cb3-127"><a href="#cb3-127" aria-label="127"></a>  </span>
+<span id="cb3-128"><a href="#cb3-128" aria-label="128"></a>  detect_2 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_nvidia, <span class="st">"Item 3</span><span class="sc">\\</span><span class="st">."</span>))[<span class="dv">2</span>]</span>
+<span id="cb3-129"><a href="#cb3-129" aria-label="129"></a>  </span>
+<span id="cb3-130"><a href="#cb3-130" aria-label="130"></a>  scraped_text_nvidia <span class="ot">&lt;-</span> all_text_nvidia[detect_1<span class="sc">:</span>detect_2]</span>
+<span id="cb3-131"><a href="#cb3-131" aria-label="131"></a>  </span>
+<span id="cb3-132"><a href="#cb3-132" aria-label="132"></a>  ten_Qs_text_scraped<span class="sc">$</span>text[i<span class="sc">+</span><span class="dv">16</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(scraped_text_nvidia, <span class="at">collapse =</span> <span class="st">"/n"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-label="133"></a>    <span class="fu">str_replace_all</span>(<span class="st">"/n"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-134"><a href="#cb3-134" aria-label="134"></a>}</span>
+<span id="cb3-135"><a href="#cb3-135" aria-label="135"></a></span>
+<span id="cb3-136"><a href="#cb3-136" aria-label="136"></a><span class="co"># Tesla</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-label="137"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb3-138"><a href="#cb3-138" aria-label="138"></a>  all_text_tesla <span class="ot">&lt;-</span> <span class="fu">session_jump_to</span>(sec_session, tesla<span class="sc">$</span>HTML[i]) <span class="sc">|&gt;</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-label="139"></a>    <span class="fu">read_html</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-label="140"></a>    <span class="fu">html_elements</span>(<span class="st">"span"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-label="141"></a>    <span class="fu">html_text2</span>()</span>
+<span id="cb3-142"><a href="#cb3-142" aria-label="142"></a>  </span>
+<span id="cb3-143"><a href="#cb3-143" aria-label="143"></a>  detect_1 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_tesla, <span class="st">"ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"</span>))</span>
+<span id="cb3-144"><a href="#cb3-144" aria-label="144"></a>  </span>
+<span id="cb3-145"><a href="#cb3-145" aria-label="145"></a>  detect_2 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(all_text_tesla, <span class="st">"ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"</span>))</span>
+<span id="cb3-146"><a href="#cb3-146" aria-label="146"></a>  </span>
+<span id="cb3-147"><a href="#cb3-147" aria-label="147"></a>  scraped_text_tesla <span class="ot">&lt;-</span> all_text_tesla[detect_1<span class="sc">:</span>detect_2]</span>
+<span id="cb3-148"><a href="#cb3-148" aria-label="148"></a>  </span>
+<span id="cb3-149"><a href="#cb3-149" aria-label="149"></a>  ten_Qs_text_scraped<span class="sc">$</span>text[i<span class="sc">+</span><span class="dv">20</span>] <span class="ot">&lt;-</span> <span class="fu">paste</span>(scraped_text_tesla, <span class="at">collapse =</span> <span class="st">"/n"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-label="150"></a>    <span class="fu">str_replace_all</span>(<span class="st">"/n"</span>, <span class="st">" "</span>)</span>
+<span id="cb3-151"><a href="#cb3-151" aria-label="151"></a>}</span>
+<span id="cb3-152"><a href="#cb3-152" aria-label="152"></a></span>
+<span id="cb3-153"><a href="#cb3-153" aria-label="153"></a><span class="co"># Export</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-label="154"></a><span class="fu">write_csv</span>(ten_Qs_text_scraped, <span class="st">"../data/ten_Qs_text_scraped.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

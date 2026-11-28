@@ -7,10 +7,11 @@ author:
 - "Sally Jang"
 abstract: "Our project focuses on analyzing the financial and textual disclosures of six major technology companies: Alphabet, Apple, Meta, Microsoft, Nvidia, and Tesla. We are examining their last four quarterly 10-Q filings to extract Research and Development (R&D) expenses and investigate how these expenses relate to changes in stock price. Additionally, we plan to conduct text analysis of the Management Discussion and Analysis (MD&A) section of each filing."
 ---
+# Introduction
+[INSERT INTRODUCTION HERE]
 
-# Team contributions and progress: 
-Over the past few days, we have been making progress on different parts of the project, with each team member assigned specific responsibilities. Alisha worked on web scraping the companies' 10-Q filings to collect their R&D expenses. She also worked on creating the summary statistics table. Sally collected stock price data for each company covering the period from March 11, 2025, to November 1, 2026 with the quantmod package. She also handled data wrangling for the time series and dot plot visualizations. Belyse worked on data wrangling for the scatterplot visualization, preparing the data needed to examine the relationship between R&D expenses and stock prices. Alisha and Sally worked together to web scrape the text of each company's 10-Q's MD&A. During our meetings, we shared our progress, discussed challenges and concerns, and worked together to find solutions. We also used these discussions to clarify next steps, address any difficulties, and make sure everyone understood their upcoming tasks.
-
+# Methodology
+[INSERT METHODOLOGY HERE]
 ```{r}
 #| label: setup
 #| include: false
@@ -35,10 +36,10 @@ library(plotly)
 library(tidytext)
 ```
 
-# Wrangled data
 
 ```{r}
 #| label: import-data
+#| include: false
 
 # Scraping files which web scrape the R&D expenses and MD&A analysis from each 
 # 10-Q's SEC HTML site and import stock prices from yahoo for each company can 
@@ -58,7 +59,7 @@ for (i in companies) {
 ```
 
 ```{r}
-#| label: further-time-series-wrangling
+#| label: time-series-wrangling
 #| include: false
 
 # Student that worked on this section: Sally
@@ -171,10 +172,15 @@ ten_Qs_text_wrangled_final <- ten_Qs_text_wrangled |>
   mutate(document_id = glue("{ten_Qs_text_scraped$COMP} {ten_Qs_text_wrangled$id}"))
 ```
 
-# Visualizations
+# Findings and Results
+
+## Part 1. Looking at the Numbers
+
+[INSERT TIME-SERIES WRITE-UP]
 
 ```{r}
 #| label: time-series
+#| warning: false
 
 # Student that worked on this section: Sally and Alisha
 
@@ -264,8 +270,11 @@ ggplotly(ts_visual, tooltip = "text")
 
 ```
 
+[SCATTERPLOT WRITE-UP]
+
 ```{r}
 #| label: scatterplot
+#| warning: false
 
 # Student who worked on this section: Belyse
 
@@ -295,6 +304,8 @@ sp_visual <- ggplot(final_data_changes,
 ggplotly(sp_visual, tooltip = "text")
 
 ```
+
+[DOT PLOT WRITE-UP]
 
 ```{r}
 #| label: dot-plot 
@@ -334,7 +345,9 @@ dp_visual <- ggplot(data = ten_Qs_dp
 ggplotly(dp_visual, tooltip = "text")
 ```
 
-# Tables
+### Tables
+
+[TABLES WRITE-UP]
 
 ```{r}
 #| label: summary-statistics-table-wrangling
@@ -504,7 +517,11 @@ rd_summary |> kable(digits = 2
 
 ```
 
-# Text Analysis
+## Part 2. Looking at the Text
+
+### Sentiment Analysis
+
+[SENTIMENT ANALYSIS WRITE-UP]
 
 ```{r}
 #| label: sentiment-analysis
@@ -574,6 +591,10 @@ text_scatterplot <- ggplot(
 ggplotly(text_scatterplot)
 ```
 
+### Td-idf Analysis
+
+[TD-IDF WRITE-UP]
+
 ```{r, out.width="100%"}
 #| label: word-cloud-td-idf
 
@@ -582,6 +603,17 @@ ggplotly(text_scatterplot)
 include_app("https://alxu-27.shinyapps.io/blog-proj-shny/", height = "800px")
 
 ```
+
+
+# Limitations
+
+[LIMITATIONS PARAGRAPH]
+
+# Conclusion
+
+[CONCLUSION PARAGRAPH]
+
+
 
 # Getting started
 

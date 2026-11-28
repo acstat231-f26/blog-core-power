@@ -1,21 +1,24 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "!draft-work/"
 
 # Can customize this section with options from the following page:
 # https://quarto.org/docs/websites/website-navigation.html
 website:
-  title: "Website title"
+  title: "Team Core Power: F26 Blog Project"
   navbar:
     left:
       - href: index.qmd # Must be included as index.qmd
         text: "Home"
         icon: house # Get icon names: https://icons.getbootstrap.com/?q=home
       # Add or remove additional pages below in desired order of appearance
-      - another-page.qmd
-      - href: yet-another-page.qmd
-        text: "Yet another page with a custom label and icon"
-        icon: arrow-through-heart-fill
+      - href: scripts-page.qmd
+        text: "View Raw Scraping Scripts"
+        icon: code-square
+
         
 format:
   html:
@@ -47,6 +50,6 @@ format:
 
 # Add default code chunk execution options here
 execute:
-  echo: false
+   echo: false
 
   

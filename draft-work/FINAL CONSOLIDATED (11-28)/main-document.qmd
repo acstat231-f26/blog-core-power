@@ -7,9 +7,9 @@ author:
 - "Sally Jang"
 abstract: "Our project focuses on analyzing the financial and textual disclosures of six major technology companies: Alphabet, Apple, Meta, Microsoft, Nvidia, and Tesla. We are examining their last four quarterly 10-Q filings to extract Research and Development (R&D) expenses and investigate how these expenses relate to changes in stock price. Additionally, we plan to conduct text analysis of the Management Discussion and Analysis (MD&A) section of each filing."
 ---
-# Team contributions and progress
 
-Over the past few days, we have been making progress on different parts of the project, with each team member assigned specific responsibilities. Alisha worked on web scraping the companies' 10-Q filings to collect their R&D expenses. She also worked on creating the summary statistics table. Sally collected stock price data for each company covering the period from March 11, 2025, to November 1, 2026 with the quantmod package. She also handled data wrangling for the time series and dot plot visualizations. Belyse worked on data wrangling for the scatterplot visualization, preparing the data needed to examine the relationship between R&D expenses and stock prices.Alisha and Sally worked together to web scrape the text of each company's 10-Q's MD&A. During our meetings, we shared our progress, discussed challenges and concerns, and worked together to find solutions. We also used these discussions to clarify next steps, address any difficulties, and make sure everyone understood their upcoming tasks.
+# Team contributions and progress: 
+Over the past few days, we have been making progress on different parts of the project, with each team member assigned specific responsibilities. Alisha worked on web scraping the companies' 10-Q filings to collect their R&D expenses. She also worked on creating the summary statistics table. Sally collected stock price data for each company covering the period from March 11, 2025, to November 1, 2026 with the quantmod package. She also handled data wrangling for the time series and dot plot visualizations. Belyse worked on data wrangling for the scatterplot visualization, preparing the data needed to examine the relationship between R&D expenses and stock prices. Alisha and Sally worked together to web scrape the text of each company's 10-Q's MD&A. During our meetings, we shared our progress, discussed challenges and concerns, and worked together to find solutions. We also used these discussions to clarify next steps, address any difficulties, and make sure everyone understood their upcoming tasks.
 
 ```{r}
 #| label: setup
@@ -30,233 +30,30 @@ library(ggplot2)
 library(lubridate)
 library(glue)
 library(ggrepel)
+library(paletteer)
+library(plotly)
+library(tidytext)
 ```
 
 # Wrangled data
 
 ```{r}
-#| label: scrape-R&D-expenses-from-SEC
-#| include: false
+#| label: import-data
 
-# Student that worked on this section: Alisha
+# Scraping files which web scrape the R&D expenses and MD&A analysis from each 
+# 10-Q's SEC HTML site and import stock prices from yahoo for each company can 
+# be found in the same "Final Consolidated Blog Project" folder
+scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
+stock_price_joined <- read_csv("data/stock_price_joined.csv")
+ten_Qs_text_scraped <- read_csv("data/ten_Qs_text_scraped.csv")
 
-# Check if scraping is allowed
-paths_allowed("https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/amzn-20250930.htm")
-
-# -----------------------------------------------------------------------------
-# This is the code for scraping 10Qs' R&D expenses from HTML files from the 
-# SEC website for Microsoft, Google, Meta, Apple, Nvidia, and Tesla
-# -----------------------------------------------------------------------------
-
-
-# Import dataset 
-# Variable Explanations:
-# COMP: Company Name
-# FILD-D: Filing Date
-# REP-D: Reporting For Date
-# HTML: HTML link
-
-ten_Qs <- readxl::read_xlsx("data/10q-links.xlsx")
-
-# Compartmentalize each variable
-# Microsoft
-microsoft <- ten_Qs |>
-  filter(COMP == "Microsoft")
-
-# Google
-google <- ten_Qs |>
-  filter(COMP == "Google")
-
-# Meta
-meta <- ten_Qs |>
-  filter(COMP == "Meta")
-
-# Apple
-apple <- ten_Qs |>
-  filter(COMP == "Apple")
-
-# Nvidia
-nvidia <- ten_Qs |>
-  filter(COMP == "Nvidia")
-
-# Tesla
-tesla <- ten_Qs |>
-  filter(COMP == "Tesla")
-
-# Create sec session
-my_ua <- "AmherstCollege alxu27@amherst.edu"
-sec_session <- session("https://www.sec.gov", user_agent(my_ua))
-
-# Add empty column to store values
-ten_Qs <- ten_Qs |>
-  mutate(RD = NA)
-
-# -------------------------------Scraping---------------------------------------
-# Microsoft
-for (i in 1:4) {
-  ten_Qs$RD[i] <- session_jump_to(sec_session, microsoft$HTML[i]) |>
-    read_html() |>
-    html_elements("table") |>
-    purrr::pluck(7) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X4)
+# For loop for importing separate stock time series
+companies <- c("microsoft", "alphabet", "meta", "apple", "nvidia", "tesla")
+for (i in companies) {
+  df <- read_csv(paste0("data/", i, "_stock.csv"))
+  
+  assign(paste0(i, "_stock"), df)
 }
-
-# Google
-for (i in 1:2) {
-  ten_Qs$RD[i+4] <- session_jump_to(sec_session, google$HTML[i]) |>
-    read_html() |>
-    html_elements("table") |>
-    purrr::pluck(14) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X10)
-}
-
-for (i in 1:2) {
-  ten_Qs$RD[i+6] <- session_jump_to(sec_session, google$HTML[i+2]) |>
-    read_html() |>
-    html_elements("table") |>
-    purrr::pluck(15) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X10)
-}  
-
-# Meta
-for (i in 1:4) {
-  ten_Qs$RD[i+8] <- session_jump_to(sec_session, meta$HTML[i]) |>
-    read_html() |>
-    html_elements("table") |>
-    purrr::pluck(7) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X4)
-}
-
-# Meta third 10-Q
-ten_Qs$RD[11] <- session_jump_to(sec_session, meta$HTML[3]) |>
-  read_html() |>
-  html_elements("table") |>
-  purrr::pluck(7) |>
-  html_table() |>
-  filter(X1 == "Research and development") |>
-  select(X16)
-
-# Apple
-for (i in 1:4) {
-  ten_Qs$RD[i+12] <- session_jump_to(sec_session, apple$HTML[i]) |>
-    read_html() |>
-    html_elements("table") |>
-    purrr::pluck(13) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X4)
-}
-
-# Nvidia
-for (i in 1:4) {
-  ten_Qs$RD[i+16] <- session_jump_to(sec_session, nvidia$HTML[i]) |>
-    read_html() |>
-    html_elements("table") |>
-    purrr::pluck(8) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X4)
-}
-
-# Tesla
-for (i in 1:4) {
-  ten_Qs$RD[i+20] <- session_jump_to(sec_session, tesla$HTML[i]) |>
-    read_html() |>
-    html_elements("table") |>
-    purrr::pluck(11) |>
-    html_table() |>
-    filter(X1 == "Research and development") |>
-    select(X4)
-}
-
-ten_Qs_RD <- ten_Qs |>
-  select(!HTML)
-
-# convert RD column into numeric type column
-ten_Qs_RD <- ten_Qs_RD |>
-mutate(
-  RD_clean = str_remove_all(RD, "[$, ]"), 
-  RD = as.numeric(RD_clean)) |>
-  select(!RD_clean)
-
-# export
-write_csv(ten_Qs_RD, "data/scraped-10qs.csv")
-```
-
-```{r}
-#| label: import-stock-prices
-#| include: false
-
-# Student that worked on this section: Sally
-
-# -----------------------------------------------------------------------------
-# This is the code for importing and wrangling stock prices for all 6 companies 
-# by using the quantmod package
-# Because the 10-Q reporting time frames are different for each company, we
-# used a standardized, informative time frame (2025-03-01 to 2026-11-01) that 
-# captured all 4 10-Qs for each company 
-# -----------------------------------------------------------------------------
-
-# Microsoft
-microsoft_stock <- getSymbols("MSFT", src = "yahoo", 
-                              from = "2025-03-01", to = "2026-11-01") |>
-  data.frame(Date = index(MSFT), coredata(MSFT)) |>
-  select(Date, MSFT.Close) |>
-  rename(Close = MSFT.Close) |>
-  mutate(COMP = "MSFT")
-
-# Alphabet
-alphabet_stock <- getSymbols("GOOG", src = "yahoo", 
-                             from = "2025-03-01", to = "2026-11-01") |>
-  data.frame(Date = index(GOOG), coredata(GOOG)) |>
-  select(Date, GOOG.Close) |>
-  rename(Close = GOOG.Close) |>
-  mutate(COMP = "GOOG")
-
-# Meta
-meta_stock <- getSymbols("META", src = "yahoo", 
-                         from = "2025-03-01", to = "2026-11-01") |>
-  data.frame(Date = index(META), coredata(META)) |>
-  select(Date, META.Close) |>
-  rename(Close = META.Close) |>
-  mutate(COMP = "META")
-
-# Apple
-apple_stock <- getSymbols("AAPL", src = "yahoo", 
-                          from = "2025-03-01", to = "2026-11-01") |>
-  data.frame(Date = index(AAPL), coredata(AAPL)) |>
-  select(Date, AAPL.Close) |>
-  rename(Close = AAPL.Close) |>
-  mutate(COMP = "AAPL")
-
-# Nvidia
-nvidia_stock <- getSymbols("NVDA", src = "yahoo", 
-                           from = "2025-03-01", to = "2026-11-01") |>
-  data.frame(Date = index(NVDA), coredata(NVDA)) |>
-  select(Date, NVDA.Close) |>
-  rename(Close = NVDA.Close) |>
-  mutate(COMP = "NVDA")
-
-# Tesla
-tesla_stock <- getSymbols("TSLA", src = "yahoo", 
-                          from = "2025-03-01", to = "2026-11-01") |>
-  data.frame(Date = index(TSLA), coredata(TSLA)) |>
-  select(Date, TSLA.Close) |>   
-  rename(Close = TSLA.Close) |>
-  mutate(COMP = "TSLA")
-
-# Binding rows to consolidate all stock price points into one data set in 
-# preparation for faceted time series visualization
-stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock, 
-                                apple_stock, nvidia_stock, tesla_stock)
 
 ```
 
@@ -265,8 +62,6 @@ stock_price_joined <- bind_rows(microsoft_stock, alphabet_stock, meta_stock,
 #| include: false
 
 # Student that worked on this section: Sally
-
-scraped_ten_Qs <- read_csv("data/scraped-10qs.csv")
 
 # Ensuring that company name formats conform between scraped 10-Qs and stock 
 # price data set
@@ -309,7 +104,6 @@ dated_ten_Qs <- scraped_ten_Qs |>
 
 # Making a new dataset with stock price after the 10-Q filing data and the 
 # day of the filing
-
 stock_filing <- stock_price_joined |>
   rename(
     stock_date_filing = Date,
@@ -344,7 +138,6 @@ final_data <- filing |>
 # Calculating change in stock price and change in RD
 
 # Change in stock price
-
 final_data <- final_data |>
   mutate(
     stock_change = stock_price_filing - stock_price_before,
@@ -366,135 +159,16 @@ final_data_changes <- final_data |>
 ```
 
 ```{r}
-#| label: text-analysis-scraping
+#| label: text-analysis-wrangling
 #| include: false
 
-# Student that worked on this section: Sally and Alisha
+# Further wrangling to ID each 10-Q for sentiment and tf-idf analysis
+ten_Qs_text_wrangled <- ten_Qs_text_scraped |>
+  mutate(id = rep(4:1, times = 6)) |>
+  rename(Company = COMP)
 
-# -----------------------------------------------------------------------------
-# This is the code for scraping 10Qs' MD&A text from HTML files from the 
-# SEC website for Microsoft, Google, Meta, Apple, Nvidia, and Tesla
-# -----------------------------------------------------------------------------
-
-ten_Qs_text <- readxl::read_xlsx("data/10q-links.xlsx")
-
-# Compartmentalize each variable
-# Microsoft
-microsoft <- ten_Qs_text |>
-  filter(COMP == "Microsoft")
-
-# Google
-google <- ten_Qs_text |>
-  filter(COMP == "Google")
-
-# Meta
-meta <- ten_Qs_text |>
-  filter(COMP == "Meta")
-
-# Apple
-apple <- ten_Qs_text |>
-  filter(COMP == "Apple")
-
-# Nvidia
-nvidia <- ten_Qs_text |>
-  filter(COMP == "Nvidia")
-
-# Tesla
-tesla <- ten_Qs_text |>
-  filter(COMP == "Tesla")
-
-# Create sec session
-my_ua <- "AmherstCollege yjang27@amherst.edu"
-sec_session <- session("https://www.sec.gov", user_agent(my_ua))
-
-# Add empty column to store values
-ten_Qs_text_scraped <- ten_Qs_text |>
-  mutate(text = NA)
-
-# -------------------------------Scraping---------------------------------------
-# Microsoft
-for (i in 1:4) {
-  all_text_microsoft <- session_jump_to(sec_session, microsoft$HTML[i]) |>
-    read_html() |>
-    html_elements("span") |>
-    html_text2()
-  
-  detect_1 <- which(str_detect(all_text_microsoft, "ITEM 2. MANAGEMENT’S"))
-  
-  detect_2 <- which(str_detect(all_text_microsoft, "ITEM 3. QUANTITATIVE"))
-  
-  ten_Qs_text_scraped$text[i] <- all_text_microsoft[detect_1:detect_2]
-}
-
-# Google
-for (i in 1:4) {
-  all_text_google <- session_jump_to(sec_session, google$HTML[i]) |>
-    read_html() |>
-    html_elements("span") |>
-    html_text2()
-  
-  detect_1 <- which(str_detect(all_text_google, "MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
-  
-  detect_2 <- which(str_detect(all_text_google, "QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
-  
-  ten_Qs_text_scraped$text[i+4] <- all_text_google[detect_1:detect_2]
-}
-
-# Meta
-for (i in 1:4) {
-  all_text_meta <- session_jump_to(sec_session, meta$HTML[i]) |>
-    read_html() |>
-    html_elements("span") |>
-    html_text2()
-  
-  detect_1 <- which(str_detect(all_text_meta, "Management's Discussion and Analysis of Financial Condition and Results of Operations"))
-  
-  detect_2 <- which(str_detect(all_text_meta, "Quantitative and Qualitative Disclosures About Market Risk"))
-  
-  ten_Qs_text_scraped$text[i+8] <- all_text_meta[detect_1:detect_2]
-}
-
-# Apple
-for (i in 1:4) {
-  all_text_apple <- session_jump_to(sec_session, apple$HTML[i]) |>
-    read_html() |>
-    html_elements("span") |>
-    html_text2()
-  
-  detect_1 <- which(str_detect(all_text_apple, "Management’s Discussion and Analysis of Financial Condition and Results of Operations"))[2]
-  
-  detect_2 <- which(str_detect(all_text_apple, "Quantitative and Qualitative Disclosures About Market Risk"))[2]
-  
-  ten_Qs_text_scraped$text[i+12] <- all_text_apple[detect_1:detect_2]
-}
-
-# Nvidia
-for (i in 1:4) {
-  all_text_nvidia <- session_jump_to(sec_session, nvidia$HTML[i]) |>
-    read_html() |>
-    html_elements("span") |>
-    html_text2()
-  
-  detect_1 <- which(str_detect(all_text_nvidia, "Item 2."))[3]
-  
-  detect_2 <- which(str_detect(all_text_nvidia, "Item 3\\."))[2]
-  
-  ten_Qs_text_scraped$text[i+16] <- all_text_nvidia[detect_1:detect_2]
-}
-
-# Tesla
-for (i in 1:4) {
-  all_text_tesla <- session_jump_to(sec_session, tesla$HTML[i]) |>
-    read_html() |>
-    html_elements("span") |>
-    html_text2()
-  
-  detect_1 <- which(str_detect(all_text_tesla, "ITEM 2. MANAGEMENT’S DISCUSSION AND ANALYSIS OF FINANCIAL CONDITION AND RESULTS OF OPERATIONS"))
-  
-  detect_2 <- which(str_detect(all_text_tesla, "ITEM 3. QUANTITATIVE AND QUALITATIVE DISCLOSURES ABOUT MARKET RISK"))
-  
-  ten_Qs_text_scraped$text[i+20] <- all_text_tesla[detect_1:detect_2]
-}
+ten_Qs_text_wrangled_final <- ten_Qs_text_wrangled |>
+  mutate(document_id = glue("{ten_Qs_text_scraped$COMP} {ten_Qs_text_wrangled$id}"))
 ```
 
 # Visualizations
@@ -502,18 +176,91 @@ for (i in 1:4) {
 ```{r}
 #| label: time-series
 
-# Student that worked on this section: Sally
+# Student that worked on this section: Sally and Alisha
 
-ggplot(
-    data=stock_price_joined, 
-    aes(x = Date, y = Close)) +
+# AAPL and NVDA report on Saturdays, when there is no closing price
+# so we have to take the price for the previous day
+
+# From = "2025-03-01" to = "2026-11-01"
+apple_stock <- getSymbols("AAPL", src = "yahoo", 
+                          from = "2025-03-01", to = "2026-11-01") |>
+  data.frame(Date = index(AAPL), coredata(AAPL)) |>
+  select(Date, AAPL.Close) |>
+  rename(Close = AAPL.Close) |>
+  mutate(COMP = "AAPL")
+
+all_days <- seq(start(AAPL), end(AAPL), by = "day") |>
+  as_tibble_col("Date")
+
+# Using tidyverse fill() function to fill missing data for all companies
+companies <- c("microsoft", "alphabet", "meta", "apple", "nvidia", "tesla")
+for (i in companies) {
+  df <- get(paste0(i,"_stock")) |>
+  merge(all_days, by = "Date", all = TRUE) |>
+  # LOCF
+  fill(Close, COMP)
+  
+  assign(paste0(i, "_all_days"), df)
+}
+
+stock_price_joined <- bind_rows(microsoft_all_days, alphabet_all_days, meta_all_days, apple_all_days, nvidia_all_days, tesla_all_days)
+
+# Editing this variable to include closing price
+text_labels <- named_ten_Qs |>
+  select(name2, "REP-D", RD) |>
+  rename(COMP = "name2", REPD = "REP-D") |>
+  left_join(stock_price_joined
+             , join_by(COMP, REPD == Date)) |>
+  mutate(y_position = c(
+    # MSFT
+    700, 600, 700, 600,
+    # GOOG
+    700, 600, 700, 600, 
+    # META
+    300, 200, 300, 200,
+    # AAPL
+    700, 600, 700, 600,
+    # NVDA
+    700, 600, 700, 600,
+    # TSLA
+    700, 600, 700, 600
+  ), 
+  x_offset = 30)
+
+# ggplot
+ts_visual <- ggplot(data=stock_price_joined
+                    , aes(
+                      x = Date
+                      , y = Close
+                      , color = COMP
+                      , text = paste0(
+                        "\nCompany: ", COMP, 
+                        "\nClose Price: $", round(Close, 2)
+                      )
+                      , group = 1)) +
   geom_line() +
   facet_wrap(~COMP) +
-  geom_vline(data=vertical_lines, aes(xintercept = reported_date)) +
-  geom_text_repel(
-    data=text_labels, 
-    aes(x = x_position, y = y_position, label = text_values), 
-    size = 3)
+  scale_color_paletteer_d("MetBrewer::Archambault") +
+  geom_point(data=text_labels
+             , aes(x = REPD
+                 , y = Close
+                 , text = paste0(
+                   "\nCompany: ", COMP, 
+                   "\nReport Date: ", REPD, 
+                   "\nR&D Expense: $", round(RD, 2), 
+                   "\nClose Price: $", round(Close, 2)
+                 ))) +  
+  geom_vline(data=vertical_lines
+             , aes(xintercept = reported_date
+                   , text = paste0(
+                     "\nReport Date: ", reported_date
+                   ))
+             , linetype = 2
+             , color = "#1e5977") +
+  theme_classic() +
+  theme(legend.position = "none")
+
+ggplotly(ts_visual, tooltip = "text")
 
 ```
 
@@ -522,31 +269,69 @@ ggplot(
 
 # Student who worked on this section: Belyse
 
-# Change in R&D Expenses vs. Stock Price Reaction scatter plot
-
-ggplot(final_data_changes,
-       aes(x = change_RD, y = stock_change_pct, color = COMP)) +
-
-  geom_point(size = 3, alpha = 0.7) +
-
+#ggplot
+sp_visual <- ggplot(final_data_changes,
+            aes(x = change_RD, y = stock_change_pct, color = COMP)) +
+  geom_hline(yintercept = 0, color = "black") +
+  geom_vline(xintercept = 0, color = "black") +
+  geom_point(
+    size = 3,
+    alpha = 0.7,
+    aes(text = paste0(
+      "Company: ", COMP,
+      "\nChange in RD: $", change_RD,
+      "\nChange in stock price: ", round(stock_change_pct, 2), "%"
+    ))
+  ) +
   labs(
     title = "Change in R&D Expenses vs. Stock Price Reaction",
-    x = "Change in R&D Expenses",
+    x = "Change in R&D Expenses ($)",
     y = "Stock Price Change (%)",
     color = "Company"
   ) +
+
   theme_minimal()
+
+ggplotly(sp_visual, tooltip = "text")
 
 ```
 
 ```{r}
 #| label: dot-plot 
 
-# Student that worked on this section: Sally
+# Student that worked on this section: Sally and Alisha
 
-ggplot(data = scraped_ten_Qs, aes(color = COMP, x = COMP, y = RD)) + 
+# Ensuring that company name format conforms to ticker symbol for dot plot
+companies <- 
+  tibble(name1 = c("Apple", "Google", "Meta", "Microsoft", "Nvidia", "Tesla"),
+         name2 = c("AAPL", "GOOG", "META", "MSFT", "NVDA", "TSLA"))
+
+ten_Qs_dp <- scraped_ten_Qs |>
+  left_join(companies, by = c("COMP" = "name1")) |>
+  rename(Date = "REP-D"
+         , Company = "name2")
+
+# ggplot
+dp_visual <- ggplot(data = ten_Qs_dp
+                    , aes(color = Company
+                          , x = Company
+                          , y = RD
+                          , label = Date
+                          , text = paste0(
+                   "\nCompany: ", Company, 
+                   "\nReport Date: ", Date, 
+                   "\nR&D Expense: $", round(RD, 2)
+                 ))) + 
   geom_point(size = 3) + 
-  labs(color = "Company")
+  labs(
+    title = "R&D Expenses Across the 4 Quarters by Company",
+    y = "R&D Expense",
+    color = "Company") +
+  scale_color_paletteer_d("MetBrewer::Archambault") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+ggplotly(dp_visual, tooltip = "text")
 ```
 
 # Tables
@@ -625,12 +410,6 @@ stock_summary <- microsoft_summary |>
   full_join(apple_summary) |>
   full_join(tesla_summary)
 
-# Create kable
-stock_summary |> kable(digits = 2
-                       , caption = "Company Stock Price Summary Statistics (in dollars)"
-                       , format.args = list(big.mark = ","))
-
-
 # ------------------------------------------------------------------------------
 # This code is for creating the summary statistics table for company r&d
 # expenses using the kableextra package
@@ -707,21 +486,114 @@ rd_summary <- microsoft_rd |>
   full_join(nvidia_rd) |>
   full_join(apple_rd) |>
   full_join(tesla_rd)
+
 ```
+
+::: {.panel-tabset}
+
+#### Stock Summary
+
+```{r}
+#| echo: false
+
+stock_summary |> kable(digits = 2
+                       , caption = "Company Stock Price Summary Statistics (in dollars)"
+                       , format.args = list(big.mark = ","))
+```
+
+
+#### R&D Expenses Summary
 
 ```{r}
 #| label: summary-statistics-table
+#| echo: false
 
-# Create and format table
 rd_summary |> kable(digits = 2
                     , caption = "Company R&D Expense Summary Statistics (in millions)"
                     , format.args = list(big.mark = ","))
 
 ```
 
+:::
+
+
+
 # Text Analysis
 
 ```{r}
+#| label: sentiment-analysis
+#| include: false
+
+# Importing AFINN sentiment lexicon and stop_words dataset 
+afinn_lexicon <- get_sentiments("afinn")
+
+data(stop_words)
+
+# Dataset for sentiment analysis by company
+ten_Qs_sentiment_analysis_1 <- ten_Qs_text_wrangled_final |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d")) |>
+  inner_join(afinn_lexicon, by = "word") |>
+  group_by(Company) |>
+  summarize(
+    Sentiment = mean(value))
+
+# Dataset for sentiment analysis by document
+ten_Qs_sentiment_analysis_2 <- ten_Qs_text_wrangled_final |>
+  unnest_tokens(output = word, input = text) |>
+  anti_join(stop_words, by = "word") |>
+  filter(!str_detect(word, "\\d")) |>
+  inner_join(afinn_lexicon, by = "word") |>
+  group_by(document_id) |>
+  summarize(
+    sentiment = mean(value))
+```
+
+```{r}
+#| label: sentiment-analysis-table
+
+ten_Qs_sentiment_analysis_1 |> kable(digits = 3
+                    , caption = "MD&A Average Sentiment Scores by Company"
+                    , format.args = list(big.mark = ","))
+```
+
+```{r}
+#| label: sentiment-analysis-scatterplot
+
+# Repeating document ID process with original named 10-Qs dataset to create
+# a new dataset including both sentiment score and R&D expense by 10-Q
+ten_Qs_text_scatterplot_1 <- named_ten_Qs |>
+  mutate(id = rep(4:1, times = 6))
+
+ten_Qs_text_scatterplot_2 <- ten_Qs_text_scatterplot_1 |>
+  mutate(document_id = glue("{ten_Qs_text_scatterplot_1$COMP} {ten_Qs_text_scatterplot_1$id}"))
+
+ten_Qs_text_scatterplot_final <- ten_Qs_sentiment_analysis_2 |>
+    left_join(ten_Qs_text_scatterplot_2, by = "document_id") |>
+    rename(Company = name2)
+
+#ggplot
+text_scatterplot <- ggplot(
+                      data = ten_Qs_text_scatterplot_final, 
+                      aes(x = sentiment, y = RD, color = Company)) +
+  geom_point() +
+  scale_color_paletteer_d("MetBrewer::Archambault") +
+  labs(title = "R&D Expense vs. Sentiment Score",
+       subtitle = "Analyzed with AFINN Lexicon",
+       color = "Company",
+       x = "Sentiment Score", 
+       y = "R&D Expense")
+
+ggplotly(text_scatterplot)
+```
+
+```{r, out.width="100%"}
+#| label: word-cloud-td-idf
+
+# Shiny app showing interactive wordcloud display for top tf-idf words in MD&A 
+# text by company
+include_app("https://alxu-27.shinyapps.io/blog-proj-shny/", height = "800px")
 
 ```
 
