@@ -564,6 +564,7 @@ text_scatterplot <- ggplot(
                       data = ten_Qs_text_scatterplot_final, 
                       aes(x = sentiment, y = RD, color = Company)) +
   geom_point() +
+  scale_color_paletteer_d("MetBrewer::Archambault") +
   labs(title = "R&D Expense vs. Sentiment Score",
        subtitle = "Analyzed with AFINN Lexicon",
        color = "Company",
